@@ -65,6 +65,7 @@
         "what_happens_if_missed": "Tax-exempt status is revoked automatically on 2027-05-15 with no hearing; the organization appears on the IRS auto-revocation list and donations after that date are not deductible.",
         "next_filing_needed": "Form 990-N for the tax year ending 2024-12-31, then 2025-12-31, filed electronically at any time before 2027-05-15."
       },
+      "brief_source": "model",
       "outreach": "Hello, this is a note about TRENTON YOUTH ROWING CLUB (EIN 22-3456789)...",
       "alert": {
         "status": "sent",

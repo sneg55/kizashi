@@ -1,12 +1,14 @@
 import argparse
 import csv
 import json
+from collections import Counter
 from datetime import date, datetime, timezone
 from pathlib import Path
 
 from kizashi.backtest import backtest_to_dict, run_backtest
 from kizashi.classify import Cls, classify_portfolio
 from kizashi.ledger import Report, Surfaced, make_run_id, report_to_dict, write_report
+from kizashi.pipeline import run_pipeline
 from kizashi.portfolio import build_portfolio_from_bmf, load_portfolio_csv
 from kizashi.sources import (
     BMF_URLS,
@@ -107,6 +109,29 @@ def cmd_classify(args: argparse.Namespace) -> None:
     print(json.dumps(summary))
 
 
+def cmd_run(args: argparse.Namespace) -> None:
+    as_of = date.fromisoformat(args.as_of) if args.as_of else date.today()
+    portfolio_path = Path(args.portfolio)
+    portfolio = load_portfolio_csv(portfolio_path, portfolio_path.stem)
+    report = run_pipeline(
+        portfolio=portfolio,
+        as_of=as_of,
+        data_dir=DATA_RAW,
+        out_dir=Path(args.out),
+        state_dir=Path(args.state),
+        with_model=not args.no_model,
+        slug=portfolio_path.stem,
+    )
+    d = report_to_dict(report)
+    for event in d["gate_events"]:
+        print(f"gate {event['decision']}\t{event['ein']}\t{event['reason']}")
+    briefs = Counter(row["brief_source"] for row in d["surfaced"])
+    print(f"briefs: model={briefs.get('model', 0)} fallback={briefs.get('fallback', 0)} none={briefs.get(None, 0)}")
+    print(f"model: {json.dumps(d['model'])}")
+    print(f"wrote {Path(args.out) / (report.run_id + '.json')}")
+    print(json.dumps(d["summary"]))
+
+
 def cmd_backtest(args: argparse.Namespace) -> None:
     pcs = read_postcards(DATA_RAW / "data-download-epostcard.txt")
     revs = read_revocations(DATA_RAW / "data-download-revocation.txt")
@@ -123,6 +148,40 @@ def cmd_backtest(args: argparse.Namespace) -> None:
     out.write_text(json.dumps(d, indent=2))
     print(f"n={d['n']} exact={d['exact']} exact_rate={d['exact_rate']:.4f} same_month={d['same_month']} same_month_rate={d['same_month_rate']:.4f}")
     print(f"source dates: revocation={source_dates['revocation']} 990n={source_dates['990n']}")
+
+
+def cmd_serve(args: argparse.Namespace) -> None:
+    import uvicorn
+
+    from kizashi.api import create_app
+
+    uvicorn.run(create_app(default_as_of=date.today()), host=args.host, port=args.port)
+
+
+def cmd_export(args: argparse.Namespace) -> None:
+    from kizashi.api import run_files
+
+    runs_dir = Path(args.runs)
+    if args.run == "latest":
+        path = runs_dir / "latest.json"
+        if not path.exists():
+            files = run_files(runs_dir)
+            if not files:
+                raise SystemExit(f"no runs in {runs_dir}")
+            path = files[0]
+    else:
+        matches = [p for p in run_files(runs_dir) if p.stem == args.run]
+        if not matches:
+            raise SystemExit(f"unknown run {args.run}")
+        path = matches[0]
+    report = json.loads(path.read_text())
+    backtest_path = runs_dir / "backtest.json"
+    if backtest_path.exists():
+        report["backtest"] = json.loads(backtest_path.read_text())
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(report, indent=2))
+    print(f"exported {report['run_id']} to {out}")
 
 
 def cmd_reconcile(args: argparse.Namespace) -> None:
@@ -170,12 +229,31 @@ def build_parser() -> argparse.ArgumentParser:
     classify_p.add_argument("--out", required=True)
     classify_p.set_defaults(func=cmd_classify)
 
+    run_p = sub.add_parser("run")
+    run_p.add_argument("--portfolio", required=True)
+    run_p.add_argument("--as-of")
+    run_p.add_argument("--out", default="data/runs")
+    run_p.add_argument("--state", default="data/state")
+    run_p.add_argument("--no-model", action="store_true")
+    run_p.set_defaults(func=cmd_run)
+
     backtest_p = sub.add_parser("backtest")
     backtest_p.add_argument("--start", default="2021-01-01")
     backtest_p.add_argument("--end", default="2026-12-31")
     backtest_p.add_argument("--out", default="data/runs/backtest.json")
     backtest_p.add_argument("--misses", default="data/runs/backtest-misses.csv")
     backtest_p.set_defaults(func=cmd_backtest)
+
+    serve_p = sub.add_parser("serve")
+    serve_p.add_argument("--host", default="127.0.0.1")
+    serve_p.add_argument("--port", type=int, default=8000)
+    serve_p.set_defaults(func=cmd_serve)
+
+    export_p = sub.add_parser("export")
+    export_p.add_argument("--run", default="latest")
+    export_p.add_argument("--runs", default="data/runs")
+    export_p.add_argument("--out", default="web/public/data/report.json")
+    export_p.set_defaults(func=cmd_export)
 
     reconcile_p = sub.add_parser("reconcile")
     reconcile_p.set_defaults(func=cmd_reconcile)
