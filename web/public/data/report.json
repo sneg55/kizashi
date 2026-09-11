@@ -1,0 +1,149 @@
+{
+  "run_id": "2026-09-12T14-03-11Z-nj-086",
+  "as_of": "2026-09-12",
+  "portfolio": {
+    "name": "Mercer County NJ small nonprofits",
+    "source": "bmf state=NJ zip3=086 filing_req=02",
+    "count": 886
+  },
+  "sources": [
+    {
+      "name": "eo1.csv",
+      "url": "https://www.irs.gov/pub/irs-soi/eo1.csv",
+      "last_modified": "2026-09-10",
+      "rows": 372035
+    },
+    {
+      "name": "data-download-epostcard.txt",
+      "url": "https://apps.irs.gov/pub/epostcard/data-download-epostcard.zip",
+      "last_modified": "2026-09-07",
+      "rows": 1544231
+    },
+    {
+      "name": "data-download-revocation.txt",
+      "url": "https://apps.irs.gov/pub/epostcard/data-download-revocation.zip",
+      "last_modified": "2026-09-07",
+      "rows": 1247179
+    }
+  ],
+  "model": {
+    "provider": "bedrock-mantle",
+    "model_id": "google.gemma-4-31b",
+    "region": "us-east-1"
+  },
+  "summary": {
+    "surface": 3,
+    "watch": 41,
+    "current": 790,
+    "excluded": 44,
+    "dead": 6,
+    "reinstated": 2,
+    "never_filed": 0,
+    "past_due": 0,
+    "alerts_sent": 2,
+    "alerts_suppressed": 1
+  },
+  "surfaced": [
+    {
+      "ein": "223456789",
+      "name": "TRENTON YOUTH ROWING CLUB",
+      "city": "TRENTON",
+      "state": "NJ",
+      "last_filed_end": "2023-12-31",
+      "last_filed_source": "990n",
+      "unfiled_past_due": 2,
+      "predicted_revocation": "2027-05-15",
+      "days_left": 245,
+      "evidence": [
+        "Last 990-N on record covers the tax period ending 2023-12-31",
+        "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
+        "Return for the period ending 2025-12-31 was due 2026-05-15 and is not on record",
+        "Third consecutive missed due date is 2027-05-15; revocation is automatic on that date"
+      ],
+      "brief": {
+        "headline": "Two annual notices missed; exempt status ends 2027-05-15 without a filing",
+        "what_happens_if_missed": "Tax-exempt status is revoked automatically on 2027-05-15 with no hearing; the organization appears on the IRS auto-revocation list and donations after that date are not deductible.",
+        "next_filing_needed": "Form 990-N for the tax year ending 2024-12-31, then 2025-12-31, filed electronically at any time before 2027-05-15."
+      },
+      "outreach": "Hello, this is a note about TRENTON YOUTH ROWING CLUB (EIN 22-3456789)...",
+      "alert": {
+        "status": "sent",
+        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      }
+    }
+  ],
+  "ledger": [
+    {
+      "ein": "223456789",
+      "name": "TRENTON YOUTH ROWING CLUB",
+      "class": "SURFACE",
+      "reason": "two_missed",
+      "last_filed_end": "2023-12-31",
+      "unfiled_past_due": 2,
+      "predicted_revocation": "2027-05-15",
+      "reinstated": false,
+      "sources_used": [
+        "bmf",
+        "990n"
+      ]
+    },
+    {
+      "ein": "223456790",
+      "name": "EWING GARDEN CLUB",
+      "class": "CURRENT",
+      "reason": "filed",
+      "last_filed_end": "2025-12-31",
+      "unfiled_past_due": 0,
+      "predicted_revocation": "2029-05-15",
+      "reinstated": false,
+      "sources_used": [
+        "bmf",
+        "990n"
+      ]
+    },
+    {
+      "ein": "223456791",
+      "name": "ST MARKS PARISH GUILD",
+      "class": "EXCLUDED",
+      "reason": "group_subordinate",
+      "last_filed_end": null,
+      "unfiled_past_due": null,
+      "predicted_revocation": null,
+      "reinstated": false,
+      "sources_used": [
+        "bmf"
+      ]
+    }
+  ],
+  "gate_events": [
+    {
+      "ein": "223456789",
+      "tool": "send_alert",
+      "decision": "allowed",
+      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+    },
+    {
+      "ein": "223456792",
+      "tool": "send_alert",
+      "decision": "cancelled",
+      "reason": "class=WATCH, one missed period is not an alert condition"
+    }
+  ],
+  "backtest": {
+    "window": "revocations dated 2021-01-01 to 2026-12-31",
+    "n": 0,
+    "exact": 0,
+    "exact_rate": 0.0,
+    "same_month": 0,
+    "same_month_rate": 0.0,
+    "histogram_months": {
+      "-12": 0,
+      "0": 0,
+      "1": 0
+    },
+    "source_dates": {
+      "revocation": "2026-09-07",
+      "990n": "2026-09-07"
+    }
+  }
+}
