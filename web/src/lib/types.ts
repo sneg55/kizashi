@@ -63,6 +63,7 @@ export interface SurfacedOrg {
   days_left: number | null
   evidence: string[]
   brief: Brief | null
+  brief_source: 'model' | 'fallback' | null
   outreach: string | null
   alert: AlertOutcome | null
 }
