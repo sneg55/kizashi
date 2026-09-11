@@ -54,7 +54,7 @@ function RunHeader({
               {sweep === 'running' ? 'Running the sweep' : 'Run sweep'}
             </button>
             {sweep === 'failed' ? (
-              <p className="m-0 max-w-[28ch] text-micro text-flag">
+              <p className="m-0 max-w-[28ch] text-micro text-ink">
                 The sweep did not start. Check that the API is running on port 8000.
               </p>
             ) : null}

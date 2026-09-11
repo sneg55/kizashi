@@ -81,7 +81,7 @@ export function SurfacedCard({
       <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
         {org.alert ? (
           <p className="data m-0 flex items-baseline gap-2 text-micro text-ink-soft">
-            <span className="text-ink">alert {org.alert.status}</span>
+            <span className="whitespace-nowrap text-ink">alert {org.alert.status}</span>
             <span>{org.alert.reason}</span>
           </p>
         ) : null}
@@ -100,7 +100,7 @@ export function SurfacedCard({
           </button>
         ) : null}
         {dismiss === 'failed' ? (
-          <p className="m-0 text-micro text-flag">
+          <p className="m-0 text-micro text-ink">
             The dismiss did not reach the API. Check that the server is running and try again.
           </p>
         ) : null}

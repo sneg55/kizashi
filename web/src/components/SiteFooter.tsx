@@ -8,7 +8,7 @@ export function SiteFooter() {
         Built for the AWS Agents for Humans Hackathon, Good Neighbor track.
       </p>
       <p className="m-0 mt-3 flex flex-wrap gap-x-6 gap-y-1">
-        <span>MIT licence</span>
+        <span>MIT license</span>
         <a href={REPO_URL} className="hover:text-ink">
           {displayUrl(REPO_URL)}
         </a>

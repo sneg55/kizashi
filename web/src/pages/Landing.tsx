@@ -30,9 +30,9 @@ const BUILT_ON = [
 function Hero({ report }: { report: Report | null }) {
   return (
     <div className="py-14 sm:py-20">
-      <p className="m-0 max-w-[30ch] font-display text-[clamp(1.6rem,3.4vw,2.55rem)] leading-[1.2] font-normal tracking-[-0.02em] text-pretty text-ink">
+      <h1 className="m-0 max-w-[30ch] font-display text-[clamp(1.6rem,3.4vw,2.55rem)] leading-[1.2] font-normal tracking-[-0.02em] text-pretty text-ink">
         {HERO}
-      </p>
+      </h1>
       <div className="mt-9 flex flex-wrap items-center gap-3">
         <Link
           to="/app"
