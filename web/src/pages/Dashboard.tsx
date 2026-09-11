@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import { BacktestPanel } from '../components/BacktestPanel'
+import { GateFeed } from '../components/GateFeed'
+import { LedgerTable } from '../components/LedgerTable'
 import { Section } from '../components/Section'
 import { SiteFooter } from '../components/SiteFooter'
 import { SummaryStrip } from '../components/SummaryStrip'
@@ -141,6 +144,24 @@ export function Dashboard() {
           <SummaryStrip summary={state.report.summary} />
           <Section title="Surfaced">
             <Surfaced report={state.report} />
+          </Section>
+          <Section title="Ledger">
+            <p className="mt-0 mb-6 max-w-[62ch] text-ink-soft">
+              Every organization in the portfolio, with the reason it produced nothing to send.
+            </p>
+            <LedgerTable rows={state.report.ledger} />
+          </Section>
+          <Section title="Gate">
+            <p className="mt-0 mb-6 max-w-[62ch] text-ink-soft">
+              Every attempt on the outbound tool, allowed or cancelled, with the reason the hook
+              recorded.
+            </p>
+            <div className="max-w-[52rem]">
+              <GateFeed events={state.report.gate_events} />
+            </div>
+          </Section>
+          <Section title="Backtest">
+            <BacktestPanel backtest={state.report.backtest} />
           </Section>
         </main>
       ) : null}

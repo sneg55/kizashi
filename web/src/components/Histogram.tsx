@@ -39,7 +39,7 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
         onMouseLeave={() => setHovered(null)}
       >
         {buckets.map((bucket, index) => {
-          const height = bucket.count === 0 ? 0 : Math.max((bucket.count / peak) * PLOT_HEIGHT, 2)
+          const height = bucket.count === 0 ? 0 : Math.max((bucket.count / peak) * PLOT_HEIGHT, 3)
           const emphasised = bucket.month === 0 || hovered?.month === bucket.month
           return (
             <g key={bucket.month}>
