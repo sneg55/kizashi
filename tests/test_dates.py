@@ -38,5 +38,6 @@ def test_parsers():
     assert parse_mm_dd_yyyy("") is None
     assert parse_yyyymm("202406") == date(2024, 6, 30)
     assert parse_yyyymm("") is None
+    assert parse_yyyymm("000000") is None
     assert parse_dd_mon_yyyy("15-MAY-2023") == date(2023, 5, 15)
     assert last_day_of_month(2024, 2) == date(2024, 2, 29)

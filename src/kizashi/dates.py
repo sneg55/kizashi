@@ -20,7 +20,10 @@ def parse_yyyymm(s: str) -> date | None:
     s = s.strip()
     if len(s) != 6 or not s.isdigit():
         return None
-    return last_day_of_month(int(s[:4]), int(s[4:]))
+    year, month = int(s[:4]), int(s[4:])
+    if year == 0 or month < 1 or month > 12:
+        return None
+    return last_day_of_month(year, month)
 
 
 def parse_dd_mon_yyyy(s: str) -> date | None:
