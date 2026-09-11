@@ -31,6 +31,7 @@ class Surfaced:
     outreach: str | None
     alert_status: str | None
     alert_reason: str | None
+    brief_source: str | None = None
 
 
 @dataclass
@@ -102,6 +103,7 @@ def _surfaced_to_dict(s: Surfaced) -> dict:
         "days_left": s.days_left,
         "evidence": list(c.evidence),
         "brief": brief,
+        "brief_source": s.brief_source,
         "outreach": s.outreach,
         "alert": alert,
     }

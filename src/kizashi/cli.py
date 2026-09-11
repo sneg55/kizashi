@@ -1,12 +1,14 @@
 import argparse
 import csv
 import json
+from collections import Counter
 from datetime import date, datetime, timezone
 from pathlib import Path
 
 from kizashi.backtest import backtest_to_dict, run_backtest
 from kizashi.classify import Cls, classify_portfolio
 from kizashi.ledger import Report, Surfaced, make_run_id, report_to_dict, write_report
+from kizashi.pipeline import run_pipeline
 from kizashi.portfolio import build_portfolio_from_bmf, load_portfolio_csv
 from kizashi.sources import (
     BMF_URLS,
@@ -107,6 +109,29 @@ def cmd_classify(args: argparse.Namespace) -> None:
     print(json.dumps(summary))
 
 
+def cmd_run(args: argparse.Namespace) -> None:
+    as_of = date.fromisoformat(args.as_of) if args.as_of else date.today()
+    portfolio_path = Path(args.portfolio)
+    portfolio = load_portfolio_csv(portfolio_path, portfolio_path.stem)
+    report = run_pipeline(
+        portfolio=portfolio,
+        as_of=as_of,
+        data_dir=DATA_RAW,
+        out_dir=Path(args.out),
+        state_dir=Path(args.state),
+        with_model=not args.no_model,
+        slug=portfolio_path.stem,
+    )
+    d = report_to_dict(report)
+    for event in d["gate_events"]:
+        print(f"gate {event['decision']}\t{event['ein']}\t{event['reason']}")
+    briefs = Counter(row["brief_source"] for row in d["surfaced"])
+    print(f"briefs: model={briefs.get('model', 0)} fallback={briefs.get('fallback', 0)} none={briefs.get(None, 0)}")
+    print(f"model: {json.dumps(d['model'])}")
+    print(f"wrote {Path(args.out) / (report.run_id + '.json')}")
+    print(json.dumps(d["summary"]))
+
+
 def cmd_backtest(args: argparse.Namespace) -> None:
     pcs = read_postcards(DATA_RAW / "data-download-epostcard.txt")
     revs = read_revocations(DATA_RAW / "data-download-revocation.txt")
@@ -169,6 +194,14 @@ def build_parser() -> argparse.ArgumentParser:
     classify_p.add_argument("--as-of")
     classify_p.add_argument("--out", required=True)
     classify_p.set_defaults(func=cmd_classify)
+
+    run_p = sub.add_parser("run")
+    run_p.add_argument("--portfolio", required=True)
+    run_p.add_argument("--as-of")
+    run_p.add_argument("--out", default="data/runs")
+    run_p.add_argument("--state", default="data/state")
+    run_p.add_argument("--no-model", action="store_true")
+    run_p.set_defaults(func=cmd_run)
 
     backtest_p = sub.add_parser("backtest")
     backtest_p.add_argument("--start", default="2021-01-01")
