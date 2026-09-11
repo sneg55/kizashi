@@ -17,6 +17,15 @@ export function humanizeReason(reason: string): string {
   return reason.replace(/_/g, ' ')
 }
 
+export function displayUrl(url: string): string {
+  try {
+    const parsed = new URL(url)
+    return `${parsed.host}${parsed.pathname}`.replace(/\/$/, '')
+  } catch {
+    return url
+  }
+}
+
 export function normalizeSearch(value: string): string {
   return value.replace(/[-\s]/g, '').toLowerCase()
 }

@@ -88,19 +88,19 @@ export function buildRunway(
     { kind: 'filed', date: toIso(filed), label: 'Last filed period', offset: 0 },
   ]
 
+  const ordinals = ['First', 'Second']
   dues.slice(0, 2).forEach((due, index) => {
-    const end = ends[index]
-    if (!end) return
+    const missed = epoch(due) <= epoch(today)
     marks.push({
-      kind: epoch(due) <= epoch(today) ? 'missed' : 'upcoming',
+      kind: missed ? 'missed' : 'upcoming',
       date: toIso(due),
-      label: `Return for ${toIso(end)} due`,
+      label: `${ordinals[index] ?? 'Next'} return ${missed ? 'missed' : 'due'}`,
       offset: 0,
     })
   })
 
   marks.push({ kind: 'today', date: toIso(today), label: 'Run date', offset: 0 })
-  marks.push({ kind: 'revocation', date: toIso(final), label: 'Status revoked', offset: 0 })
+  marks.push({ kind: 'revocation', date: toIso(final), label: 'Exemption revoked', offset: 0 })
 
   const start = epoch(filed)
   const finish = epoch(final)
