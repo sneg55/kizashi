@@ -1,4 +1,4 @@
-export const LIVE_URL = ''
+export const LIVE_URL = 'https://kizashi.nsawinyh.workers.dev'
 
 export const REPO_URL = 'https://github.com/sneg55/kizashi'
 
