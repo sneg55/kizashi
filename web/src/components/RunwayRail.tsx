@@ -40,8 +40,8 @@ export function RunwayRail({
   ]
 
   return (
-    <div className={animate ? 'rail-draw' : undefined}>
-      <div className="px-1">
+    <div>
+      <div className={`px-1 ${animate ? 'rail-draw' : ''}`}>
         <div className="relative h-10">
           {segments.map((segment) =>
             segment.width > 0 ? (
