@@ -54,6 +54,7 @@ def create_app(
     state_dir: Path = DEFAULT_STATE_DIR,
     data_dir: Path = DEFAULT_DATA_DIR,
     web_dist: Path = DEFAULT_WEB_DIST,
+    default_as_of: date | None = None,
 ) -> FastAPI:
     app = FastAPI(title="kizashi")
 
@@ -98,10 +99,13 @@ def create_app(
         portfolio_path = Path(body.portfolio_csv)
         if not portfolio_path.exists():
             raise HTTPException(status_code=404, detail="unknown portfolio")
+        as_of = date.fromisoformat(body.as_of) if body.as_of else default_as_of
+        if as_of is None:
+            raise HTTPException(status_code=400, detail="as_of is required")
         portfolio = load_portfolio_csv(portfolio_path, portfolio_path.stem)
         report = run_pipeline(
             portfolio=portfolio,
-            as_of=date.fromisoformat(body.as_of) if body.as_of else date.today(),
+            as_of=as_of,
             data_dir=data_dir,
             out_dir=runs_dir,
             state_dir=state_dir,

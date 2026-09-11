@@ -66,6 +66,12 @@ def test_dismiss_writes_to_the_alert_store(client):
     assert store.has("223456789", "2027-05-15")
 
 
+def test_run_without_an_as_of_is_rejected(client):
+    c, _ = client
+    body = c.post("/api/runs", json={"portfolio_csv": "data/demo/portfolio-nj-086.csv", "with_model": False})
+    assert body.status_code == 400
+
+
 def test_unbuilt_web_app_is_404(client):
     c, _ = client
     assert c.get("/").status_code == 404

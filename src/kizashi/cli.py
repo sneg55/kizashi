@@ -155,7 +155,7 @@ def cmd_serve(args: argparse.Namespace) -> None:
 
     from kizashi.api import create_app
 
-    uvicorn.run(create_app(), host=args.host, port=args.port)
+    uvicorn.run(create_app(default_as_of=date.today()), host=args.host, port=args.port)
 
 
 def cmd_export(args: argparse.Namespace) -> None:
