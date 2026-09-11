@@ -1,0 +1,11 @@
+docs/internal/
+.env
+.venv/
+__pycache__/
+*.pyc
+data/raw/
+data/state/
+*.zip
+web/node_modules/
+web/dist/
+.DS_Store
