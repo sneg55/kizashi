@@ -112,7 +112,7 @@ def cmd_classify(args: argparse.Namespace) -> None:
 def cmd_run(args: argparse.Namespace) -> None:
     as_of = date.fromisoformat(args.as_of) if args.as_of else date.today()
     portfolio_path = Path(args.portfolio)
-    portfolio = load_portfolio_csv(portfolio_path, portfolio_path.stem)
+    portfolio = load_portfolio_csv(portfolio_path, args.name or portfolio_path.stem)
     report = run_pipeline(
         portfolio=portfolio,
         as_of=as_of,
@@ -232,6 +232,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_p = sub.add_parser("run")
     run_p.add_argument("--portfolio", required=True)
     run_p.add_argument("--as-of")
+    run_p.add_argument("--name")
     run_p.add_argument("--out", default="data/runs")
     run_p.add_argument("--state", default="data/state")
     run_p.add_argument("--no-model", action="store_true")
