@@ -5,6 +5,9 @@ __pycache__/
 *.pyc
 data/raw/
 data/state/
+data/runs/*
+!data/runs/backtest.json
+.trash/
 *.zip
 web/node_modules/
 web/dist/

@@ -150,6 +150,40 @@ def cmd_backtest(args: argparse.Namespace) -> None:
     print(f"source dates: revocation={source_dates['revocation']} 990n={source_dates['990n']}")
 
 
+def cmd_serve(args: argparse.Namespace) -> None:
+    import uvicorn
+
+    from kizashi.api import create_app
+
+    uvicorn.run(create_app(), host=args.host, port=args.port)
+
+
+def cmd_export(args: argparse.Namespace) -> None:
+    from kizashi.api import run_files
+
+    runs_dir = Path(args.runs)
+    if args.run == "latest":
+        path = runs_dir / "latest.json"
+        if not path.exists():
+            files = run_files(runs_dir)
+            if not files:
+                raise SystemExit(f"no runs in {runs_dir}")
+            path = files[0]
+    else:
+        matches = [p for p in run_files(runs_dir) if p.stem == args.run]
+        if not matches:
+            raise SystemExit(f"unknown run {args.run}")
+        path = matches[0]
+    report = json.loads(path.read_text())
+    backtest_path = runs_dir / "backtest.json"
+    if backtest_path.exists():
+        report["backtest"] = json.loads(backtest_path.read_text())
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(report, indent=2))
+    print(f"exported {report['run_id']} to {out}")
+
+
 def cmd_reconcile(args: argparse.Namespace) -> None:
     bmf = read_bmf(DATA_RAW / "eo1.csv")
     pcs = read_postcards(DATA_RAW / "data-download-epostcard.txt")
@@ -209,6 +243,17 @@ def build_parser() -> argparse.ArgumentParser:
     backtest_p.add_argument("--out", default="data/runs/backtest.json")
     backtest_p.add_argument("--misses", default="data/runs/backtest-misses.csv")
     backtest_p.set_defaults(func=cmd_backtest)
+
+    serve_p = sub.add_parser("serve")
+    serve_p.add_argument("--host", default="127.0.0.1")
+    serve_p.add_argument("--port", type=int, default=8000)
+    serve_p.set_defaults(func=cmd_serve)
+
+    export_p = sub.add_parser("export")
+    export_p.add_argument("--run", default="latest")
+    export_p.add_argument("--runs", default="data/runs")
+    export_p.add_argument("--out", default="web/public/data/report.json")
+    export_p.set_defaults(func=cmd_export)
 
     reconcile_p = sub.add_parser("reconcile")
     reconcile_p.set_defaults(func=cmd_reconcile)
