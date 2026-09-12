@@ -25,7 +25,7 @@ Kizashi computes the date from the public record instead of waiting for the list
 - `strands.multiagent.GraphBuilder` assembles the pipeline: a custom `MultiAgentBase` node runs the deterministic classifier and never calls a model, then a brief agent with pydantic structured output, then a dispatch agent that owns the `send_alert` tool.
 - `strands.hooks.BeforeToolCallEvent` is the gate. It reads the ledger and the alert history and sets `cancel_tool` with a reason string when the call is not allowed, and records a `hold_for_review` call as a third decision, "held", without writing alert history. `AfterToolCallEvent` records the sends with their delivery id.
 - The model is served by Amazon Bedrock through the Mantle endpoint, using the `OpenAIModel` provider with `bedrock_mantle_config`, which mints a short-term Bedrock API key per request from the AWS session. The default model is `google.gemma-4-31b`.
-- The runtime entrypoint is a `BedrockAgentCoreApp`, invoked at `/invocations` with a portfolio path and an as-of date.
+- The runtime entrypoint is a `BedrockAgentCoreApp`, invoked at `/invocations` with a portfolio path and an as-of date. The scheduled sweep runs the same pipeline as an ECS Fargate task from an EventBridge Scheduler schedule and publishes to S3.
 
 ## Architecture
 
@@ -45,7 +45,8 @@ flowchart LR
   H[BeforeToolCallEvent hook<br/>cancel_tool unless SURFACE<br/>and not previously alerted] -. gates .-> E
   M[(Alert history<br/>AlertStore)] <--> H
   L --> R[Report: surfaced, ledger, gate events, backtest]
-  G --> RT[AgentCore Runtime<br/>scheduled invoke]
+  G --> RT[EventBridge Scheduler<br/>ECS Fargate task, monthly]
+  RT --> S3[(S3: report and alert history)]
 ```
 
 ## Run it
@@ -98,7 +99,11 @@ The bias runs one way: an organization that filed since would not look delinquen
 
 ## Runtime
 
-`uv run python src/kizashi/runtime_app.py` starts the AgentCore runtime contract locally on port 8080; `POST /invocations` with `{"portfolio_csv": "data/demo/portfolio-nj-086.csv", "with_model": false}` returns the run summary. Deploying it to a hosted AgentCore Runtime is blocked on this AWS account by a zero agents-per-account quota, so the hosted step is not part of this submission.
+The sweep runs on a schedule with nobody watching. `infra/scheduled-run.sh` creates, idempotently, an S3 bucket (`kizashi-runs-<account>`, private), an ECR repository, a CloudWatch log group, three IAM roles, an ECS cluster, a Fargate task definition (`kizashi-sweep`, 1 vCPU, 4 GB, the image built from the `Dockerfile` at the root) and an EventBridge Scheduler schedule `kizashi-monthly` with `cron(0 12 7 * ? *)`, 12:00 UTC on the 7th, after the IRS refreshes the monthly files. The task runs `scripts/scheduled-run.sh`: pull the alert history from S3, fetch the three IRS files, run the full pipeline with the model, and publish the report and the updated alert history back to S3 (`runs/<run_id>.json`, `runs/latest.json`, `state/alerts.json`). The task role holds `bedrock-mantle:CreateInference` and `bedrock-mantle:CallWithBearerToken`, which is what the Mantle endpoint actually checks; the classic `bedrock:*` actions were never exercised.
+
+A scheduled launch on 2026-09-12 ran the pipeline end to end in 4 minutes 45 seconds of container time: 38 briefs from the model, 36 alerts sent on the dry-run channel, 2 held, backtest and silence score attached, alert history written back. The schedule is enabled.
+
+`uv run python src/kizashi/runtime_app.py` starts the AgentCore runtime contract locally on port 8080; `POST /invocations` with `{"portfolio_csv": "data/demo/portfolio-nj-086.csv", "with_model": false}` returns the run summary. Deploying that entrypoint to a hosted AgentCore Runtime is blocked on this AWS account by a zero agents-per-account quota, so the hosted step is not part of this submission; the scheduled Fargate task is.
 
 ## Source agreement
 

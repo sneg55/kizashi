@@ -12,16 +12,21 @@ const BUILT_ON = [
     wash: 'bg-flag-wash',
   },
   {
-    name: 'Amazon Bedrock AgentCore Runtime',
-    role: 'the entrypoint the run is invoked through, exercised locally for this submission',
+    name: 'Amazon EventBridge Scheduler and ECS Fargate',
+    role: 'the monthly sweep, on the 7th at 12:00 UTC, publishing the report and the alert history to S3',
     wash: 'bg-mint-veil',
+  },
+  {
+    name: 'Amazon SES and AgentCore Runtime',
+    role: 'the delivery channel behind send_alert, and the entrypoint the same pipeline answers on',
+    wash: 'bg-accent-wash',
   },
 ]
 
 export function BuiltOn() {
   return (
     <Section title="Built on" align="center">
-      <dl className="m-0 grid gap-6 sm:grid-cols-3">
+      <dl className="m-0 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {BUILT_ON.map((item) => (
           <div key={item.name} className="card p-6 sm:p-8">
             <span aria-hidden="true" className={`block h-10 w-10 rounded-full ${item.wash}`} />
