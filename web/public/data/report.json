@@ -1,6 +1,6 @@
 {
-  "run_id": "2026-09-11T23-59-07Z-portfolio-nj-086",
-  "as_of": "2026-09-11",
+  "run_id": "2026-09-12T11-13-52Z-portfolio-nj-086",
+  "as_of": "2026-09-12",
   "portfolio": {
     "name": "Mercer County NJ small nonprofits",
     "source": "data/demo/portfolio-nj-086.csv",
@@ -40,8 +40,9 @@
     "reinstated": 99,
     "never_filed": 14,
     "past_due": 1,
-    "alerts_sent": 38,
-    "alerts_suppressed": 1
+    "alerts_sent": 36,
+    "alerts_suppressed": 1,
+    "alerts_held": 2
   },
   "surfaced": [
     {
@@ -53,7 +54,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2026-11-15",
-      "days_left": 65,
+      "days_left": 64,
       "evidence": [
         "Last return on record covers the tax period ending 2023-06-30",
         "Return for the period ending 2024-06-30 was due 2024-11-15 and is not on record",
@@ -66,10 +67,13 @@
         "next_filing_needed": "Tax periods ending 2024-06-30 and 2025-06-30 must be filed before 2026-11-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for MASSACHUSETTS MEDICAL GROUP MANAGEMENT ASSOCIATION INC shows two missing returns. The statutory date for automatic revocation is 2026-11-15. Please contact the organization.",
+      "outreach": "Please contact MASSACHUSETTS MEDICAL GROUP MANAGEMENT ASSOCIATION INC. The record shows two missing returns and a statutory date of 2026-11-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2026-11-15"
+        "reason": "class=SURFACE, no prior alert for 2026-11-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-be12655ef0b5"
       }
     },
     {
@@ -81,7 +85,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -94,10 +98,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for NEW JERSEY PROFESSIONAL FIREFIGHTERS EMERGENCY RELIEF FUND shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Please contact NEW JERSEY PROFESSIONAL FIREFIGHTERS EMERGENCY RELIEF FUND. The record shows two missing returns and a statutory date of 2027-05-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-ca2d26606812"
       }
     },
     {
@@ -109,7 +116,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2026-11-15",
-      "days_left": 65,
+      "days_left": 64,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-06-30",
         "Return for the period ending 2024-06-30 was due 2024-11-15 and is not on record",
@@ -122,10 +129,13 @@
         "next_filing_needed": "Tax periods ending 2024-06-30 and 2025-06-30 must be filed before 2026-11-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for FRIENDS OF STEINERT HIGH SCHOOLJAZZ PROGRAM shows two missing returns. The statutory date for automatic revocation is 2026-11-15. Please contact the organization.",
+      "outreach": "Please contact FRIENDS OF STEINERT HIGH SCHOOLJAZZ PROGRAM. The record shows two missing returns and a statutory date of 2026-11-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2026-11-15"
+        "reason": "class=SURFACE, no prior alert for 2026-11-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-e8ee65415200"
       }
     },
     {
@@ -137,7 +147,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-03-15",
-      "days_left": 185,
+      "days_left": 184,
       "evidence": [
         "Last return on record covers the tax period ending 2023-10-31",
         "Return for the period ending 2024-10-31 was due 2025-03-15 and is not on record",
@@ -150,10 +160,13 @@
         "next_filing_needed": "Tax periods ending 2024-10-31 and 2025-10-31 must be filed before 2027-03-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for LAWRENCEVILLE SCHOOL CAMP INC shows two missing returns. The statutory date for automatic revocation is 2027-03-15. Please contact the organization.",
+      "outreach": "Please contact LAWRENCEVILLE SCHOOL CAMP INC. The record shows two missing returns and a statutory date of 2027-03-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-03-15"
+        "reason": "class=SURFACE, no prior alert for 2027-03-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-aab57458f4e4"
       }
     },
     {
@@ -165,7 +178,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -178,10 +191,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for GREATER TRENTON CHORAL SOCIETY INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Please contact GREATER TRENTON CHORAL SOCIETY INC. The record shows two missing returns and a statutory date of 2027-05-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-9c04efaf6f6b"
       }
     },
     {
@@ -193,7 +209,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -206,10 +222,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for CIFA FOUNDATION INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Please contact CIFA FOUNDATION INC. The record shows two missing returns and a statutory date of 2027-05-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-914b56f9ef0e"
       }
     },
     {
@@ -221,7 +240,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -234,10 +253,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for MERCEDES BENZ CLUB OF SOUTH JERSEY shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Please contact MERCEDES BENZ CLUB OF SOUTH JERSEY. The record shows two missing returns and a statutory date of 2027-05-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-2b5069c77c9a"
       }
     },
     {
@@ -249,7 +271,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -262,10 +284,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for THE FRIENDLY SONS AND DAUGHTERS OF ST PATRICK OF MERCER COUNTY INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Please contact THE FRIENDLY SONS AND DAUGHTERS OF ST PATRICK OF MERCER COUNTY INC. The record shows two missing returns and a statutory date of 2027-05-15.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-67fa8d4f7c6d"
       }
     },
     {
@@ -277,7 +302,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -290,10 +315,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for OMKAR FOUNDATION shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for OMKAR FOUNDATION shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-2d9957d8a24e"
       }
     },
     {
@@ -305,7 +333,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -318,10 +346,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for HELP SELF COMMUNITY DEVELOPMENT CORPORATION shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for HELP SELF COMMUNITY DEVELOPMENT CORPORATION shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-fcbfb8eef4d8"
       }
     },
     {
@@ -333,7 +364,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -346,10 +377,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for ARTISTS FOR A CAUSE shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for ARTISTS FOR A CAUSE shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-08c2cc558d4b"
       }
     },
     {
@@ -361,7 +395,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -374,10 +408,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for HAMILTON A S BASEBALL INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for HAMILTON A S BASEBALL INC shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-80509c25b6da"
       }
     },
     {
@@ -389,7 +426,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -402,10 +439,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for GOSPEL SHOWERS ENTERTAINMENT shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for GOSPEL SHOWERS ENTERTAINMENT shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-bf66bd02c894"
       }
     },
     {
@@ -417,7 +457,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -430,10 +470,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for HOMEWARD BOUND RESCUE OF NEW JERSEY shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for HOMEWARD BOUND RESCUE OF NEW JERSEY shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-be60ab5fc01c"
       }
     },
     {
@@ -445,7 +488,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -458,10 +501,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for JOHN J HARVILLA TIN-MAN FOUNDATION shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for JOHN J HARVILLA TIN-MAN FOUNDATION shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-90fa7f964b31"
       }
     },
     {
@@ -473,7 +519,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -486,10 +532,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for AMERICAN BRIDAL AND PROM INDUSTRY ASSOCIATION INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for AMERICAN BRIDAL AND PROM INDUSTRY ASSOCIATION INC shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-251d2c72374a"
       }
     },
     {
@@ -501,7 +550,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -514,10 +563,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for HAMILTON WEST SWIM BOOSTER CLUB shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for HAMILTON WEST SWIM BOOSTER CLUB shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-367cefcdcc28"
       }
     },
     {
@@ -529,7 +581,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -542,10 +594,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for REBECCAS HEART shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for REBECCAS HEART shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-a8cce473d668"
       }
     },
     {
@@ -557,7 +612,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -570,10 +625,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for PROM SCHOLAR INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for PROM SCHOLAR INC shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-656c2ed95a4a"
       }
     },
     {
@@ -585,7 +643,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-08-15",
-      "days_left": 338,
+      "days_left": 337,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2024-03-31",
         "Return for the period ending 2025-03-31 was due 2025-08-15 and is not on record",
@@ -598,10 +656,13 @@
         "next_filing_needed": "Tax periods ending 2025-03-31 and 2026-03-31 must be filed before 2027-08-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for SOCIETA NAPOLETANA MADONNA MARIA SS DICASSINDRINO shows two missing returns. The statutory date for automatic revocation is 2027-08-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for SOCIETA NAPOLETANA MADONNA MARIA SS DICASSINDRINO shows two missing returns. The statutory date for revocation is 2027-08-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-08-15"
+        "reason": "class=SURFACE, no prior alert for 2027-08-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-aa5c3675b6ea"
       }
     },
     {
@@ -613,7 +674,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -626,10 +687,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for DAWN OF HOPE shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for DAWN OF HOPE shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-589751510692"
       }
     },
     {
@@ -641,7 +705,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -654,10 +718,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for LAWRENCE TOWNSHIP PBA LOCAL 119 CIVIC ASSOCIATION INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for LAWRENCE TOWNSHIP PBA LOCAL 119 CIVIC ASSOCIATION INC shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": "The name reads as a local of a national body.",
       "alert": {
-        "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "status": "held",
+        "reason": "held by the dispatcher: The name reads as a local of a national body.",
+        "channel": null,
+        "delivery_id": null
       }
     },
     {
@@ -669,7 +736,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -682,10 +749,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for LET THERE BE HEALTH shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for LET THERE BE HEALTH shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-99ea273e885c"
       }
     },
     {
@@ -697,7 +767,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last return on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -710,10 +780,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: The record for KOTELNICKI ARTS FOUNDATION shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants Lead, the record for KOTELNICKI ARTS FOUNDATION shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-3557bf79b120"
       }
     },
     {
@@ -725,7 +798,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -738,10 +811,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for ELBRAS DREAM INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for ELBRAS DREAM INC shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-86a32a08091e"
       }
     },
     {
@@ -753,7 +829,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -766,10 +842,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for CULTURE IS KEY shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for CULTURE IS KEY shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-267929565d12"
       }
     },
     {
@@ -781,7 +860,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last return on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -794,10 +873,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for FAMILY ENRICHMENT ENPOWERMENT DEVELOPMENT shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for FAMILY ENRICHMENT ENPOWERMENT DEVELOPMENT shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-7de65c717a3b"
       }
     },
     {
@@ -809,7 +891,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -822,10 +904,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for SGFS FOUNDATION shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for SGFS FOUNDATION shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-4ccec8d58b6f"
       }
     },
     {
@@ -837,7 +922,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -850,10 +935,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for VONZELLAS CROWN shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for VONZELLAS CROWN shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-97c5a8331a12"
       }
     },
     {
@@ -865,7 +953,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -878,10 +966,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for AGAPE HEALING INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for AGAPE HEALING INC shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-24c34cc675f7"
       }
     },
     {
@@ -893,7 +984,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -906,10 +997,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for AMEMONOS AGENCIA MISIONERA INTERNACIONAL INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for AMEMONOS AGENCIA MISIONERA INTERNACIONAL INC shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-b36a00b62a0b"
       }
     },
     {
@@ -921,7 +1015,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -934,10 +1028,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants lead, the record for FRIENDS OF HAMILTON HIGH WEST SPORTS shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for FRIENDS OF HAMILTON HIGH WEST SPORTS shows two missing returns and a statutory date of 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-036dbd361e1d"
       }
     },
     {
@@ -949,7 +1046,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -962,10 +1059,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: A SHANTE LOVE INC has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for A SHANTE LOVE INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-293a45eb6f9a"
       }
     },
     {
@@ -977,7 +1077,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -990,10 +1090,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: JBMDL 5-6 COUNCIL has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for JBMDL 5-6 COUNCIL shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "review_note": "The name reads as a council of a national body.",
       "alert": {
-        "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "status": "held",
+        "reason": "held by the dispatcher: The name reads as a council of a national body.",
+        "channel": null,
+        "delivery_id": null
       }
     },
     {
@@ -1005,7 +1108,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -1018,10 +1121,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: BROTHER OFFICER LAW ENFORCEMENT SOCIETY has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for BROTHER OFFICER LAW ENFORCEMENT SOCIETY shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-36abf6710395"
       }
     },
     {
@@ -1033,7 +1139,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -1046,10 +1152,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: SAINT SHENOUDA INC has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for SAINT SHENOUDA INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-fbb72b3fd719"
       }
     },
     {
@@ -1061,7 +1170,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 246,
+      "days_left": 245,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -1074,10 +1183,13 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: LET OUR VOICES ELEVATE INC has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for LET OUR VOICES ELEVATE INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-05-15"
+        "reason": "class=SURFACE, no prior alert for 2027-05-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-3999075946e2"
       }
     },
     {
@@ -1089,7 +1201,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-08-15",
-      "days_left": 338,
+      "days_left": 337,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2024-03-31",
         "Return for the period ending 2025-03-31 was due 2025-08-15 and is not on record",
@@ -1102,10 +1214,13 @@
         "next_filing_needed": "Tax periods ending 2025-03-31 and 2026-03-31 must be filed before 2027-08-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead: HORIZON FOR ALL has two missing returns. The record shows a statutory revocation date of 2027-08-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for HORIZON FOR ALL shows two missing returns. The statutory date for automatic revocation is 2027-08-15. Please contact the organization.",
+      "review_note": null,
       "alert": {
         "status": "sent",
-        "reason": "class=SURFACE, no prior alert for 2027-08-15"
+        "reason": "class=SURFACE, no prior alert for 2027-08-15",
+        "channel": "dry-run",
+        "delivery_id": "dry-run-a4cb4e0eccb0"
       }
     }
   ],
@@ -13485,235 +13600,313 @@
       "ein": "042642962",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2026-11-15"
+      "reason": "class=SURFACE, no prior alert for 2026-11-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-be12655ef0b5"
     },
     {
       "ein": "043697038",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-ca2d26606812"
     },
     {
       "ein": "208851570",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2026-11-15"
+      "reason": "class=SURFACE, no prior alert for 2026-11-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-e8ee65415200"
     },
     {
       "ein": "221469437",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-03-15"
+      "reason": "class=SURFACE, no prior alert for 2027-03-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-aab57458f4e4"
     },
     {
       "ein": "222488785",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-9c04efaf6f6b"
     },
     {
       "ein": "223264933",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-914b56f9ef0e"
     },
     {
       "ein": "223276381",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-2b5069c77c9a"
     },
     {
       "ein": "223280849",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-67fa8d4f7c6d"
     },
     {
       "ein": "223796086",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-2d9957d8a24e"
     },
     {
       "ein": "223849068",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-fcbfb8eef4d8"
     },
     {
       "ein": "264279756",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-08c2cc558d4b"
     },
     {
       "ein": "271189516",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-80509c25b6da"
     },
     {
       "ein": "331772325",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-bf66bd02c894"
     },
     {
       "ein": "383651137",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-be60ab5fc01c"
     },
     {
       "ein": "453707628",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-90fa7f964b31"
     },
     {
       "ein": "455360371",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-251d2c72374a"
     },
     {
       "ein": "464073288",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-367cefcdcc28"
     },
     {
       "ein": "474135268",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-a8cce473d668"
     },
     {
       "ein": "811661126",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-656c2ed95a4a"
     },
     {
       "ein": "812993536",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-08-15"
+      "reason": "class=SURFACE, no prior alert for 2027-08-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-aa5c3675b6ea"
     },
     {
       "ein": "814391200",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-589751510692"
     },
     {
       "ein": "822482006",
-      "tool": "send_alert",
-      "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "tool": "hold_for_review",
+      "decision": "held",
+      "reason": "held by the dispatcher: The name reads as a local of a national body.",
+      "channel": null,
+      "delivery_id": null
     },
     {
       "ein": "832964935",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-99ea273e885c"
     },
     {
       "ein": "834693681",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-3557bf79b120"
     },
     {
       "ein": "844486422",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-86a32a08091e"
     },
     {
       "ein": "852439037",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-267929565d12"
     },
     {
       "ein": "853940447",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-7de65c717a3b"
     },
     {
       "ein": "854122830",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-4ccec8d58b6f"
     },
     {
       "ein": "861803183",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-97c5a8331a12"
     },
     {
       "ein": "874018744",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-24c34cc675f7"
     },
     {
       "ein": "881347714",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-b36a00b62a0b"
     },
     {
       "ein": "881704383",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-036dbd361e1d"
     },
     {
       "ein": "882927654",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-293a45eb6f9a"
     },
     {
       "ein": "883682458",
-      "tool": "send_alert",
-      "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "tool": "hold_for_review",
+      "decision": "held",
+      "reason": "held by the dispatcher: The name reads as a council of a national body.",
+      "channel": null,
+      "delivery_id": null
     },
     {
       "ein": "921983802",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-36abf6710395"
     },
     {
       "ein": "932267226",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-fbb72b3fd719"
     },
     {
       "ein": "934750646",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-05-15"
+      "reason": "class=SURFACE, no prior alert for 2027-05-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-3999075946e2"
     },
     {
       "ein": "992635383",
       "tool": "send_alert",
       "decision": "allowed",
-      "reason": "class=SURFACE, no prior alert for 2027-08-15"
+      "reason": "class=SURFACE, no prior alert for 2027-08-15",
+      "channel": "dry-run",
+      "delivery_id": "dry-run-a4cb4e0eccb0"
     },
     {
       "ein": "010579647",
       "tool": "send_alert",
       "decision": "cancelled",
-      "reason": "class=WATCH, not an alert condition"
+      "reason": "class=WATCH, not an alert condition",
+      "channel": null,
+      "delivery_id": null
     }
   ],
   "backtest": {

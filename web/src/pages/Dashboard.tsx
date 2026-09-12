@@ -176,7 +176,7 @@ export function Dashboard() {
             <Section
               title="Gate"
               id="gate"
-              lead="Every attempt on the outbound tool, allowed or cancelled, with the reason the hook recorded."
+              lead="Every attempt on the outbound tools, allowed, held or cancelled, with the reason the hook recorded."
             >
               <div className="card max-w-[52rem] px-6 py-2 sm:px-8">
                 <GateFeed events={state.report.gate_events} />
