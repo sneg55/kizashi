@@ -10,7 +10,7 @@ const AUDIO = path.join(__dirname, 'out', 'audio')
 const CAPS = path.join(__dirname, 'testreel-output')
 const OUT = path.join(__dirname, 'out', 'demo.mp4')
 
-const W = 1920, H = 1080, FPS = 30, TAIL = 0.4, TARGET = 285, BG = '0xedefee'
+const W = 1920, H = 1080, FPS = 30, TAIL = 0.4, TARGET = 284, BG = '0xedefee'
 
 const probe = (f) =>
   parseFloat(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=nk=1:nw=1', f], { encoding: 'utf8' }).trim())

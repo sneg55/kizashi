@@ -25,7 +25,7 @@
     "sec": 27,
     "kind": "card",
     "caption": "FRIENDS OF STEINERT HIGH SCHOOLJAZZ PROGRAM  ·  EIN 20-8851570  ·  read from the live report",
-    "narrate": "The date is arithmetic. Take one organization from this portfolio. Its last filing on record ends June thirtieth, twenty twenty three. Two due dates have gone by since. The third is November fifteenth, twenty twenty six, and on that day the exemption ends. That arithmetic matches the date the I R S actually recorded on nearly nine out of ten revocations since twenty twenty one. The answer key is public, and nobody reads it before year three.",
+    "narrate": "The date is arithmetic. Take one organization from this portfolio. Its last filing on record ends June thirtieth, twenty twenty three. Two due dates have gone by since. The third is November fifteenth, twenty twenty six, and on that day the exemption ends. That arithmetic matches the date the I R S actually recorded eighty seven point nine percent of the time, over revocations dated twenty twenty one through twenty twenty six. The answer key is public, and nobody reads it before year three.",
     "block": {
       "type": "chain",
       "title": "One organization, five dates",
@@ -69,7 +69,7 @@
     "narrate": "The run is a Strands Agents SDK graph: a deterministic classifier node that never calls a model, then a brief agent with structured output, then a dispatch agent that owns the send alert tool. The briefs are written by Gemma four, thirty one B, served by Amazon Bedrock through the Mantle endpoint. Thirty eight briefs from the model, none falling back. Thirty eight alerts sent, one suppressed.",
     "block": {
       "type": "term",
-      "prompt": "uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv",
+      "prompt": "KIZASHI_DEMO_FORCE_EIN=010579647 uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv",
       "lines": [
         {
           "text": "gate allowed\t042642962\tclass=SURFACE, no prior alert for 2026-11-15",
@@ -186,7 +186,7 @@
       "type": "title",
       "brand": "Kizashi",
       "sub": "What the grants lead gets each month is nothing, until it is something.",
-      "tag": "Strands Agents SDK  ·  Amazon Bedrock  ·  AgentCore Runtime"
+      "tag": "Strands Agents SDK  ·  Amazon Bedrock  ·  AgentCore entrypoint"
     }
   }
 ]
