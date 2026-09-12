@@ -74,7 +74,7 @@ The landing page is at `/`, the dashboard at `/app`. Tests: `uv run pytest -q`.
 
 `uv run kizashi backtest` over revocations dated 2021-01-01 to 2026-12-31, joined to the 990-N file, with 2020 excluded and refiled rows dropped: n=152249, exact=133844, exact_rate=0.8791, same_month=133844, same_month_rate=0.8791. Source file dates: revocation list 2026-09-11, 990-N file 2026-09-07.
 
-The residual is not noise. The histogram of actual minus predicted has a spike at +12 months (4194 rows), organizations the IRS revoked exactly one filing year later than the postcard record implies, and a clamped tail at -24 months and beyond (4192 rows), organizations whose last postcard on record predates a much earlier revocation. Both are visible in the web app.
+The residual is not noise. The histogram of actual minus predicted, in months and clamped to plus or minus 24, has three spikes away from zero: +24 or more (8631 rows) and +12 (4194 rows), organizations the IRS revoked one or more filing years later than the postcard record implies, usually because a later 990 or 990-EZ is not in the postcard file; and -24 or less (4192 rows), organizations whose last postcard on record postdates an earlier revocation. All three are labelled in the web app's histogram.
 
 ## Demo portfolio
 
