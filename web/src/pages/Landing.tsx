@@ -49,7 +49,7 @@ function Hero({ report }: { report: Report | null }) {
       </div>
       {report ? (
         <p className="m-0 mt-7 flex flex-wrap gap-x-6 gap-y-1 text-micro text-ink-soft">
-          <span>{report.portfolio.name}</span>
+          <span className="min-w-0 [overflow-wrap:anywhere]">{report.portfolio.name}</span>
           <span className="data">run {report.as_of}</span>
           <span className="data">
             {formatCount(report.summary.surface)} of {formatCount(report.portfolio.count)} surfaced

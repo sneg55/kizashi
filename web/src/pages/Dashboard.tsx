@@ -8,6 +8,7 @@ import { SummaryStrip } from '../components/SummaryStrip'
 import { SurfacedCard } from '../components/SurfacedCard'
 import { TopBar } from '../components/TopBar'
 import { runSweep } from '../lib/data'
+import { compareIso } from '../lib/dates'
 import { formatCount } from '../lib/format'
 import { IS_STATIC } from '../lib/site'
 import type { Report } from '../lib/types'
@@ -38,10 +39,12 @@ function RunHeader({
     <div className="py-10">
       <div className="flex flex-wrap items-start justify-between gap-x-8 gap-y-5">
         <div className="min-w-0">
-          <h1 className="m-0 font-display text-[clamp(1.75rem,3vw,2.25rem)] leading-tight font-normal tracking-[-0.015em] text-ink">
+          <h1 className="m-0 font-display text-[clamp(1.75rem,3vw,2.25rem)] leading-tight font-normal tracking-[-0.015em] [overflow-wrap:anywhere] text-ink">
             {report.portfolio.name}
           </h1>
-          <p className="data m-0 mt-2 text-micro text-ink-soft">{report.portfolio.source}</p>
+          <p className="data m-0 mt-2 text-micro [overflow-wrap:anywhere] text-ink-soft">
+            {report.portfolio.source}
+          </p>
         </div>
         {IS_STATIC ? null : (
           <div className="flex flex-col items-start gap-2">
@@ -103,10 +106,17 @@ function Surfaced({ report }: { report: Report }) {
     )
   }
 
+  const ordered = [...report.surfaced].sort(
+    (a, b) =>
+      compareIso(a.predicted_revocation, b.predicted_revocation) ||
+      (a.days_left ?? Number.MAX_SAFE_INTEGER) - (b.days_left ?? Number.MAX_SAFE_INTEGER) ||
+      a.name.localeCompare(b.name),
+  )
+
   return (
-    <div>
-      {report.surfaced.map((org, index) => (
-        <SurfacedCard key={org.ein} org={org} asOf={report.as_of} animate={index === 0} />
+    <div key={report.run_id} className="border-t border-rule">
+      {ordered.map((org, index) => (
+        <SurfacedCard key={org.ein} org={org} asOf={report.as_of} defaultOpen={index === 0} />
       ))}
     </div>
   )
@@ -142,7 +152,7 @@ export function Dashboard() {
         <main>
           <RunHeader report={state.report} onReplace={replace} />
           <SummaryStrip summary={state.report.summary} />
-          <Section title="Surfaced">
+          <Section title="Surfaced" count={state.report.surfaced.length}>
             <Surfaced report={state.report} />
           </Section>
           <Section title="Ledger">
