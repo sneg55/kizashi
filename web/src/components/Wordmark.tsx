@@ -4,9 +4,10 @@ export function Wordmark({ to = '/' }: { to?: string }) {
   return (
     <Link
       to={to}
-      className="font-display text-[1.375rem] leading-none font-medium tracking-[-0.01em] text-ink no-underline"
+      className="font-display text-[1.25rem] leading-none font-medium tracking-[-0.02em] text-ink no-underline"
     >
-      Kizashi
+      Kiza
+      <span className="underline decoration-accent decoration-2 underline-offset-[5px]">shi</span>
     </Link>
   )
 }

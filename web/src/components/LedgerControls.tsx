@@ -1,5 +1,8 @@
 import { formatCount } from '../lib/format'
 
+const RESTING = 'border-rule-strong bg-sheet text-ink-soft hover:border-ink hover:text-ink'
+const ACTIVE = 'border-accent bg-accent text-sheet'
+
 export function Chip({
   active,
   label,
@@ -13,21 +16,19 @@ export function Chip({
   accent?: boolean
   onClick: () => void
 }) {
-  const resting = accent
-    ? 'border-flag/40 text-flag hover:border-flag'
-    : 'border-rule text-ink-soft hover:border-rule-strong hover:text-ink'
-
   return (
     <button
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`flex cursor-pointer items-baseline gap-1.5 border px-2.5 py-1 text-micro transition-colors ${
-        active ? 'border-ink bg-ink text-ground' : resting
+      className={`pill items-baseline gap-1.5 border px-3 py-1.5 text-micro font-medium ${
+        active ? ACTIVE : RESTING
       }`}
     >
-      <span>{label}</span>
-      <span className="data opacity-70">{formatCount(count)}</span>
+      <span className={!active && accent ? 'text-flag' : ''}>{label}</span>
+      <span className={`data font-normal ${active ? 'text-sheet/80' : 'text-muted'}`}>
+        {formatCount(count)}
+      </span>
     </button>
   )
 }
@@ -46,11 +47,7 @@ export function Toggle({
       type="button"
       onClick={onClick}
       aria-pressed={active}
-      className={`cursor-pointer border px-2.5 py-1 text-micro transition-colors ${
-        active
-          ? 'border-ink bg-ink text-ground'
-          : 'border-rule text-ink-soft hover:border-rule-strong hover:text-ink'
-      }`}
+      className={`pill border px-3 py-1.5 text-micro font-medium ${active ? ACTIVE : RESTING}`}
     >
       {label}
     </button>

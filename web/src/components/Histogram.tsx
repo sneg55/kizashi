@@ -62,10 +62,10 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
 
   return (
     <figure className="m-0">
-      <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 text-micro text-ink-soft">
+      <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 text-micro text-muted">
         <span>Date the IRS recorded minus the predicted date, in months</span>
         {readout ? (
-          <span className="data text-tiny text-ink">
+          <span className="data text-tiny font-medium text-ink">
             {tickLabel(readout.month)} months: {formatCount(readout.count)} organizations
           </span>
         ) : null}
@@ -85,7 +85,7 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
           x2="100%"
           y1={BASELINE - BAR_MAX}
           y2={BASELINE - BAR_MAX}
-          className="stroke-rule"
+          className="stroke-rule-strong"
           strokeWidth={1}
         />
         {buckets.map((bucket, index) => {
@@ -97,8 +97,16 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
               ? 0
               : Math.max((bucket.count / scalePeak) * BAR_MAX, 3)
           const top = BASELINE - height
-          const emphasised = isZero || hovered?.month === bucket.month
-          const showLabel = labelled.has(bucket.month) || (brokenBar && bucket.count > 0)
+          const isHovered = hovered?.month === bucket.month
+          const isSpike = labelled.has(bucket.month)
+          const showLabel = isSpike || (brokenBar && bucket.count > 0)
+          const fill = isHovered
+            ? 'fill-accent'
+            : isZero
+              ? 'fill-ink'
+              : isSpike
+                ? 'fill-flag'
+                : 'fill-accent-mist'
           const anchor = anchorFor(index, buckets.length)
 
           return (
@@ -117,8 +125,8 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
                   y={top}
                   width={`${barWidth}%`}
                   height={height}
-                  rx={2}
-                  className={emphasised ? 'fill-ink' : 'fill-ink-soft'}
+                  rx={3}
+                  className={fill}
                   pointerEvents="none"
                 />
               ) : null}
@@ -128,7 +136,7 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
                   y={LABEL_BAND + BREAK_STUB}
                   width={`${barWidth}%`}
                   height={BREAK_GAP}
-                  className="fill-ground"
+                  className="fill-sheet"
                   pointerEvents="none"
                 />
               ) : null}
@@ -137,7 +145,7 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
                   x={anchoredX(index, buckets.length, slot)}
                   y={brokenBar ? LABEL_BAND - 6 : top - 5}
                   textAnchor={anchor}
-                  className="data fill-ink text-[0.6875rem]"
+                  className="data fill-ink text-[0.75rem] font-medium"
                   pointerEvents="none"
                 >
                   {formatCount(bucket.count)}
@@ -161,7 +169,7 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
                   : index === buckets.length - 1
                     ? 'right-0'
                     : '-translate-x-1/2'
-              } ${bucket.month === 0 ? 'text-ink' : 'text-ink-soft'}`}
+              } ${bucket.month === 0 ? 'text-ink' : 'text-muted'}`}
               style={
                 index === 0 || index === buckets.length - 1
                   ? undefined
@@ -175,7 +183,7 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
       </div>
 
       {broken ? (
-        <p className="m-0 mt-4 max-w-[62ch] text-micro text-ink-soft">
+        <p className="m-0 mt-5 max-w-[62ch] text-micro text-muted">
           Bars are scaled to the largest bucket away from zero, {formatCount(scalePeak)}. The zero
           bucket is taller than the plot, so it is drawn broken and carries its own count. The two
           end buckets hold every case {CLAMP_MONTHS} months or further out.

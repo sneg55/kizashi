@@ -2,19 +2,19 @@ import { buildRunway } from '../lib/dates'
 import type { RunwayMark } from '../lib/dates'
 
 const TICK_STYLE: Record<RunwayMark['kind'], string> = {
-  filed: 'h-2.5 w-2.5 translate-y-[3px] bg-ink',
-  missed: 'h-4 w-[1.5px] bg-ink',
-  upcoming: 'h-3 w-px bg-rule-strong',
-  today: 'h-5 w-px bg-ink-soft',
-  revocation: 'h-9 w-[3px] translate-y-[6px] bg-flag',
+  filed: 'h-3 w-3 translate-y-[2px] rounded-full bg-ink',
+  missed: 'h-4 w-[2px] rounded-full bg-ink',
+  upcoming: 'h-3 w-[2px] rounded-full bg-rule-strong',
+  today: 'h-5 w-[2px] rounded-full bg-accent',
+  revocation: 'h-9 w-[3px] translate-y-[6px] rounded-full bg-flag',
 }
 
 const VALUE_STYLE: Record<RunwayMark['kind'], string> = {
   filed: 'text-ink',
   missed: 'text-ink',
-  upcoming: 'text-ink-soft',
-  today: 'text-ink-soft',
-  revocation: 'text-flag',
+  upcoming: 'text-muted',
+  today: 'text-accent',
+  revocation: 'text-ink',
 }
 
 export function RunwayRail({
@@ -47,7 +47,7 @@ export function RunwayRail({
             segment.width > 0 ? (
               <div
                 key={segment.key}
-                className={`absolute bottom-2 h-0.5 ${segment.className}`}
+                className={`absolute bottom-2 h-[3px] rounded-full ${segment.className}`}
                 style={{ left: `${segment.left * 100}%`, width: `${segment.width * 100}%` }}
               />
             ) : null,
@@ -62,11 +62,19 @@ export function RunwayRail({
         </div>
       </div>
 
-      <dl className="mt-2 grid grid-cols-2 gap-x-5 gap-y-3 border-t border-rule pt-3 sm:grid-cols-5">
+      <dl className="mt-3 grid grid-cols-[repeat(auto-fit,minmax(8rem,1fr))] gap-x-5 gap-y-3 border-t border-rule pt-4">
         {runway.marks.map((mark) => (
           <div key={`label-${mark.kind}-${mark.date}`}>
-            <dt className="text-micro text-ink-soft">{mark.label}</dt>
-            <dd className={`data mt-0.5 text-tiny ${VALUE_STYLE[mark.kind]}`}>{mark.date}</dd>
+            <dt className="text-micro text-muted">{mark.label}</dt>
+            <dd
+              className={`data m-0 mt-0.5 text-tiny font-medium whitespace-nowrap ${VALUE_STYLE[mark.kind]} ${
+                mark.kind === 'revocation'
+                  ? 'inline-block rounded-full bg-flag-wash px-2 py-0.5'
+                  : ''
+              }`}
+            >
+              {mark.date}
+            </dd>
           </div>
         ))}
       </dl>

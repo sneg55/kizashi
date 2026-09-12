@@ -1,53 +1,65 @@
 @import 'tailwindcss';
 
-@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
-
 :root {
-  --ground: #edefee;
-  --sheet: #f9faf9;
-  --ink: #15191a;
-  --ink-soft: #515c59;
-  --rule: #d2d8d5;
-  --rule-strong: #b2bbb7;
-  --flag: #a3281d;
-  --flag-wash: #a3281d14;
-  --allow: #2f5d4a;
-  --shadow-sheet: 0 1px 2px rgb(21 25 26 / 0.05), 0 8px 24px -16px rgb(21 25 26 / 0.25);
-}
-
-[data-theme='dark'] {
-  --ground: #101413;
-  --sheet: #171c1b;
-  --ink: #e7ebe9;
-  --ink-soft: #9aa6a2;
-  --rule: #2a312f;
-  --rule-strong: #3f4845;
-  --flag: #e8705c;
-  --flag-wash: #e8705c1f;
-  --allow: #7fc0a4;
-  --shadow-sheet: 0 1px 2px rgb(0 0 0 / 0.4), 0 8px 24px -16px rgb(0 0 0 / 0.6);
+  --ground: #f9f9fb;
+  --sheet: #ffffff;
+  --sheet-alt: #e3e6e8;
+  --ink: #1f1f47;
+  --ink-body: #171a1c;
+  --ink-soft: #3d3d5c;
+  --muted: #575775;
+  --fog: #6c7693;
+  --ash: #84849a;
+  --rule: #eaedf6;
+  --rule-strong: #d1d6e1;
+  --accent: #576cdb;
+  --accent-wash: #d6dbf5;
+  --accent-mist: #c1c9f6;
+  --accent-sky: #abb6ed;
+  --flag: #f25a5a;
+  --flag-wash: #f7d4d4;
+  --mint: #a6f2d2;
+  --mint-veil: #c1f6e0;
+  --shadow-card: rgba(73, 46, 107, 0.14) 0px 3px 16px 0px;
+  --shadow-float: rgba(71, 92, 133, 0.25) 0px 4px 20px 0px, rgba(144, 138, 208, 0.1) 0px 30px 60px 0px;
 }
 
 @theme inline {
   --color-ground: var(--ground);
   --color-sheet: var(--sheet);
+  --color-sheet-alt: var(--sheet-alt);
   --color-ink: var(--ink);
+  --color-ink-body: var(--ink-body);
   --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-fog: var(--fog);
+  --color-ash: var(--ash);
   --color-rule: var(--rule);
   --color-rule-strong: var(--rule-strong);
+  --color-accent: var(--accent);
+  --color-accent-wash: var(--accent-wash);
+  --color-accent-mist: var(--accent-mist);
+  --color-accent-sky: var(--accent-sky);
   --color-flag: var(--flag);
   --color-flag-wash: var(--flag-wash);
-  --color-allow: var(--allow);
+  --color-mint: var(--mint);
+  --color-mint-veil: var(--mint-veil);
 
-  --font-sans: 'Public Sans', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Newsreader', ui-serif, Georgia, serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Inter', 'Helvetica Neue', Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
 
-  --text-micro: 0.75rem;
+  --text-micro: 0.8125rem;
   --text-micro--line-height: 1.4;
-  --text-tiny: 0.8125rem;
+  --text-tiny: 0.875rem;
   --text-tiny--line-height: 1.5;
-  --shadow-sheet: var(--shadow-sheet);
+  --text-lead: 1.125rem;
+  --text-lead--line-height: 1.5;
+
+  --shadow-card: var(--shadow-card);
+  --shadow-float: var(--shadow-float);
+
+  --radius-card: 16px;
+  --radius-panel: 32px;
 }
 
 @layer base {
@@ -58,24 +70,32 @@
   body {
     margin: 0;
     background-color: var(--ground);
-    color: var(--ink);
+    color: var(--ink-body);
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.65;
-    font-weight: 350;
+    line-height: 1.5;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    color: var(--ink);
+  }
+
   :focus-visible {
-    outline: 2px solid var(--ink);
-    outline-offset: 2px;
-    border-radius: 1px;
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 9999px;
   }
 
   ::selection {
-    background: color-mix(in srgb, var(--ink) 14%, transparent);
+    background: var(--accent-wash);
     color: var(--ink);
   }
 
@@ -87,19 +107,81 @@
   }
 
   a:hover {
-    text-decoration-color: var(--ink);
+    text-decoration-color: currentColor;
   }
 
   table {
     font-variant-numeric: tabular-nums;
   }
+
+  code {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.875em;
+  }
 }
 
 @utility data {
-  font-family: var(--font-mono);
+  font-family: var(--font-display);
   font-variant-numeric: tabular-nums;
-  font-feature-settings: 'zero' 1;
-  letter-spacing: -0.01em;
+  font-feature-settings: 'tnum' 1, 'zero' 1;
+}
+
+@utility card {
+  background: var(--sheet);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+}
+
+@utility pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  font-family: var(--font-display);
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    color 160ms ease,
+    border-color 160ms ease,
+    opacity 160ms ease;
+}
+
+@utility pill-primary {
+  background: var(--accent);
+  color: var(--sheet);
+  border: 0;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  &:hover {
+    background: color-mix(in srgb, var(--accent) 86%, var(--ink));
+  }
+}
+
+@utility pill-quiet {
+  background: var(--sheet);
+  color: var(--ink);
+  border: 1px solid var(--rule-strong);
+  padding: calc(0.75rem - 1px) calc(1.5rem - 1px);
+  font-size: 1rem;
+  &:hover {
+    border-color: var(--ink);
+  }
+}
+
+@utility ghost-link {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: currentColor;
+  }
 }
 
 @utility rail-draw {

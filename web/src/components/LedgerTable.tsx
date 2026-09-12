@@ -59,20 +59,20 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
   }
 
   return (
-    <div>
+    <div className="card p-5 sm:p-8">
       <div className="flex flex-wrap items-center gap-x-4 gap-y-3">
-        <label className="flex-1 basis-56">
+        <label className="flex-1 basis-64">
           <span className="sr-only">Search the ledger by name or EIN</span>
           <input
             type="search"
             value={query}
             onChange={(event) => reset(setQuery, event.target.value)}
             placeholder="Search by name or EIN"
-            className="w-full border border-rule bg-transparent px-3 py-1.5 text-tiny text-ink placeholder:text-ink-soft focus:border-rule-strong"
+            className="h-11 w-full rounded-full border border-rule-strong bg-sheet px-5 text-tiny text-ink placeholder:text-muted focus:border-accent focus:outline-none"
           />
         </label>
         <div className="flex items-center gap-2">
-          <span className="text-micro text-ink-soft">Revocation date</span>
+          <span className="text-micro text-muted">Revocation date</span>
           <Toggle
             active={sort === 'soonest'}
             label="soonest first"
@@ -86,7 +86,7 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
         </div>
       </div>
 
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-6 flex flex-wrap gap-2">
         <Chip
           active={selectedClass === 'all'}
           label="every class"
@@ -134,15 +134,15 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
       </div>
 
       {filtered.length === 0 ? (
-        <p className="mt-8 text-ink-soft">
+        <p className="mt-8 text-muted">
           No row matches that filter. Clear the search or pick another class.
         </p>
       ) : (
-        <div className="mt-7 overflow-x-auto">
+        <div className="mt-8 overflow-x-auto">
           <table className="w-full border-collapse text-left sm:min-w-[46rem]">
             <thead>
-              <tr className="border-b border-rule-strong text-micro text-ink-soft">
-                <th scope="col" className="py-2 pr-4 font-medium">
+              <tr className="border-b border-rule-strong font-display text-micro font-medium text-muted">
+                <th scope="col" className="py-2.5 pr-4 font-medium">
                   Organization
                 </th>
                 <th scope="col" className="py-2 pr-4 font-medium">
@@ -170,24 +170,26 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
             </thead>
             <tbody>
               {visible.map((row) => (
-                <tr key={row.ein} className="border-b border-rule align-baseline">
+                <tr key={row.ein} className="border-b border-rule align-baseline transition-colors hover:bg-ground">
                   <td className="py-2 pr-4">
                     <span className="text-tiny text-ink">{row.name}</span>{' '}
-                    <span className="data ml-2 text-micro whitespace-nowrap text-ink-soft">
+                    <span className="data ml-2 text-micro whitespace-nowrap text-muted">
                       {formatEin(row.ein)}
                     </span>
                     {row.reinstated ? (
                       <>
                         {' '}
-                        <span className="data ml-2 text-micro text-ink-soft">reinstated</span>
+                        <span className="ml-2 rounded-full bg-accent-wash px-2 py-0.5 font-display text-[0.75rem] font-medium text-ink">
+                          reinstated
+                        </span>
                       </>
                     ) : null}
-                    <span className="data block text-micro text-ink-soft sm:hidden">
+                    <span className="data block text-micro text-muted sm:hidden">
                       {humanizeReason(row.reason)}
                       {row.predicted_revocation ? (
                         <>
                           {', '}
-                          <span className={row.class === 'SURFACE' ? 'text-flag' : 'text-ink'}>
+                          <span className="text-ink">
                             {row.predicted_revocation}
                           </span>
                         </>
@@ -195,27 +197,31 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
                     </span>
                   </td>
                   <td
-                    className={`data py-2 pr-4 text-micro ${
+                    className={`data py-2.5 pr-4 text-micro font-medium ${
                       row.class === 'SURFACE' ? 'text-flag' : 'text-ink-soft'
                     }`}
                   >
                     {classLabel(row.class)}
                   </td>
-                  <td className="data hidden py-2 pr-4 text-micro text-ink-soft sm:table-cell">
+                  <td className="data hidden py-2.5 pr-4 text-micro text-ink-soft sm:table-cell">
                     {humanizeReason(row.reason)}
                   </td>
-                  <td className="data hidden py-2 pr-4 text-micro text-ink-soft sm:table-cell">
+                  <td className="data hidden py-2.5 pr-4 text-micro whitespace-nowrap text-ink-soft sm:table-cell">
                     {row.last_filed_end ?? (row.class === 'NEVER_FILED' ? 'none' : 'n/a')}
                   </td>
-                  <td className="data hidden py-2 pr-4 text-right text-micro text-ink-soft sm:table-cell">
+                  <td className="data hidden py-2.5 pr-4 text-right text-micro text-ink-soft sm:table-cell">
                     {row.unfiled_past_due ?? 'n/a'}
                   </td>
                   <td
-                    className={`data hidden py-2 text-micro whitespace-nowrap sm:table-cell ${
-                      row.class === 'SURFACE' ? 'text-flag' : 'text-ink'
-                    }`}
+                    className="data hidden py-2.5 text-micro whitespace-nowrap text-ink sm:table-cell"
                   >
-                    {row.predicted_revocation ?? 'n/a'}
+                    {row.class === 'SURFACE' && row.predicted_revocation ? (
+                      <span className="rounded-full bg-flag-wash px-2 py-0.5 font-medium">
+                        {row.predicted_revocation}
+                      </span>
+                    ) : (
+                      (row.predicted_revocation ?? 'n/a')
+                    )}
                   </td>
                 </tr>
               ))}
@@ -226,7 +232,7 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
 
       {pageCount > 1 ? (
         <div className="mt-5 flex flex-wrap items-center gap-4">
-          <p className="data m-0 text-micro text-ink-soft">
+          <p className="data m-0 text-micro text-muted">
             {formatCount(current * PAGE_SIZE + 1)} to{' '}
             {formatCount(current * PAGE_SIZE + visible.length)} of {formatCount(filtered.length)}
           </p>
@@ -235,7 +241,7 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
               type="button"
               onClick={() => setPage(current - 1)}
               disabled={current === 0}
-              className="cursor-pointer border border-rule px-2.5 py-1 text-micro text-ink-soft hover:border-rule-strong hover:text-ink disabled:cursor-default disabled:opacity-40"
+              className="pill border border-rule-strong bg-sheet px-3 py-1.5 text-micro text-ink-soft hover:border-ink hover:text-ink disabled:cursor-default disabled:opacity-40"
             >
               Previous
             </button>
@@ -243,7 +249,7 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
               type="button"
               onClick={() => setPage(current + 1)}
               disabled={current >= pageCount - 1}
-              className="cursor-pointer border border-rule px-2.5 py-1 text-micro text-ink-soft hover:border-rule-strong hover:text-ink disabled:cursor-default disabled:opacity-40"
+              className="pill border border-rule-strong bg-sheet px-3 py-1.5 text-micro text-ink-soft hover:border-ink hover:text-ink disabled:cursor-default disabled:opacity-40"
             >
               Next
             </button>

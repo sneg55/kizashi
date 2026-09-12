@@ -40,7 +40,7 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
   }
 
   return (
-    <div className="pt-6 pb-8">
+    <div className="pt-4 pb-8 sm:pl-10">
       <RunwayRail
         lastFiledEnd={org.last_filed_end}
         asOf={asOf}
@@ -50,14 +50,12 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
 
       {org.brief ? (
         <div className="mt-8 max-w-[64ch]">
-          <p className="m-0 font-display text-[1.25rem] leading-snug text-pretty text-ink">
+          <p className="m-0 font-display text-[1.375rem] leading-snug font-medium tracking-[-0.02em] text-pretty text-ink">
             {org.brief.headline}
           </p>
           <p className="m-0 mt-3 text-tiny text-ink-soft">{org.brief.what_happens_if_missed}</p>
           <p className="m-0 mt-2 text-tiny text-ink-soft">{org.brief.next_filing_needed}</p>
-          {briefSource ? (
-            <p className="data m-0 mt-3 text-micro text-ink-soft">{briefSource}</p>
-          ) : null}
+          {briefSource ? <p className="m-0 mt-3 text-micro text-muted">{briefSource}</p> : null}
         </div>
       ) : (
         <ol className="m-0 mt-8 max-w-[64ch] list-none space-y-1.5 p-0">
@@ -71,8 +69,8 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
 
       <div className="mt-7 flex flex-wrap items-center gap-x-6 gap-y-3">
         {org.alert ? (
-          <p className="data m-0 flex flex-wrap items-baseline gap-x-2 text-micro text-ink-soft">
-            <span className="whitespace-nowrap text-ink">alert {org.alert.status}</span>
+          <p className="data m-0 flex flex-wrap items-baseline gap-x-2 text-micro text-muted">
+            <span className="whitespace-nowrap font-medium text-ink">alert {org.alert.status}</span>
             <span>{org.alert.reason}</span>
           </p>
         ) : null}
@@ -81,7 +79,7 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
             type="button"
             onClick={onDismiss}
             disabled={dismiss === 'pending' || dismiss === 'done'}
-            className="cursor-pointer border border-rule-strong px-3 py-1.5 text-micro text-ink-soft transition-colors hover:border-ink hover:text-ink disabled:cursor-default disabled:border-rule disabled:text-ink-soft"
+            className="pill border border-rule-strong bg-sheet px-4 py-2 text-micro text-ink hover:border-ink disabled:cursor-default disabled:border-rule disabled:text-muted"
           >
             {dismiss === 'done'
               ? 'Dismissed for this date'
@@ -91,11 +89,7 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
           </button>
         ) : null}
         {canDismiss && dismiss === 'done' ? (
-          <button
-            type="button"
-            onClick={onRestore}
-            className="cursor-pointer text-micro text-ink-soft underline-offset-2 hover:text-ink hover:underline"
-          >
+          <button type="button" onClick={onRestore} className="ghost-link cursor-pointer text-micro">
             Restore
           </button>
         ) : null}
@@ -108,8 +102,8 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
 
       {org.outreach ? (
         <details className="group mt-6 border-t border-rule pt-4">
-          <summary className="cursor-pointer list-none text-tiny text-ink-soft marker:content-[''] hover:text-ink">
-            <span className="group-open:hidden">Read the drafted note</span>
+          <summary className="ghost-link cursor-pointer list-none text-tiny marker:content-['']">
+            <span className="group-open:hidden">Read the drafted note ›</span>
             <span className="hidden group-open:inline">Hide the drafted note</span>
           </summary>
           <p className="m-0 mt-4 max-w-[64ch] text-tiny whitespace-pre-wrap text-ink">
@@ -135,34 +129,41 @@ export function SurfacedCard({
   const place = [org.city, org.state].filter(Boolean).join(', ')
 
   return (
-    <div className="border-b border-rule last:border-b-0">
+    <div className={`border-b border-rule last:border-b-0 ${open ? 'bg-ground/70' : ''}`}>
       <h3 className="m-0">
         <button
           type="button"
           onClick={() => setOpen(!open)}
           aria-expanded={open}
           aria-controls={panelId}
-          className="grid w-full cursor-pointer grid-cols-[1rem_1fr] items-baseline gap-x-3 py-3.5 text-left sm:grid-cols-[1rem_1fr_auto_7rem] sm:gap-x-6"
+          className="grid w-full cursor-pointer grid-cols-[1.25rem_1fr] items-start gap-x-3 px-5 py-4 text-left transition-colors hover:bg-ground/70 sm:grid-cols-[1.25rem_1fr_auto_8rem] sm:items-baseline sm:gap-x-4 sm:px-8"
         >
-          <span className="data text-tiny text-ink-soft" aria-hidden="true">
+          <span
+            className={`data mt-[3px] text-center text-[1rem] leading-none sm:mt-0 ${open ? 'text-accent' : 'text-muted'}`}
+            aria-hidden="true"
+          >
             {open ? '−' : '+'}
           </span>
           <span className="min-w-0">
-            <span className="block text-tiny [overflow-wrap:anywhere] text-ink">{org.name}</span>
-            <span className="mt-0.5 flex flex-wrap items-baseline gap-x-3 text-micro text-ink-soft">
+            <span className="block font-display text-tiny font-medium [overflow-wrap:anywhere] text-ink">
+              {org.name}
+            </span>
+            <span className="mt-0.5 flex flex-wrap items-baseline gap-x-3 text-micro text-muted">
               {place ? <span>{place}</span> : null}
               <span className="data">{formatEin(org.ein)}</span>
             </span>
           </span>
-          <span className="data col-start-2 text-micro text-ink-soft sm:col-start-3 sm:text-right">
+          <span className="data col-start-2 text-micro text-muted sm:col-start-3 sm:text-right">
             {org.days_left === null ? 'no date' : `${formatCount(org.days_left)} days`}
           </span>
-          <span className="data col-start-2 text-tiny whitespace-nowrap text-flag sm:col-start-4 sm:text-right">
-            {org.predicted_revocation ?? 'none'}
+          <span className="col-start-2 sm:col-start-4 sm:justify-self-end">
+            <span className="data inline-block rounded-full bg-flag-wash px-2.5 py-0.5 text-micro font-medium whitespace-nowrap text-ink">
+              {org.predicted_revocation ?? 'no date'}
+            </span>
           </span>
         </button>
       </h3>
-      <div id={panelId} hidden={!open}>
+      <div id={panelId} hidden={!open} className="px-5 sm:px-8">
         {open ? <Panel org={org} asOf={asOf} /> : null}
       </div>
     </div>

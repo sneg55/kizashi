@@ -15,34 +15,36 @@ export function SummaryStrip({ summary }: { summary: Summary }) {
   const shown = CLASS_ORDER.filter((item) => item.key === 'surface' || summary[item.key] > 0)
 
   return (
-    <div className="border-y border-rule py-5">
-      <p className="m-0 flex flex-wrap gap-x-7 gap-y-2">
+    <div className="card p-6 sm:p-8">
+      <dl className="m-0 flex flex-wrap gap-x-10 gap-y-5">
         {shown.map((item) => (
-          <span
-            key={item.key}
-            className={`flex items-baseline gap-1.5 ${
-              item.key === 'surface' ? 'text-flag' : 'text-ink'
-            }`}
-          >
-            <span className="data text-[1.05rem]">{formatCount(summary[item.key])}</span>
-            <span className={`text-tiny ${item.key === 'surface' ? 'text-flag' : 'text-ink-soft'}`}>
-              {item.label}
-            </span>
-          </span>
+          <div key={item.key} className="min-w-[4.5rem]">
+            <dd
+              className={`data m-0 font-display text-[2rem] leading-none font-light tracking-[-0.025em] ${
+                item.key === 'surface' ? 'text-flag' : 'text-ink'
+              }`}
+            >
+              {formatCount(summary[item.key])}
+            </dd>
+            <dt className="mt-2 text-micro text-muted">{item.label}</dt>
+          </div>
         ))}
-      </p>
-      <p className="m-0 mt-3 flex flex-wrap gap-x-7 gap-y-1 text-tiny text-ink-soft">
+      </dl>
+      <p className="m-0 mt-6 flex flex-wrap gap-x-7 gap-y-1 border-t border-rule pt-5 text-tiny text-muted">
         <span>
-          <span className="data text-ink">{formatCount(summary.alerts_sent)}</span> alerts sent
+          <span className="data font-medium text-ink">{formatCount(summary.alerts_sent)}</span>{' '}
+          alerts sent
         </span>
         <span>
-          <span className="data text-ink">{formatCount(summary.alerts_suppressed)}</span> suppressed
-          by the gate
+          <span className="data font-medium text-ink">
+            {formatCount(summary.alerts_suppressed)}
+          </span>{' '}
+          suppressed by the gate
         </span>
         {summary.reinstated > 0 ? (
           <span>
-            <span className="data text-ink">{formatCount(summary.reinstated)}</span> reinstated after
-            an earlier revocation, counted in the classes above
+            <span className="data font-medium text-ink">{formatCount(summary.reinstated)}</span>{' '}
+            reinstated after an earlier revocation, counted in the classes above
           </span>
         ) : null}
       </p>
