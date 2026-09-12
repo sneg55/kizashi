@@ -1,0 +1,23 @@
+{
+  "$schema": "../node_modules/testreel/recording-definition.schema.json",
+  "url": "https://kizashi.nsawinyh.workers.dev/app",
+  "viewport": { "width": 1920, "height": 1080 },
+  "colorScheme": "light",
+  "outputFormat": "mp4",
+  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "steps": [
+    { "action": "wait", "ms": 1500 },
+    { "action": "scroll", "y": 5000 },
+    { "action": "wait", "ms": 400 },
+    { "action": "scroll", "y": 5031 },
+    { "action": "wait", "ms": 2500 },
+    { "action": "hover", "selector": "text=Every attempt on the outbound tool" },
+    { "action": "wait", "ms": 2500 },
+    { "action": "scroll", "y": 1100 },
+    { "action": "wait", "ms": 2500 },
+    { "action": "scroll", "y": 1126 },
+    { "action": "wait", "ms": 2200 },
+    { "action": "hover", "selector": "text=class=WATCH, not an alert condition" },
+    { "action": "wait", "ms": 3000 }
+  ]
+}

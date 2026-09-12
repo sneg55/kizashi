@@ -1,0 +1,23 @@
+{
+  "$schema": "../node_modules/testreel/recording-definition.schema.json",
+  "url": "https://kizashi.nsawinyh.workers.dev/app",
+  "viewport": { "width": 1920, "height": 1080 },
+  "colorScheme": "light",
+  "outputFormat": "mp4",
+  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "steps": [
+    { "action": "wait", "ms": 1800 },
+    { "action": "scroll", "y": 400 },
+    { "action": "wait", "ms": 1200 },
+    { "action": "hover", "selector": "text=Exemption revoked" },
+    { "action": "wait", "ms": 2200 },
+    { "action": "hover", "selector": "text=Two annual returns are missing" },
+    { "action": "wait", "ms": 2000 },
+    { "action": "click", "selector": "summary:has-text(\"Read the drafted note\")" },
+    { "action": "wait", "ms": 800 },
+    { "action": "scroll", "y": 250 },
+    { "action": "wait", "ms": 2000 },
+    { "action": "hover", "selector": "text=Grants Lead" },
+    { "action": "wait", "ms": 3000 }
+  ]
+}

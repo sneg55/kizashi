@@ -1,0 +1,23 @@
+{
+  "$schema": "../node_modules/testreel/recording-definition.schema.json",
+  "url": "https://kizashi.nsawinyh.workers.dev/app",
+  "viewport": { "width": 1920, "height": 1080 },
+  "colorScheme": "light",
+  "outputFormat": "mp4",
+  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "steps": [
+    { "action": "wait", "ms": 2500 },
+    { "action": "hover", "selector": "text=data/demo/portfolio-nj-086.csv" },
+    { "action": "wait", "ms": 2500 },
+    { "action": "hover", "selector": "text=data-download-epostcard.txt" },
+    { "action": "wait", "ms": 2500 },
+    { "action": "hover", "selector": "text=google.gemma-4-31b" },
+    { "action": "wait", "ms": 2500 },
+    { "action": "hover", "selector": "text=suppressed by the gate" },
+    { "action": "wait", "ms": 2500 },
+    { "action": "zoom", "selector": "text=suppressed by the gate", "scale": 1.35 },
+    { "action": "wait", "ms": 2500 },
+    { "action": "zoom", "scale": 1 },
+    { "action": "wait", "ms": 2500 }
+  ]
+}

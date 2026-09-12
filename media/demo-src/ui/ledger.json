@@ -1,0 +1,27 @@
+{
+  "$schema": "../node_modules/testreel/recording-definition.schema.json",
+  "url": "https://kizashi.nsawinyh.workers.dev/app",
+  "viewport": { "width": 1920, "height": 1080 },
+  "colorScheme": "light",
+  "outputFormat": "mp4",
+  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "steps": [
+    { "action": "wait", "ms": 1500 },
+    { "action": "scroll", "y": 3535 },
+    { "action": "wait", "ms": 2000 },
+    { "action": "hover", "selector": "text=Every organization in the portfolio, with the reason" },
+    { "action": "wait", "ms": 2000 },
+    { "action": "click", "selector": "button:has-text(\"group subordinate\")" },
+    { "action": "wait", "ms": 2500 },
+    { "action": "click", "selector": "button:has-text(\"one missed\")" },
+    { "action": "wait", "ms": 2500 },
+    { "action": "click", "selector": "button:has-text(\"every reason\")" },
+    { "action": "wait", "ms": 1500 },
+    { "action": "type", "selector": "input[placeholder=\"Search by name or EIN\"]", "text": "STEINERT", "clear": true },
+    { "action": "wait", "ms": 2500 },
+    { "action": "type", "selector": "input[placeholder=\"Search by name or EIN\"]", "text": "", "clear": true },
+    { "action": "wait", "ms": 1200 },
+    { "action": "click", "selector": "button:has-text(\"surface\")" },
+    { "action": "wait", "ms": 3000 }
+  ]
+}

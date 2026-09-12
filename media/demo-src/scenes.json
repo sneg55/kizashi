@@ -1,0 +1,192 @@
+[
+  {
+    "id": "open",
+    "sec": 18,
+    "kind": "card",
+    "caption": "Kizashi  ·  AWS Agents for Humans Hackathon, Good Neighbor track",
+    "narrate": "This is Kizashi. It is a background agent that watches the public I R S filing record for the small nonprofits a funder pays for, and says nothing at all until one of them is about to lose its tax exempt status.",
+    "block": {
+      "type": "title",
+      "brand": "Kizashi",
+      "sub": "A background agent that watches the public IRS record for the nonprofits you fund, and says nothing until one of them is about to lose its status.",
+      "tag": "compute  ·  stay quiet  ·  gate  ·  send"
+    }
+  },
+  {
+    "id": "rule",
+    "sec": 26,
+    "kind": "ui",
+    "capture": "landing",
+    "caption": "The statutory rule the agent watches",
+    "narrate": "Every exempt organization owes an annual return or notice, due on the fifteenth day of the fifth month after its tax year ends. Miss three in a row and the exemption is revoked on that third due date, automatically. No hearing, no warning. The I R S publishes the revocation months after it already took effect, so the date has to be computed rather than read."
+  },
+  {
+    "id": "arith",
+    "sec": 27,
+    "kind": "card",
+    "caption": "FRIENDS OF STEINERT HIGH SCHOOLJAZZ PROGRAM  ·  EIN 20-8851570  ·  read from the live report",
+    "narrate": "The date is arithmetic. Take one organization from this portfolio. Its last filing on record ends June thirtieth, twenty twenty three. Two due dates have gone by since. The third is November fifteenth, twenty twenty six, and on that day the exemption ends. That arithmetic matches the date the I R S actually recorded on nearly nine out of ten revocations since twenty twenty one. The answer key is public, and nobody reads it before year three.",
+    "block": {
+      "type": "chain",
+      "title": "One organization, five dates",
+      "rows": [
+        {
+          "label": "Last filed period",
+          "value": "2023-06-30"
+        },
+        {
+          "label": "First return missed",
+          "value": "2024-11-15"
+        },
+        {
+          "label": "Second return missed",
+          "value": "2025-11-15"
+        },
+        {
+          "label": "Run date",
+          "value": "2026-09-11"
+        },
+        {
+          "label": "Exemption revoked",
+          "value": "2026-11-15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "portfolio",
+    "sec": 26,
+    "kind": "ui",
+    "capture": "portfolio",
+    "caption": "Mercer County NJ small nonprofits: 886 organizations, 38 surfaced",
+    "narrate": "Here is a real portfolio: eight hundred eighty six small nonprofits in Mercer County, New Jersey, the kind of organization a community foundation funds by the hundred. The agent loads three public I R S bulk files, the business master file, the nine ninety N e Postcard download and the automatic revocation list, and writes one ledger row per organization. Thirty eight are surfaced. Eight hundred forty eight produced nothing to send."
+  },
+  {
+    "id": "run",
+    "sec": 27,
+    "kind": "term",
+    "caption": "The run: a Strands graph, gate decisions, and the summary line",
+    "narrate": "The run is a Strands Agents SDK graph: a deterministic classifier node that never calls a model, then a brief agent with structured output, then a dispatch agent that owns the send alert tool. The briefs are written by Gemma four, thirty one B, served by Amazon Bedrock through the Mantle endpoint. Thirty eight briefs from the model, none falling back. Thirty eight alerts sent, one suppressed.",
+    "block": {
+      "type": "term",
+      "prompt": "uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv",
+      "lines": [
+        {
+          "text": "gate allowed\t042642962\tclass=SURFACE, no prior alert for 2026-11-15",
+          "cls": "good"
+        },
+        {
+          "text": "gate allowed\t043697038\tclass=SURFACE, no prior alert for 2027-05-15",
+          "cls": "good"
+        },
+        {
+          "text": "gate cancelled\t010579647\tclass=WATCH, not an alert condition",
+          "cls": "dim"
+        },
+        {
+          "text": "briefs: model=38 fallback=0 none=0",
+          "cls": "plain"
+        },
+        {
+          "text": "model: {\"provider\": \"bedrock-mantle\", \"model_id\": \"google.gemma-4-31b\", \"region\": \"us-east-1\"}",
+          "cls": "plain"
+        },
+        {
+          "text": "{\"surface\": 38, \"watch\": 151, \"current\": 456, \"excluded\": 215, \"dead\": 11, \"reinstated\": 99, \"never_filed\": 14, \"past_due\": 1, \"alerts_sent\": 38, \"alerts_suppressed\": 1}",
+          "cls": "plain"
+        }
+      ]
+    }
+  },
+  {
+    "id": "surfaced",
+    "sec": 28,
+    "kind": "ui",
+    "capture": "surfaced",
+    "caption": "A surfaced organization: the runway, the brief, the drafted note",
+    "narrate": "This is what a surfaced organization looks like. The runway across the top is the record itself: the last filed period, the two missed due dates, today, and the date the exemption ends. The brief under it is written by the model from those evidence lines and nothing else. The outreach note goes to the grants lead, not to the organization, and it does not give tax advice."
+  },
+  {
+    "id": "ledger",
+    "sec": 30,
+    "kind": "ui",
+    "capture": "ledger",
+    "caption": "The ledger: every organization it stayed quiet on, and why",
+    "narrate": "The ledger is the actual product: every organization the agent did not warn you about, with the reason it stayed quiet. Two hundred fifteen are subordinates under a group ruling, covered by somebody else's return. Four hundred sixteen simply filed. One hundred fifty one have missed a single period, which is not an alert condition yet. Ninety nine were revoked once and reinstated, so the clock restarted. Search it by name or by E I N."
+  },
+  {
+    "id": "gate",
+    "sec": 27,
+    "kind": "ui",
+    "capture": "gate",
+    "caption": "Gate feed: 38 allowed, 1 cancelled, each with the hook's reason",
+    "narrate": "Nothing leaves without going through the gate. Every alert is a tool call, and a deterministic hook on that tool reads the ledger and the alert history before the call runs. Allowed, with the class and the exact date the alert is allowed for. Cancelled, because that one is class watch, and one missed period is not an alert condition. The model never decides who gets contacted."
+  },
+  {
+    "id": "rerun",
+    "sec": 21,
+    "kind": "term",
+    "caption": "Same portfolio, alert history kept: the gate cancels all 38",
+    "narrate": "Run the same portfolio a second time without clearing the alert history and the whole thing goes quiet. Thirty eight organizations are still surfaced, zero alerts go out, and thirty eight are cancelled, each one already alerted for the same date. Nobody gets the same warning twice.",
+    "block": {
+      "type": "term",
+      "prompt": "uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv",
+      "lines": [
+        {
+          "text": "gate cancelled\t042642962\talready alerted for 2026-11-15",
+          "cls": "dim"
+        },
+        {
+          "text": "gate cancelled\t043697038\talready alerted for 2027-05-15",
+          "cls": "dim"
+        },
+        {
+          "text": "{\"surface\": 38, \"alerts_sent\": 0, \"alerts_suppressed\": 38}",
+          "cls": "plain"
+        }
+      ]
+    }
+  },
+  {
+    "id": "backtest",
+    "sec": 28,
+    "kind": "ui",
+    "capture": "backtest",
+    "caption": "Backtest: 152,249 scored, 133,844 exact, and the residual left visible",
+    "narrate": "The backtest ships in the report, residual and all. One hundred fifty two thousand two hundred forty nine revocations scored, one hundred thirty three thousand eight hundred forty four exact. The residual is not noise. Four thousand one hundred ninety four sit at plus twelve months, eight thousand six hundred thirty one at plus twenty four or beyond, and four thousand one hundred ninety two at minus twenty four or less. All three are labelled on the chart instead of hidden."
+  },
+  {
+    "id": "runtime",
+    "sec": 21,
+    "kind": "term",
+    "caption": "The same pipeline as an AgentCore runtime entrypoint, run locally",
+    "narrate": "The same pipeline is an AgentCore runtime entrypoint. Running it locally, a post to slash invocations with a portfolio path returns the run summary, which is what a scheduled invoke gets with no browser open anywhere.",
+    "block": {
+      "type": "term",
+      "prompt": "uv run python src/kizashi/runtime_app.py",
+      "lines": [
+        {
+          "text": "$ curl -X POST localhost:8080/invocations -d '{\"portfolio_csv\": \"data/demo/portfolio-nj-086.csv\", \"with_model\": false}'",
+          "cls": "dim"
+        },
+        {
+          "text": "{\"run_id\": \"2026-09-12T00-11-59Z-portfolio-nj-086\", \"as_of\": \"2026-09-11\", \"summary\": {\"surface\": 38, \"watch\": 151, \"current\": 456, \"excluded\": 215, \"dead\": 11, \"reinstated\": 99, \"never_filed\": 14, \"past_due\": 1}}",
+          "cls": "plain"
+        }
+      ]
+    }
+  },
+  {
+    "id": "close",
+    "sec": 14,
+    "kind": "card",
+    "caption": "github.com/sneg55/kizashi  ·  kizashi.nsawinyh.workers.dev",
+    "narrate": "Kizashi. What the grants lead gets each month is nothing, until it is something. The repository and the live report are linked below.",
+    "block": {
+      "type": "title",
+      "brand": "Kizashi",
+      "sub": "What the grants lead gets each month is nothing, until it is something.",
+      "tag": "Strands Agents SDK  ·  Amazon Bedrock  ·  AgentCore Runtime"
+    }
+  }
+]

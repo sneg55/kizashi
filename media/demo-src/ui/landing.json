@@ -1,0 +1,19 @@
+{
+  "$schema": "../node_modules/testreel/recording-definition.schema.json",
+  "url": "https://kizashi.nsawinyh.workers.dev/",
+  "viewport": { "width": 1920, "height": 1080 },
+  "colorScheme": "light",
+  "outputFormat": "mp4",
+  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "steps": [
+    { "action": "wait", "ms": 3000 },
+    { "action": "hover", "selector": "text=The rule" },
+    { "action": "wait", "ms": 5000 },
+    { "action": "hover", "selector": "text=Miss three in a row" },
+    { "action": "wait", "ms": 4500 },
+    { "action": "hover", "selector": "text=There is no hearing" },
+    { "action": "wait", "ms": 4500 },
+    { "action": "hover", "selector": "text=It computes the date" },
+    { "action": "wait", "ms": 3500 }
+  ]
+}
