@@ -1,4 +1,4 @@
-import { execFileSync } from 'child_process'
+import { execFileSync, spawnSync } from 'child_process'
 import fs from 'fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -9,8 +9,10 @@ const CARDS = path.join(__dirname, 'out', 'cards')
 const AUDIO = path.join(__dirname, 'out', 'audio')
 const CAPS = path.join(__dirname, 'testreel-output')
 const OUT = path.join(__dirname, 'out', 'demo.mp4')
+const MIX = path.join(__dirname, 'out', 'mix.wav')
 
-const W = 1920, H = 1080, FPS = 30, TAIL = 0.4, TARGET = 284, BG = '0xedefee'
+const W = 1920, H = 1080, FPS = 30, TAIL = 0.4, TARGET = 298, BG = '0xf9f9fb'
+const LOUDNESS = -16, TRUE_PEAK = -1.5
 
 const probe = (f) =>
   parseFloat(execFileSync('ffprobe', ['-v', 'error', '-show_entries', 'format=duration', '-of', 'default=nk=1:nw=1', f], { encoding: 'utf8' }).trim())
@@ -24,7 +26,7 @@ const latestCapture = (name) => {
 
 let sumDa = 0
 for (const s of scenes) {
-  s._audio = path.join(AUDIO, `${s.id}.mp3`)
+  s._audio = path.join(AUDIO, `${s.id}.wav`)
   if (!fs.existsSync(s._audio)) throw new Error(`missing narration for ${s.id}; run tts.mjs first`)
   s._da = probe(s._audio)
   sumDa += s._da
@@ -60,13 +62,35 @@ scenes.forEach((s, i) => {
   }
   inputs.push('-i', s._audio)
   const aIdx = idx++
+  const stretch = factor > 1.001 ? `atempo=${factor.toFixed(4)},` : ''
   filters.push(
-    `[${aIdx}:a]atempo=${factor.toFixed(4)},aresample=48000,aformat=channel_layouts=stereo,apad,atrim=0:${L},asetpts=N/SR/TB[a${i}]`
+    `[${aIdx}:a]${stretch}aresample=48000,aformat=channel_layouts=stereo,apad,atrim=0:${L},asetpts=N/SR/TB[a${i}]`
   )
   concatLabels.push(`[v${i}][a${i}]`)
 })
 filters.push(`${concatLabels.join('')}concat=n=${scenes.length}:v=1:a=1[v][araw]`)
-filters.push(`[araw]loudnorm=I=-16:TP=-1.5:LRA=11,aresample=48000[a]`)
+
+const audioOnly = filters.filter((f) => !f.includes(':v]') && !f.startsWith(concatLabels[0]))
+const audioLabels = scenes.map((_, i) => `[a${i}]`).join('')
+const measureArgs = [
+  '-y', '-loglevel', 'error',
+  ...inputs,
+  '-filter_complex', `${audioOnly.join(';')};${audioLabels}concat=n=${scenes.length}:v=0:a=1[am]`,
+  '-map', '[am]', '-c:a', 'pcm_s16le', MIX,
+]
+console.log('measuring loudness...')
+execFileSync('ffmpeg', measureArgs, { stdio: 'inherit' })
+const report = spawnSync(
+  'ffmpeg',
+  ['-hide_banner', '-nostats', '-i', MIX, '-af', `loudnorm=I=${LOUDNESS}:TP=${TRUE_PEAK}:print_format=json`, '-f', 'null', '-'],
+  { encoding: 'utf8' },
+).stderr
+const measured = JSON.parse(report.slice(report.lastIndexOf('{'), report.lastIndexOf('}') + 1))
+fs.unlinkSync(MIX)
+const gain = LOUDNESS - parseFloat(measured.input_i)
+console.log(`integrated ${measured.input_i} LUFS, true peak ${measured.input_tp} dBTP -> static gain ${gain.toFixed(2)} dB`)
+const limit = Math.pow(10, TRUE_PEAK / 20).toFixed(3)
+filters.push(`[araw]volume=${gain.toFixed(2)}dB,alimiter=limit=${limit}:attack=5:release=50:level=false,aresample=48000[a]`)
 
 const args = [
   '-y', '-loglevel', 'error',

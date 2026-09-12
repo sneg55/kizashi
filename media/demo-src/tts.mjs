@@ -15,13 +15,15 @@ if (!KEY) {
 }
 const MODEL = 'gpt-4o-mini-tts'
 const VOICE = process.env.TTS_VOICE || 'sage'
+const FORMAT = 'wav'
 const INSTRUCTIONS =
-  'Clear, confident product-demo narration. Even pace, no hard sell. Pronounce acronyms letter by letter.'
+  'Clear, confident product-demo narration at a brisk pace, about ten percent faster than a relaxed read, with short pauses between sentences. No hard sell. Pronounce acronyms letter by letter.'
 
-const hash = (t) => crypto.createHash('sha256').update(`${MODEL}|${VOICE}|${t}`).digest('hex').slice(0, 16)
+const hash = (t) =>
+  crypto.createHash('sha256').update(`${MODEL}|${VOICE}|${FORMAT}|${INSTRUCTIONS}|${t}`).digest('hex').slice(0, 16)
 
 async function synth(scene) {
-  const mp3 = path.join(OUT, `${scene.id}.mp3`)
+  const mp3 = path.join(OUT, `${scene.id}.${FORMAT}`)
   const stamp = path.join(OUT, `${scene.id}.hash`)
   const want = hash(scene.narrate)
   if (fs.existsSync(mp3) && fs.existsSync(stamp) && fs.readFileSync(stamp, 'utf8') === want) {
@@ -36,7 +38,7 @@ async function synth(scene) {
       voice: VOICE,
       input: scene.narrate,
       instructions: INSTRUCTIONS,
-      response_format: 'mp3',
+      response_format: FORMAT,
     }),
   })
   if (!res.ok) {
