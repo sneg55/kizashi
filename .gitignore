@@ -14,3 +14,7 @@ docs/internal/
 web/.wrangler/
 web/dist/
 web/node_modules/
+media/demo-src/node_modules/
+media/demo-src/out/
+media/demo-src/testreel-output/
+media/demo-src/.cache/
