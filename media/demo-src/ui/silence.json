@@ -9,17 +9,15 @@
     { "action": "wait", "ms": 1500 },
     { "action": "scroll", "y": 5000 },
     { "action": "wait", "ms": 400 },
-    { "action": "scroll", "y": 5094 },
-    { "action": "wait", "ms": 2500 },
-    { "action": "hover", "selector": "text=Every attempt on the outbound tools" },
+    { "action": "scroll", "y": 5000 },
+    { "action": "wait", "ms": 400 },
+    { "action": "scroll", "y": 4274 },
     { "action": "wait", "ms": 2200 },
-    { "action": "scroll", "y": 1600 },
+    { "action": "hover", "selector": "text=Surfaced then" },
     { "action": "wait", "ms": 2200 },
-    { "action": "hover", "selector": "text=The name reads as a local of a national body" },
+    { "action": "hover", "selector": "text=Still standing" },
     { "action": "wait", "ms": 2200 },
-    { "action": "scroll", "y": 1000 },
-    { "action": "wait", "ms": 2000 },
-    { "action": "hover", "selector": "text=class=WATCH, not an alert condition" },
+    { "action": "hover", "selector": "text=Outcome by class" },
     { "action": "wait", "ms": 2500 }
   ]
 }

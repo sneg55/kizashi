@@ -4,15 +4,17 @@
   "viewport": { "width": 1920, "height": 1080 },
   "colorScheme": "light",
   "outputFormat": "mp4",
-  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "cursor": { "enabled": true, "size": 28, "color": "#1f1f47", "rippleColor": "#576cdb", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
   "steps": [
-    { "action": "wait", "ms": 3000 },
-    { "action": "hover", "selector": "text=The rule" },
-    { "action": "wait", "ms": 5000 },
+    { "action": "wait", "ms": 2200 },
+    { "action": "scroll", "y": 900 },
+    { "action": "wait", "ms": 2000 },
     { "action": "hover", "selector": "text=Miss three in a row" },
-    { "action": "wait", "ms": 4500 },
+    { "action": "wait", "ms": 2500 },
     { "action": "hover", "selector": "text=There is no hearing" },
-    { "action": "wait", "ms": 4500 },
+    { "action": "wait", "ms": 2500 },
+    { "action": "scroll", "y": 800 },
+    { "action": "wait", "ms": 2000 },
     { "action": "hover", "selector": "text=It computes the date" },
     { "action": "wait", "ms": 3500 }
   ]

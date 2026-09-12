@@ -1,7 +1,7 @@
 [
   {
     "id": "open",
-    "sec": 18,
+    "sec": 16,
     "kind": "card",
     "caption": "Kizashi  ·  AWS Agents for Humans Hackathon, Good Neighbor track",
     "narrate": "This is Kizashi. It is a background agent that watches the public I R S filing record for the small nonprofits a funder pays for, and says nothing at all until one of them is about to lose its tax exempt status.",
@@ -14,18 +14,18 @@
   },
   {
     "id": "rule",
-    "sec": 26,
+    "sec": 25,
     "kind": "ui",
     "capture": "landing",
     "caption": "The statutory rule the agent watches",
-    "narrate": "Every exempt organization owes an annual return or notice, due on the fifteenth day of the fifth month after its tax year ends. Miss three in a row and the exemption is revoked on that third due date, automatically. No hearing, no warning. The I R S publishes the revocation months after it already took effect, so the date has to be computed rather than read."
+    "narrate": "Every exempt organization owes an annual return or notice, due on the fifteenth day of the fifth month after its tax year ends. Miss three in a row and the exemption is revoked on that third due date, automatically. No hearing, no warning. The I R S publishes it months later, so the date has to be computed rather than read."
   },
   {
     "id": "arith",
-    "sec": 27,
+    "sec": 28,
     "kind": "card",
     "caption": "FRIENDS OF STEINERT HIGH SCHOOLJAZZ PROGRAM  ·  EIN 20-8851570  ·  read from the live report",
-    "narrate": "The date is arithmetic. Take one organization from this portfolio. Its last filing on record ends June thirtieth, twenty twenty three. Two due dates have gone by since. The third is November fifteenth, twenty twenty six, and on that day the exemption ends. That arithmetic matches the date the I R S actually recorded eighty seven point nine percent of the time, over revocations dated twenty twenty one through twenty twenty six. The answer key is public, and nobody reads it before year three.",
+    "narrate": "The date is arithmetic. Take one organization from this portfolio. Its last filing ends June thirtieth, twenty twenty three. Two due dates have gone by since. The third is November fifteenth, twenty twenty six, and on that day the exemption ends. That arithmetic matches the date the I R S recorded eighty seven point nine percent of the time. The answer key is public, and nobody reads it before year three.",
     "block": {
       "type": "chain",
       "title": "One organization, five dates",
@@ -44,7 +44,7 @@
         },
         {
           "label": "Run date",
-          "value": "2026-09-11"
+          "value": "2026-09-12"
         },
         {
           "label": "Exemption revoked",
@@ -55,18 +55,18 @@
   },
   {
     "id": "portfolio",
-    "sec": 26,
+    "sec": 27,
     "kind": "ui",
     "capture": "portfolio",
     "caption": "Mercer County NJ small nonprofits: 886 organizations, 38 surfaced",
-    "narrate": "Here is a real portfolio: eight hundred eighty six small nonprofits in Mercer County, New Jersey, the kind of organization a community foundation funds by the hundred. The agent loads three public I R S bulk files, the business master file, the nine ninety N e Postcard download and the automatic revocation list, and writes one ledger row per organization. Thirty eight are surfaced. Eight hundred forty eight produced nothing to send."
+    "narrate": "Here is a real portfolio: eight hundred eighty six small nonprofits in Mercer County, New Jersey, the kind a community foundation funds by the hundred. The agent loads three public I R S bulk files and writes one ledger row per organization. Thirty eight are surfaced. Eight hundred forty eight produced nothing to send."
   },
   {
     "id": "run",
     "sec": 27,
     "kind": "term",
-    "caption": "The run: a Strands graph, gate decisions, and the summary line",
-    "narrate": "The run is a Strands Agents SDK graph: a deterministic classifier node that never calls a model, then a brief agent with structured output, then a dispatch agent that owns the send alert tool. The briefs are written by Gemma four, thirty one B, served by Amazon Bedrock through the Mantle endpoint. Thirty eight briefs from the model, none falling back. Thirty eight alerts sent, one suppressed.",
+    "caption": "The run: a Strands graph, three gate decisions, and the summary line",
+    "narrate": "The run is a Strands Agents SDK graph: a deterministic classifier node that never calls a model, then a brief agent with structured output, then a dispatch agent that owns the outbound tools. The briefs come from Gemma four, thirty one B, on Amazon Bedrock through the Mantle endpoint. Thirty eight briefs from the model. Thirty six alerts sent, two held for review, one suppressed.",
     "block": {
       "type": "term",
       "prompt": "KIZASHI_DEMO_FORCE_EIN=010579647 uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv",
@@ -76,8 +76,8 @@
           "cls": "good"
         },
         {
-          "text": "gate allowed\t043697038\tclass=SURFACE, no prior alert for 2027-05-15",
-          "cls": "good"
+          "text": "gate held\t822482006\theld by the dispatcher: The name reads as a local of a national body.",
+          "cls": "dim"
         },
         {
           "text": "gate cancelled\t010579647\tclass=WATCH, not an alert condition",
@@ -92,7 +92,7 @@
           "cls": "plain"
         },
         {
-          "text": "{\"surface\": 38, \"watch\": 151, \"current\": 456, \"excluded\": 215, \"dead\": 11, \"reinstated\": 99, \"never_filed\": 14, \"past_due\": 1, \"alerts_sent\": 38, \"alerts_suppressed\": 1}",
+          "text": "{\"surface\": 38, \"watch\": 151, \"current\": 456, \"excluded\": 215, \"dead\": 11, \"reinstated\": 99, \"never_filed\": 14, \"past_due\": 1, \"alerts_sent\": 36, \"alerts_suppressed\": 1, \"alerts_held\": 2}",
           "cls": "plain"
         }
       ]
@@ -100,34 +100,34 @@
   },
   {
     "id": "surfaced",
-    "sec": 28,
+    "sec": 24,
     "kind": "ui",
     "capture": "surfaced",
     "caption": "A surfaced organization: the runway, the brief, the drafted note",
-    "narrate": "This is what a surfaced organization looks like. The runway across the top is the record itself: the last filed period, the two missed due dates, today, and the date the exemption ends. The brief under it is written by the model from those evidence lines and nothing else. The outreach note goes to the grants lead, not to the organization, and it does not give tax advice."
+    "narrate": "This is what a surfaced organization looks like. The runway across the top is the record itself: the last filed period, the two missed due dates, today, and the date the exemption ends. The brief under it is written by the model from those evidence lines and nothing else. The drafted note states only what is on the record. It does not give tax advice."
   },
   {
     "id": "ledger",
-    "sec": 30,
+    "sec": 27,
     "kind": "ui",
     "capture": "ledger",
     "caption": "The ledger: every organization it stayed quiet on, and why",
-    "narrate": "The ledger is the actual product: every organization the agent did not warn you about, with the reason it stayed quiet. Two hundred fifteen are subordinates under a group ruling, covered by somebody else's return. Four hundred sixteen simply filed. One hundred fifty one have missed a single period, which is not an alert condition yet. Ninety nine were revoked once and reinstated, so the clock restarted. Search it by name or by E I N."
+    "narrate": "The ledger is the actual product: every organization the agent did not warn you about, with the reason it stayed quiet. Two hundred fifteen are subordinates under a group ruling. Four hundred sixteen simply filed. One hundred fifty one have missed a single period, which is not an alert condition yet. Search it by name or by E I N."
   },
   {
     "id": "gate",
-    "sec": 27,
+    "sec": 29,
     "kind": "ui",
     "capture": "gate",
-    "caption": "Gate feed: 38 allowed, 1 cancelled, each with the hook's reason",
-    "narrate": "Nothing leaves without going through the gate. Every alert is a tool call, and a deterministic hook on that tool reads the ledger and the alert history before the call runs. Allowed, with the class and the exact date the alert is allowed for. Cancelled, because that one is class watch, and one missed period is not an alert condition. The model never decides who gets contacted."
+    "caption": "Gate feed: 36 allowed with a delivery id, 2 held, 1 cancelled",
+    "narrate": "Every alert is a tool call, and a deterministic hook reads the ledger and the alert history before it runs. Allowed, with the class, the date and the delivery id. Cancelled, because that one is class watch, not an alert condition. Held, because the brief agent left a review note. The model's only judgement is the safe direction: it can stop a send, never start one."
   },
   {
     "id": "rerun",
-    "sec": 21,
+    "sec": 20,
     "kind": "term",
-    "caption": "Same portfolio, alert history kept: the gate cancels all 38",
-    "narrate": "Run the same portfolio a second time without clearing the alert history and the whole thing goes quiet. Thirty eight organizations are still surfaced, zero alerts go out, and thirty eight are cancelled, each one already alerted for the same date. Nobody gets the same warning twice.",
+    "caption": "Same portfolio, alert history kept: 0 sent, 36 cancelled, the same 2 held",
+    "narrate": "Run the same portfolio again without clearing the alert history and the whole thing goes quiet. Thirty eight still surfaced, zero alerts out, thirty six cancelled as already alerted, and the same two held, because a hold writes no history. Nobody gets the same warning twice.",
     "block": {
       "type": "term",
       "prompt": "uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv",
@@ -137,11 +137,11 @@
           "cls": "dim"
         },
         {
-          "text": "gate cancelled\t043697038\talready alerted for 2027-05-15",
+          "text": "gate held\t822482006\theld by the dispatcher: The name reads as a local of a national body.",
           "cls": "dim"
         },
         {
-          "text": "{\"surface\": 38, \"alerts_sent\": 0, \"alerts_suppressed\": 38}",
+          "text": "{\"surface\": 38, \"alerts_sent\": 0, \"alerts_suppressed\": 36, \"alerts_held\": 2}",
           "cls": "plain"
         }
       ]
@@ -149,28 +149,44 @@
   },
   {
     "id": "backtest",
-    "sec": 28,
+    "sec": 23,
     "kind": "ui",
     "capture": "backtest",
     "caption": "Backtest: 152,249 scored, 133,844 exact, and the residual left visible",
-    "narrate": "The backtest ships in the report, residual and all. One hundred fifty two thousand two hundred forty nine revocations scored, one hundred thirty three thousand eight hundred forty four exact. The residual is not noise. Four thousand one hundred ninety four sit at plus twelve months, eight thousand six hundred thirty one at plus twenty four or beyond, and four thousand one hundred ninety two at minus twenty four or less. All three are labelled on the chart instead of hidden."
+    "narrate": "The backtest ships in the report. One hundred fifty two thousand two hundred forty nine revocations scored, one hundred thirty three thousand eight hundred forty four exact. The residual is not noise: three spikes away from zero, at plus twelve, plus twenty four and minus twenty four months, labelled on the chart rather than hidden."
+  },
+  {
+    "id": "silence",
+    "sec": 25,
+    "kind": "ui",
+    "capture": "silence",
+    "caption": "Scoring the silence: the classifier rerun as of 2024-09-12, later revocations hidden",
+    "narrate": "The classifier is also scored against the thing it predicts. Rerun as of September twenty twenty four, with every later revocation hidden, it surfaced one hundred thirty five organizations. One hundred five were revoked in the two years since. Seventy seven point eight percent. The table beside it shows what every other class did."
   },
   {
     "id": "runtime",
-    "sec": 21,
+    "sec": 26,
     "kind": "term",
-    "caption": "The same pipeline as an AgentCore runtime entrypoint, run locally",
-    "narrate": "The same pipeline is an AgentCore runtime entrypoint. Running it locally, a post to slash invocations with a portfolio path returns the run summary, which is what a scheduled invoke gets with no browser open anywhere.",
+    "caption": "EventBridge Scheduler kizashi-monthly, cron(0 12 7 * ? *)  ·  ECS Fargate kizashi-sweep, 1 vCPU, 4 GB  ·  report and alert history to S3",
+    "narrate": "This is not a laptop demo any more. An EventBridge schedule fires on the seventh of every month and launches a Fargate task that runs exactly this script: pull the alert history from S three, fetch the I R S files, run the pipeline, publish the report back. The launch on the twelfth finished in four minutes forty five seconds, sent thirty six and held two.",
     "block": {
       "type": "term",
-      "prompt": "uv run python src/kizashi/runtime_app.py",
+      "prompt": "cat scripts/scheduled-run.sh",
       "lines": [
         {
-          "text": "$ curl -X POST localhost:8080/invocations -d '{\"portfolio_csv\": \"data/demo/portfolio-nj-086.csv\", \"with_model\": false}'",
-          "cls": "dim"
+          "text": "kizashi pull-state --bucket \"$KIZASHI_BUCKET\"",
+          "cls": "plain"
         },
         {
-          "text": "{\"run_id\": \"2026-09-12T00-11-59Z-portfolio-nj-086\", \"as_of\": \"2026-09-11\", \"summary\": {\"surface\": 38, \"watch\": 151, \"current\": 456, \"excluded\": 215, \"dead\": 11, \"reinstated\": 99, \"never_filed\": 14, \"past_due\": 1}}",
+          "text": "kizashi fetch",
+          "cls": "plain"
+        },
+        {
+          "text": "kizashi run --portfolio data/demo/portfolio-nj-086.csv --name \"Mercer County NJ small nonprofits\"",
+          "cls": "plain"
+        },
+        {
+          "text": "kizashi publish --bucket \"$KIZASHI_BUCKET\"",
           "cls": "plain"
         }
       ]
@@ -178,7 +194,7 @@
   },
   {
     "id": "close",
-    "sec": 14,
+    "sec": 11,
     "kind": "card",
     "caption": "github.com/sneg55/kizashi  ·  kizashi.nsawinyh.workers.dev",
     "narrate": "Kizashi. What the grants lead gets each month is nothing, until it is something. The repository and the live report are linked below.",
@@ -186,7 +202,7 @@
       "type": "title",
       "brand": "Kizashi",
       "sub": "What the grants lead gets each month is nothing, until it is something.",
-      "tag": "Strands Agents SDK  ·  Amazon Bedrock  ·  AgentCore entrypoint"
+      "tag": "Strands Agents SDK  ·  Amazon Bedrock  ·  EventBridge, Fargate, S3"
     }
   }
 ]

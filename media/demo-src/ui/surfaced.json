@@ -4,20 +4,20 @@
   "viewport": { "width": 1920, "height": 1080 },
   "colorScheme": "light",
   "outputFormat": "mp4",
-  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "cursor": { "enabled": true, "size": 28, "color": "#1f1f47", "rippleColor": "#576cdb", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
   "steps": [
     { "action": "wait", "ms": 1800 },
-    { "action": "scroll", "y": 400 },
-    { "action": "wait", "ms": 1200 },
+    { "action": "scroll", "y": 650 },
+    { "action": "wait", "ms": 1500 },
     { "action": "hover", "selector": "text=Exemption revoked" },
     { "action": "wait", "ms": 2200 },
     { "action": "hover", "selector": "text=Two annual returns are missing" },
-    { "action": "wait", "ms": 2000 },
+    { "action": "wait", "ms": 2200 },
     { "action": "click", "selector": "summary:has-text(\"Read the drafted note\")" },
-    { "action": "wait", "ms": 800 },
-    { "action": "scroll", "y": 250 },
-    { "action": "wait", "ms": 2000 },
-    { "action": "hover", "selector": "text=Grants Lead" },
-    { "action": "wait", "ms": 3000 }
+    { "action": "wait", "ms": 1000 },
+    { "action": "scroll", "y": 300 },
+    { "action": "wait", "ms": 1800 },
+    { "action": "hover", "selector": "text=Please contact FRIENDS OF STEINERT" },
+    { "action": "wait", "ms": 2500 }
   ]
 }

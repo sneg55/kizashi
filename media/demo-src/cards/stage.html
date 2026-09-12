@@ -4,68 +4,77 @@
 <meta charset="utf-8" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #edefee;
-    --ink: #15191a;
-    --soft: #5b6360;
-    --rule: #d2d8d5;
-    --accent: #a3281d;
-    --green: #2f5d4a;
-    --serif: Newsreader, ui-serif, Georgia, serif;
-    --sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
-    --mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+    --ground: #f9f9fb;
+    --sheet: #ffffff;
+    --ink: #1f1f47;
+    --ink-body: #171a1c;
+    --muted: #575775;
+    --fog: #6c7693;
+    --rule: #eaedf6;
+    --rule-strong: #d1d6e1;
+    --accent: #576cdb;
+    --accent-wash: #d6dbf5;
+    --flag: #f25a5a;
+    --flag-wash: #f7d4d4;
+    --sans: Inter, "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+    --shadow: rgba(73, 46, 107, 0.14) 0px 3px 16px 0px;
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { width: 1920px; height: 1080px; overflow: hidden; }
-  body { background: var(--bg); color: var(--ink); font-family: var(--sans); }
+  body { background: var(--ground); color: var(--ink-body); font-family: var(--sans);
+         -webkit-font-smoothing: antialiased; }
   #stage { width: 1920px; height: 1080px; position: relative; }
   .pad { position: absolute; inset: 0; display: flex; flex-direction: column;
-         justify-content: center; padding: 130px 150px; gap: 40px; }
-  .mark { position: absolute; top: 64px; left: 150px; font-family: var(--serif);
-          font-size: 40px; font-weight: 500; letter-spacing: -0.5px; }
-  .foot { position: absolute; bottom: 62px; left: 150px; right: 150px;
-          font-family: var(--mono); font-size: 22px; color: var(--soft);
-          border-top: 1px solid var(--rule); padding-top: 22px; letter-spacing: 0.4px; }
-  .brand { font-family: var(--serif); font-size: 132px; font-weight: 400; letter-spacing: -3px; line-height: 1; }
-  .sub { font-family: var(--serif); font-size: 58px; font-weight: 300; line-height: 1.22; max-width: 1420px; }
-  .tag { font-family: var(--mono); font-size: 26px; color: var(--soft); letter-spacing: 3px; text-transform: uppercase; }
-  .h { font-family: var(--mono); font-size: 26px; color: var(--soft); letter-spacing: 3px; text-transform: uppercase; }
-  .bul { display: flex; flex-direction: column; }
-  .bul .row { display: grid; grid-template-columns: 90px 1fr; align-items: baseline;
-              gap: 30px; font-size: 44px; font-weight: 400; line-height: 1.35;
-              border-top: 1px solid var(--rule); padding: 30px 0; }
-  .bul .row:last-child { border-bottom: 1px solid var(--rule); }
-  .bul .mk { font-family: var(--mono); font-size: 26px; color: var(--soft); }
-  .chain { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; }
-  .chain .cell { border-top: 2px solid var(--ink); padding-top: 26px; padding-right: 28px; }
-  .chain .cell.last { border-top-color: var(--accent); }
-  .chain .lab { font-size: 26px; color: var(--soft); line-height: 1.3; min-height: 70px; }
-  .chain .val { font-family: var(--mono); font-size: 40px; margin-top: 10px; letter-spacing: -0.5px; }
-  .chain .cell.last .val { color: var(--accent); }
-  .lede { font-family: var(--serif); font-size: 56px; font-weight: 300; line-height: 1.25; max-width: 1520px; }
-  .term { width: 100%; background: #fbfcfb; border: 1px solid var(--rule); }
-  .term .tb { height: 50px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 11px; padding: 0 22px; }
-  .term .tl { width: 13px; height: 13px; border-radius: 50%; border: 1px solid var(--rule); }
-  .term .body { padding: 34px 40px; font-family: var(--mono); line-height: 1.62; }
-  .term .pr { color: var(--soft); margin-bottom: 18px; }
-  .term .pr::before { content: "$ "; color: var(--soft); }
+         justify-content: center; padding: 140px 170px; gap: 40px; }
+  .mark { position: absolute; top: 62px; left: 170px; font-size: 34px; font-weight: 500;
+          color: var(--ink); letter-spacing: -0.6px; }
+  .mark span { border-bottom: 3px solid var(--accent); padding-bottom: 3px; }
+  .foot { position: absolute; bottom: 60px; left: 170px; right: 170px;
+          font-size: 23px; color: var(--fog); border-top: 1px solid var(--rule-strong);
+          padding-top: 22px; }
+  .brand { font-size: 122px; font-weight: 600; color: var(--ink); letter-spacing: -4px; line-height: 1; }
+  .brand span { border-bottom: 8px solid var(--accent); padding-bottom: 8px; }
+  .sub { font-size: 52px; font-weight: 400; color: var(--ink); line-height: 1.28; max-width: 1380px; letter-spacing: -1px; }
+  .tag { font-size: 26px; color: var(--fog); letter-spacing: 0.5px; }
+  .h { font-size: 26px; color: var(--fog); letter-spacing: 0.5px; }
+  .bul { display: flex; flex-direction: column; gap: 22px; }
+  .bul .row { background: var(--sheet); border-radius: 16px; box-shadow: var(--shadow);
+              display: grid; grid-template-columns: 74px 1fr; align-items: baseline;
+              gap: 26px; font-size: 40px; padding: 34px 40px; line-height: 1.3; }
+  .bul .mk { font-size: 26px; color: var(--accent); font-weight: 500; }
+  .chain { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 20px; }
+  .chain .cell { background: var(--sheet); border-radius: 16px; box-shadow: var(--shadow); padding: 30px 28px; }
+  .chain .lab { font-size: 24px; color: var(--fog); line-height: 1.3; min-height: 66px; }
+  .chain .val { font-size: 40px; font-weight: 500; color: var(--ink); margin-top: 12px; letter-spacing: -0.5px; }
+  .chain .cell.last .val { color: var(--flag); background: var(--flag-wash);
+                           border-radius: 999px; padding: 6px 18px; display: inline-block; }
+  .lede { font-size: 54px; font-weight: 400; color: var(--ink); line-height: 1.25; max-width: 1480px; letter-spacing: -1px; }
+  .term { width: 100%; background: var(--sheet); border-radius: 16px; box-shadow: var(--shadow); overflow: hidden; }
+  .term .tb { height: 54px; border-bottom: 1px solid var(--rule); display: flex; align-items: center; gap: 11px; padding: 0 24px; }
+  .term .tl { width: 13px; height: 13px; border-radius: 50%; background: var(--rule-strong); }
+  .term .body { padding: 36px 42px; font-family: var(--mono); line-height: 1.62; }
+  .term .pr { color: var(--accent); margin-bottom: 18px; }
+  .term .pr::before { content: "$ "; color: var(--fog); }
   .ln { white-space: pre-wrap; padding-left: 2.4em; text-indent: -2.4em; }
-  .ln.plain { color: var(--ink); }
-  .ln.good { color: var(--green); }
-  .ln.dim { color: var(--soft); }
+  .ln.plain { color: var(--ink-body); }
+  .ln.good { color: var(--accent); }
+  .ln.dim { color: var(--muted); }
 </style>
 </head>
 <body>
   <div id="stage"><div class="pad" id="pad"></div></div>
 <script>
   const el = (c, txt) => { const e = document.createElement('div'); if (c) e.className = c; if (txt != null) e.textContent = txt; return e }
+  const underlined = (c, txt) => { const e = el(c); const s = document.createElement('span'); s.textContent = txt; e.append(s); return e }
   const pad = document.getElementById('pad')
   const stage = document.getElementById('stage')
 
   function title(b) {
-    pad.append(el('brand', b.brand))
+    pad.append(underlined('brand', b.brand))
     if (b.sub) pad.append(el('sub', b.sub))
     if (b.tag) pad.append(el('tag', b.tag))
   }
@@ -85,7 +94,9 @@
     const wrap = el('chain')
     b.rows.forEach((r, i) => {
       const cell = el('cell' + (i === b.rows.length - 1 ? ' last' : ''))
-      cell.append(el('lab', r.label), el('val', r.value))
+      const val = el('val')
+      val.append(document.createTextNode(r.value))
+      cell.append(el('lab', r.label), val)
       wrap.append(cell)
     })
     pad.append(wrap)
@@ -97,7 +108,7 @@
     const body = el('body')
     body.append(el('pr', b.prompt))
     const longest = b.lines.reduce((m, l) => Math.max(m, l.text.length), b.prompt.length + 2)
-    const avail = 1920 - 300 - 80
+    const avail = 1920 - 340 - 84
     body.style.fontSize = Math.max(22, Math.min(30, Math.floor(avail / (longest * 0.602)))) + 'px'
     for (const l of b.lines) body.append(el('ln ' + (l.cls || 'plain'), l.text))
     t.append(tb, body)
@@ -111,7 +122,7 @@
     const b = scene.block
     if (!b || !R[b.type]) throw new Error('unknown block for scene ' + scene.id)
     R[b.type](b)
-    if (b.type !== 'title') stage.append(el('mark', 'Kizashi'))
+    if (b.type !== 'title') stage.append(underlined('mark', 'Kizashi'))
     if (scene.caption) stage.append(el('foot', scene.caption))
     return true
   }

@@ -4,26 +4,20 @@
   "viewport": { "width": 1920, "height": 1080 },
   "colorScheme": "light",
   "outputFormat": "mp4",
-  "cursor": { "enabled": true, "size": 28, "color": "#15191a", "rippleColor": "#a3281d", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
+  "cursor": { "enabled": true, "size": 28, "color": "#1f1f47", "rippleColor": "#576cdb", "rippleSize": 44, "idleHide": false, "transitionMs": 700 },
   "steps": [
     { "action": "wait", "ms": 1500 },
     { "action": "scroll", "y": 5000 },
     { "action": "wait", "ms": 400 },
     { "action": "scroll", "y": 5000 },
     { "action": "wait", "ms": 400 },
-    { "action": "scroll", "y": 2713 },
+    { "action": "scroll", "y": 3322 },
     { "action": "wait", "ms": 2200 },
     { "action": "hover", "selector": "text=Revocations scored" },
-    { "action": "wait", "ms": 2500 },
-    { "action": "hover", "selector": "text=Exact date" },
-    { "action": "wait", "ms": 2200 },
-    { "action": "hover", "selector": "text=\"4,192\"" },
-    { "action": "wait", "ms": 2200 },
-    { "action": "hover", "selector": "text=\"4,194\"" },
     { "action": "wait", "ms": 2200 },
     { "action": "hover", "selector": "text=\"8,631\"" },
-    { "action": "wait", "ms": 2500 },
+    { "action": "wait", "ms": 2200 },
     { "action": "hover", "selector": "text=Bars are scaled to the largest bucket away from zero" },
-    { "action": "wait", "ms": 3000 }
+    { "action": "wait", "ms": 2500 }
   ]
 }
