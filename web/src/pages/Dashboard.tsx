@@ -4,6 +4,7 @@ import { BacktestPanel } from '../components/BacktestPanel'
 import { GateFeed } from '../components/GateFeed'
 import { LedgerTable } from '../components/LedgerTable'
 import { Section } from '../components/Section'
+import { SilencePanel } from '../components/SilencePanel'
 import { SiteFooter } from '../components/SiteFooter'
 import { SummaryStrip } from '../components/SummaryStrip'
 import { SurfacedCard } from '../components/SurfacedCard'
@@ -183,6 +184,13 @@ export function Dashboard() {
             </Section>
             <Section title="Backtest" id="backtest">
               <BacktestPanel backtest={state.report.backtest} />
+            </Section>
+            <Section
+              title="Scoring the silence"
+              id="silence"
+              lead="The classifier rerun at a date two years back, with every later revocation hidden from it, against what the IRS has posted since."
+            >
+              <SilencePanel silence={state.report.silence} />
             </Section>
           </>
         ) : null}

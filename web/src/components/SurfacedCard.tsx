@@ -56,6 +56,12 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
           <p className="m-0 mt-3 text-tiny text-ink-soft">{org.brief.what_happens_if_missed}</p>
           <p className="m-0 mt-2 text-tiny text-ink-soft">{org.brief.next_filing_needed}</p>
           {briefSource ? <p className="m-0 mt-3 text-micro text-muted">{briefSource}</p> : null}
+          {org.review_note ? (
+            <p className="m-0 mt-4 rounded-[12px] bg-accent-wash px-4 py-3 text-tiny text-ink">
+              <span className="font-display font-medium">Held for a person to check.</span>{' '}
+              {org.review_note}
+            </p>
+          ) : null}
         </div>
       ) : (
         <ol className="m-0 mt-8 max-w-[64ch] list-none space-y-1.5 p-0">
@@ -72,6 +78,11 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
           <p className="data m-0 flex flex-wrap items-baseline gap-x-2 text-micro text-muted">
             <span className="whitespace-nowrap font-medium text-ink">alert {org.alert.status}</span>
             <span>{org.alert.reason}</span>
+            {org.alert.delivery_id ? (
+              <span>
+                via {org.alert.channel}, {org.alert.delivery_id}
+              </span>
+            ) : null}
           </p>
         ) : null}
         {canDismiss ? (

@@ -1,7 +1,9 @@
 import { formatCount } from '../lib/format'
 import type { Summary } from '../lib/types'
 
-const CLASS_ORDER: { key: keyof Summary; label: string }[] = [
+type ClassKey = 'surface' | 'watch' | 'current' | 'excluded' | 'dead' | 'past_due' | 'never_filed'
+
+const CLASS_ORDER: { key: ClassKey; label: string }[] = [
   { key: 'surface', label: 'surfaced' },
   { key: 'watch', label: 'watch' },
   { key: 'current', label: 'current' },
@@ -41,6 +43,12 @@ export function SummaryStrip({ summary }: { summary: Summary }) {
           </span>{' '}
           suppressed by the gate
         </span>
+        {summary.alerts_held ? (
+          <span>
+            <span className="data font-medium text-ink">{formatCount(summary.alerts_held)}</span>{' '}
+            held for review by the dispatcher
+          </span>
+        ) : null}
         {summary.reinstated > 0 ? (
           <span>
             <span className="data font-medium text-ink">{formatCount(summary.reinstated)}</span>{' '}

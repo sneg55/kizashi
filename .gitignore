@@ -1,5 +1,4 @@
 __pycache__/
-!data/runs/backtest.json
 .DS_Store
 .env
 .harness/
@@ -9,6 +8,8 @@ __pycache__/
 *.zip
 data/raw/
 data/runs/*
+!data/runs/backtest.json
+!data/runs/silence.json
 data/state/
 docs/internal/
 web/.wrangler/

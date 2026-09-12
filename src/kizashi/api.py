@@ -69,6 +69,10 @@ def create_app(
         return AlertStore(state_dir / "alerts.json")
 
     def annotated(report: dict) -> dict:
+        for key in ("backtest", "silence"):
+            path = runs_dir / f"{key}.json"
+            if path.exists():
+                report[key] = _load(path)
         return with_dismissals(report, store())
 
     @app.get("/api/runs")

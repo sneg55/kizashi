@@ -16,13 +16,14 @@ Kizashi computes the date from the public record instead of waiting for the list
 2. For every organization in a portfolio, finds the last return on record, projects the next three due dates, counts how many have already passed, and computes the date revocation becomes automatic.
 3. Applies exclusions a person would apply: group-ruling subordinates, churches, terminated organizations, organizations that are not 990-N filers, organizations already on the revocation list, organizations that were reinstated.
 4. Writes one ledger row per organization with its class and the reason it was, or was not, surfaced.
-5. For the few that are surfaced, a Strands agent writes a brief and an outreach note from the evidence, and a second agent dispatches alerts through a `send_alert` tool.
-6. A deterministic hook on that tool cancels any alert whose organization is not in the surfaced class, whose date does not match the record, or which has already been sent. Every cancellation is logged with its reason.
+5. For the few that are surfaced, a Strands agent writes a brief and an outreach note from the evidence, and adds a review note only when the record itself suggests a person should check first (a name that reads as a local or auxiliary of a national body that may file for it under a group return, or a change of tax year between filings).
+6. A second agent dispatches: `send_alert` when there is no review note, `hold_for_review` when there is one. A deterministic hook on `send_alert` cancels any alert whose organization is not in the surfaced class, whose date does not match the record, or which has already been sent or dismissed. Every send, hold and cancellation is logged with its reason.
+7. `send_alert` delivers through Amazon SES (`sesv2` `SendEmail`) when `KIZASHI_SES_FROM`, `KIZASHI_SES_TO` and `KIZASHI_SES_SEND=1` are all set, and otherwise records a dry-run delivery id. The gate feed and the alert history carry the channel and the delivery id either way. The SES path is exercised by a stubbed `sesv2` client in the tests; no run in this repository has sent a real email.
 
 ## Built with Strands Agents SDK
 
 - `strands.multiagent.GraphBuilder` assembles the pipeline: a custom `MultiAgentBase` node runs the deterministic classifier and never calls a model, then a brief agent with pydantic structured output, then a dispatch agent that owns the `send_alert` tool.
-- `strands.hooks.BeforeToolCallEvent` is the gate. It reads the ledger and the alert history and sets `cancel_tool` with a reason string when the call is not allowed. `AfterToolCallEvent` records the sends.
+- `strands.hooks.BeforeToolCallEvent` is the gate. It reads the ledger and the alert history and sets `cancel_tool` with a reason string when the call is not allowed, and records a `hold_for_review` call as a third decision, "held", without writing alert history. `AfterToolCallEvent` records the sends with their delivery id.
 - The model is served by Amazon Bedrock through the Mantle endpoint, using the `OpenAIModel` provider with `bedrock_mantle_config`, which mints a short-term Bedrock API key per request from the AWS session. The default model is `google.gemma-4-31b`.
 - The runtime entrypoint is a `BedrockAgentCoreApp`, invoked at `/invocations` with a portfolio path and an as-of date.
 
@@ -55,12 +56,13 @@ uv run kizashi fetch
 uv run kizashi portfolio --state NJ --zip3 086 --out data/demo/portfolio-nj-086.csv
 uv run kizashi classify --portfolio data/demo/portfolio-nj-086.csv --out data/runs/
 uv run kizashi backtest --out data/runs/backtest.json
+uv run kizashi score --as-of 2024-09-12 --out data/runs/silence.json
 uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv --out data/runs/
 uv run kizashi serve --port 8000
 uv run python src/kizashi/runtime_app.py
 ```
 
-`classify` is the deterministic pass with no model. `run` adds the brief agent, the dispatch agent and the gate. `serve` exposes the API and the built web app. The last line runs the AgentCore runtime contract locally on port 8080.
+`classify` is the deterministic pass with no model. `score` reruns it at a past date with later revocations hidden and reports the outcome by class. `run` adds the brief agent, the dispatch agent and the gate. `serve` exposes the API and the built web app. The last line runs the AgentCore runtime contract locally on port 8080.
 
 Web app:
 
@@ -75,6 +77,16 @@ The landing page is at `/`, the dashboard at `/app`. Tests: `uv run pytest -q`.
 `uv run kizashi backtest` over revocations dated 2021-01-01 to 2026-12-31, joined to the 990-N file, with 2020 excluded and refiled rows dropped: n=152249, exact=133844, exact_rate=0.8791, same_month=133844, same_month_rate=0.8791. Source file dates: revocation list 2026-09-11, 990-N file 2026-09-07.
 
 The residual is not noise. The histogram of actual minus predicted, in months and clamped to plus or minus 24, has three spikes away from zero: +24 or more (8631 rows) and +12 (4194 rows), organizations the IRS revoked one or more filing years later than the postcard record implies, usually because a later 990 or 990-EZ is not in the postcard file; and -24 or less (4192 rows), organizations whose last postcard on record postdates an earlier revocation. All three are labelled in the web app's histogram.
+
+Coverage, from the same run: 328308 revocations dated in the window; 152249 scored because a 990-N postcard predating the revocation is on record; 20113 dropped because the latest postcard postdates the revocation; 155946 not scored because the organization has no postcard in the file at all. The unscored half is the population the classifier reaches through the Business Master File tax period or the ruling date, and the date match above says nothing about those paths.
+
+## Scoring the silence
+
+`uv run kizashi score --as-of 2024-09-12` reruns the classifier over every 990-N filer in the region-1 Business Master File (130601 organizations) as of that date, with every revocation dated after it hidden from the classifier, and compares the result with what the IRS has posted through 2026-09-11. Only the surfaced class counts as a prediction, because it is the only class the gate lets an alert through for.
+
+Of the 135 organizations it would have surfaced in September 2024, 105 were revoked in the two years since (77.8%) and 30 are still standing. The IRS posted 529 revocations in that window for organizations still in the file; surfacing caught 19.8% of them, or 31.3% after setting aside the 194 that filed again after the revocation, which the latest-only postcard file cannot show. Outcome by class as of the scoring date: surfaced 135 with 105 revoked; watch 276 with 33; current 106202 with 384; past due 177 with 3; never filed 11 with 2; excluded 23385 with 2.
+
+The bias runs one way: an organization that filed since would not look delinquent in today's file, so precision is flattered, and recall is conditional on the organization still being in the Business Master File. Most watch and current rows revoked since had not yet missed two returns when this was scored, which is the design, not a miss.
 
 ## Demo portfolio
 
@@ -94,7 +106,7 @@ The residual is not noise. The histogram of actual minus predicted, in months an
 
 ## Data handling
 
-Public organizational data only. The 990-N file's principal-officer name and address fields are never read into memory, never rendered, and never sent to a model. No credentials, no scraping behind a login. The only outbound side effect is an alert message, and the hook owns that gate. Alert text states what is on the record and the statutory date; it does not give tax advice. Every report carries the source file dates so a reader can see how stale the record is.
+Public organizational data only. The 990-N file's principal-officer name and address fields are never read into memory, never rendered, and never sent to a model. No credentials, no scraping behind a login. The only outbound side effect is an alert message: SES when three environment variables opt in, a dry-run record otherwise, and the hook owns that gate either way. Alert text states what is on the record and the statutory date; it does not give tax advice. Every report carries the source file dates so a reader can see how stale the record is.
 
 ## License
 

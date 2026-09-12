@@ -4,6 +4,7 @@ from datetime import date, datetime, timezone
 from pathlib import Path
 
 from kizashi.classify import Classification, Cls, classify_portfolio
+from kizashi.delivery import delivery_from_env
 from kizashi.gate import AlertGate, AlertStore
 from kizashi.graph import GRAPH_TASK, PipelineState, build_graph
 from kizashi.ledger import Brief, GateEvent, Report, Surfaced, make_run_id, write_report
@@ -48,14 +49,17 @@ def _force_row(classes: dict[str, Classification]) -> dict | None:
     }
 
 
-def _alert_for(ein: str, events: list[GateEvent]) -> tuple[str | None, str | None]:
+def _alert_for(ein: str, events: list[GateEvent]) -> tuple[str | None, str | None, str | None, str | None]:
     mine = [e for e in events if e.ein == ein]
     for e in mine:
         if e.decision == "allowed":
-            return "sent", e.reason
+            return "sent", e.reason, e.channel, e.delivery_id
+    for e in mine:
+        if e.decision == "held":
+            return "held", e.reason, None, None
     if mine:
-        return "suppressed", mine[-1].reason
-    return None, None
+        return "suppressed", mine[-1].reason, None, None
+    return None, None, None, None
 
 
 def load_sources(
@@ -96,14 +100,14 @@ def run_pipeline_with_sources(
     state = PipelineState()
 
     if with_model and surfaced_rows:
-        graph = build_graph(classifications, make_model(), gate, state, _force_row(classes))
+        graph = build_graph(classifications, make_model(), gate, state, _force_row(classes), delivery_from_env())
         graph(GRAPH_TASK)
 
     briefs = state.brief_set.by_ein()
     surfaced = []
     for c in surfaced_rows:
         b = briefs.get(c.ein)
-        status, reason = _alert_for(c.ein, events)
+        status, reason, channel, delivery_id = _alert_for(c.ein, events)
         surfaced.append(
             Surfaced(
                 classification=c,
@@ -119,11 +123,16 @@ def run_pipeline_with_sources(
                 alert_status=status,
                 alert_reason=reason,
                 brief_source=state.brief_set.sources.get(c.ein),
+                alert_channel=channel,
+                alert_delivery_id=delivery_id,
+                review_note=b.review_note if b else None,
             )
         )
 
     backtest_path = out_dir / "backtest.json"
     backtest = json.loads(backtest_path.read_text()) if backtest_path.exists() else None
+    silence_path = out_dir / "silence.json"
+    silence = json.loads(silence_path.read_text()) if silence_path.exists() else None
 
     report = Report(
         run_id=run_id,
@@ -135,6 +144,7 @@ def run_pipeline_with_sources(
         surfaced=surfaced,
         gate_events=events,
         backtest=backtest,
+        silence=silence,
     )
     write_report(report, out_dir)
     return report

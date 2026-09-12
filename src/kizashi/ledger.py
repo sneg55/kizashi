@@ -14,6 +14,8 @@ class GateEvent:
     tool: str
     decision: str
     reason: str
+    channel: str | None = None
+    delivery_id: str | None = None
 
 
 @dataclass
@@ -32,6 +34,9 @@ class Surfaced:
     alert_status: str | None
     alert_reason: str | None
     brief_source: str | None = None
+    alert_channel: str | None = None
+    alert_delivery_id: str | None = None
+    review_note: str | None = None
 
 
 @dataclass
@@ -45,6 +50,7 @@ class Report:
     surfaced: list[Surfaced]
     gate_events: list[GateEvent]
     backtest: dict | None
+    silence: dict | None = None
 
 
 def make_run_id(as_of_dt: datetime, portfolio_slug: str) -> str:
@@ -65,6 +71,7 @@ def _compute_summary(classifications: list[Classification], gate_events: list[Ga
             reinstated += 1
     alerts_sent = sum(1 for g in gate_events if g.decision == "allowed")
     alerts_suppressed = sum(1 for g in gate_events if g.decision in {"cancelled", "dismissed"})
+    alerts_held = sum(1 for g in gate_events if g.decision == "held")
     return {
         "surface": counts["surface"],
         "watch": counts["watch"],
@@ -76,6 +83,7 @@ def _compute_summary(classifications: list[Classification], gate_events: list[Ga
         "past_due": counts["past_due"],
         "alerts_sent": alerts_sent,
         "alerts_suppressed": alerts_suppressed,
+        "alerts_held": alerts_held,
     }
 
 
@@ -83,7 +91,12 @@ def _surfaced_to_dict(s: Surfaced) -> dict:
     c = s.classification
     alert = None
     if s.alert_status is not None or s.alert_reason is not None:
-        alert = {"status": s.alert_status, "reason": s.alert_reason}
+        alert = {
+            "status": s.alert_status,
+            "reason": s.alert_reason,
+            "channel": s.alert_channel,
+            "delivery_id": s.alert_delivery_id,
+        }
     brief = None
     if s.brief is not None:
         brief = {
@@ -105,6 +118,7 @@ def _surfaced_to_dict(s: Surfaced) -> dict:
         "brief": brief,
         "brief_source": s.brief_source,
         "outreach": s.outreach,
+        "review_note": s.review_note,
         "alert": alert,
     }
 
@@ -133,8 +147,19 @@ def report_to_dict(r: Report) -> dict:
         "summary": _compute_summary(r.classifications, r.gate_events),
         "surfaced": [_surfaced_to_dict(s) for s in r.surfaced],
         "ledger": [_ledger_row(c) for c in r.classifications],
-        "gate_events": [{"ein": g.ein, "tool": g.tool, "decision": g.decision, "reason": g.reason} for g in r.gate_events],
+        "gate_events": [
+            {
+                "ein": g.ein,
+                "tool": g.tool,
+                "decision": g.decision,
+                "reason": g.reason,
+                "channel": g.channel,
+                "delivery_id": g.delivery_id,
+            }
+            for g in r.gate_events
+        ],
         "backtest": r.backtest,
+        "silence": r.silence,
     }
 
 

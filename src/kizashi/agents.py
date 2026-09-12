@@ -8,6 +8,7 @@ from strands import Agent, tool
 
 from kizashi.classify import Classification
 from kizashi.dates import due_date, period_ends_after
+from kizashi.delivery import Deliverer, alert_subject
 
 logger = logging.getLogger(__name__)
 
@@ -24,19 +25,25 @@ BRIEF_SYSTEM_PROMPT = (
     "and that the organization then appears on the IRS auto-revocation list. "
     "next_filing_needed: the tax periods that are not on record and the date they must be filed before. "
     "outreach: a note addressed to the intermediary's grants lead, naming the organization, what the record shows "
-    "and the statutory date, asking them to contact the organization. Three or four sentences, no advice."
+    "and the statutory date, asking them to contact the organization. Three or four sentences, no advice. "
+    "review_note: null for almost every organization. Set it to one sentence only when the record itself suggests "
+    "a person should check before anyone is contacted: the name reads as a post, lodge, chapter, council, auxiliary, "
+    "unit or local of a national body that may file for it under a group return, or the evidence lines show the "
+    "tax year end changed between filings. Name exactly what you saw. Never invent a concern."
 )
 
 BRIEF_JSON_ONLY_SUFFIX = (
     "\n\nReturn JSON only, with no prose and no code fence, shaped as "
-    '{"briefs": [{"ein": "", "headline": "", "what_happens_if_missed": "", "next_filing_needed": "", "outreach": ""}]}'
+    '{"briefs": [{"ein": "", "headline": "", "what_happens_if_missed": "", "next_filing_needed": "", "outreach": "", "review_note": null}]}'
 )
 
 DISPATCH_SYSTEM_PROMPT = (
-    "You dispatch alerts for a grantmaking intermediary. "
-    "For every organization in the input call the send_alert tool exactly once, passing its ein, "
+    "You dispatch alerts for a grantmaking intermediary. Every organization in the input carries a review_note. "
+    "If review_note is null, call the send_alert tool exactly once for that organization, passing its ein, "
     "its predicted_revocation and its message verbatim. "
-    "An error result from the tool is final: never call send_alert again for that organization. "
+    "If review_note is not null, do not send: call the hold_for_review tool exactly once instead, passing its ein, "
+    "its predicted_revocation and the review_note as the reason, so a person checks the record first. "
+    "An error result from either tool is final: never call a tool again for that organization. "
     "When every organization has been attempted, reply with the single word done and no other commentary."
 )
 
@@ -47,6 +54,7 @@ class BriefOut(BaseModel):
     what_happens_if_missed: str
     next_filing_needed: str
     outreach: str
+    review_note: str | None = None
 
 
 class BriefBatch(BaseModel):
@@ -125,6 +133,7 @@ def fallback_brief(c: Classification) -> BriefOut:
         what_happens_if_missed=what_happens_if_missed,
         next_filing_needed=next_filing_needed,
         outreach=outreach,
+        review_note=None,
     )
 
 
@@ -182,17 +191,44 @@ def write_briefs(model: Any, surfaced: list[Classification], batch_size: int = B
     return out
 
 
-def make_send_alert_tool(sink: list[dict]) -> Callable:
+def make_send_alert_tool(sink: list[dict], deliverer: Deliverer, names: dict[str, str]) -> Callable:
     @tool(name="send_alert", description="Send one alert about an organization to the intermediary's grants lead.")
     def send_alert(
         ein: Annotated[str, "The organization's nine digit EIN, digits only."],
         predicted_revocation: Annotated[str, "The predicted revocation date as YYYY-MM-DD."],
         message: Annotated[str, "The note to deliver, verbatim."],
     ) -> str:
-        sink.append({"ein": normalize_ein(ein), "predicted_revocation": predicted_revocation, "message": message})
-        return "sent"
+        key = normalize_ein(ein)
+        subject = alert_subject(names.get(key, f"EIN {format_ein(key)}"), predicted_revocation)
+        delivery = deliverer.deliver(key, predicted_revocation, subject, message)
+        sink.append(
+            {
+                "ein": key,
+                "predicted_revocation": predicted_revocation,
+                "message": message,
+                "channel": delivery.channel,
+                "delivery_id": delivery.delivery_id,
+            }
+        )
+        return f"sent via {delivery.channel}, delivery {delivery.delivery_id}"
 
     return send_alert
+
+
+def make_hold_tool(holds: list[dict]) -> Callable:
+    @tool(
+        name="hold_for_review",
+        description="Hold an organization's alert so a person checks the record before anyone is contacted.",
+    )
+    def hold_for_review(
+        ein: Annotated[str, "The organization's nine digit EIN, digits only."],
+        predicted_revocation: Annotated[str, "The predicted revocation date as YYYY-MM-DD."],
+        reason: Annotated[str, "What in the record suggests a person should check first."],
+    ) -> str:
+        holds.append({"ein": normalize_ein(ein), "predicted_revocation": predicted_revocation, "reason": reason})
+        return "held"
+
+    return hold_for_review
 
 
 def make_dispatch_agent(model: Any, tools: list, hooks: list) -> Agent:
@@ -217,6 +253,7 @@ def dispatch_rows(surfaced: list[Classification], briefs: dict[str, BriefOut]) -
                 "name": c.name,
                 "predicted_revocation": c.predicted_revocation.isoformat() if c.predicted_revocation else "",
                 "message": b.outreach,
+                "review_note": b.review_note,
             }
         )
     return rows
@@ -227,18 +264,21 @@ def dispatch_alerts(
     rows: list[dict],
     gate: Any,
     sink: list[dict],
+    deliverer: Deliverer,
+    holds: list[dict] | None = None,
     batch_size: int = DISPATCH_BATCH_SIZE,
 ) -> None:
-    send_alert = make_send_alert_tool(sink)
+    names = {normalize_ein(r["ein"]): r.get("name", "") for r in rows}
+    tools = [make_send_alert_tool(sink, deliverer, names), make_hold_tool(holds if holds is not None else [])]
     for start in range(0, len(rows), batch_size):
-        _dispatch_batch(model, rows[start : start + batch_size], gate, send_alert)
+        _dispatch_batch(model, rows[start : start + batch_size], gate, tools)
     missed = [r for r in rows if normalize_ein(r["ein"]) not in gate.attempted]
     for start in range(0, len(missed), batch_size):
-        _dispatch_batch(model, missed[start : start + batch_size], gate, send_alert)
+        _dispatch_batch(model, missed[start : start + batch_size], gate, tools)
 
 
-def _dispatch_batch(model: Any, batch: list[dict], gate: Any, send_alert: Callable) -> None:
+def _dispatch_batch(model: Any, batch: list[dict], gate: Any, tools: list) -> None:
     try:
-        make_dispatch_agent(model, [send_alert], [gate])(json.dumps(batch, indent=1))
+        make_dispatch_agent(model, tools, [gate])(json.dumps(batch, indent=1))
     except Exception:
         logger.warning("dispatch batch of %d failed", len(batch), exc_info=True)

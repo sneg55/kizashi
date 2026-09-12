@@ -10,6 +10,7 @@ from strands.telemetry.metrics import EventLoopMetrics
 
 from kizashi.agents import BriefBatch, BriefOut, BriefSet, brief_payload, dispatch_alerts, dispatch_rows, write_briefs
 from kizashi.classify import Classification, Cls
+from kizashi.delivery import Deliverer, DryRunDelivery
 from kizashi.gate import AlertGate
 
 logger = logging.getLogger(__name__)
@@ -21,6 +22,7 @@ GRAPH_TASK = "Classify the portfolio against the IRS record, brief what surfaces
 class PipelineState:
     brief_set: BriefSet = field(default_factory=BriefSet)
     alerts: list[dict] = field(default_factory=list)
+    holds: list[dict] = field(default_factory=list)
 
 
 def _text_result(node_id: str, text: str) -> MultiAgentResult:
@@ -96,6 +98,7 @@ class DispatchNode(MultiAgentBase):
         gate: AlertGate,
         state: PipelineState,
         force_row: dict | None = None,
+        deliverer: Deliverer | None = None,
     ) -> None:
         super().__init__()
         self.id = "dispatch"
@@ -104,14 +107,20 @@ class DispatchNode(MultiAgentBase):
         self.gate = gate
         self.state = state
         self.force_row = force_row
+        self.deliverer = deliverer if deliverer is not None else DryRunDelivery()
 
     async def invoke_async(self, task: Any, invocation_state: dict | None = None, **kwargs: Any) -> MultiAgentResult:
         briefs = _briefs_from_text(_input_text(task)) or self.state.brief_set.by_ein()
         rows = dispatch_rows(self.surfaced, briefs)
         if self.force_row is not None:
             rows.append(self.force_row)
-        dispatch_alerts(self.model, rows, self.gate, self.state.alerts)
-        summary = {"attempted": len(rows), "sent": len(self.state.alerts), "gate_events": len(self.gate.events)}
+        dispatch_alerts(self.model, rows, self.gate, self.state.alerts, self.deliverer, self.state.holds)
+        summary = {
+            "attempted": len(rows),
+            "sent": len(self.state.alerts),
+            "held": len(self.state.holds),
+            "gate_events": len(self.gate.events),
+        }
         return _text_result(self.id, json.dumps(summary))
 
 
@@ -121,11 +130,12 @@ def build_graph(
     gate: AlertGate,
     state: PipelineState | None = None,
     force_row: dict | None = None,
+    deliverer: Deliverer | None = None,
 ):
     pipeline_state = state if state is not None else PipelineState()
     classifier = ClassifierNode(classifications)
     brief = BriefNode(model, classifier.surfaced, pipeline_state)
-    dispatch = DispatchNode(model, classifier.surfaced, gate, pipeline_state, force_row)
+    dispatch = DispatchNode(model, classifier.surfaced, gate, pipeline_state, force_row, deliverer)
     builder = GraphBuilder()
     builder.add_node(classifier, "classify")
     builder.add_node(brief, "brief")

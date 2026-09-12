@@ -14,6 +14,7 @@ class BacktestResult:
     exact: int
     same_month: int
     histogram_months: dict[int, int]
+    coverage: dict[str, int]
     misses_path: Path | None
 
 
@@ -33,15 +34,22 @@ def run_backtest(
     same_month = 0
     histogram: dict[int, int] = {}
     misses: list[dict] = []
+    coverage = {"in_window": 0, "scored": 0, "refiled_after_revocation": 0, "no_postcard": 0}
 
     for rev in revs.values():
         if rev.revocation_date.year == 2020:
             continue
         if not (start <= rev.revocation_date <= end):
             continue
+        coverage["in_window"] += 1
         pc = pcs.get(rev.ein)
-        if pc is None or pc.period_end is None or pc.period_end > rev.revocation_date:
+        if pc is None or pc.period_end is None:
+            coverage["no_postcard"] += 1
             continue
+        if pc.period_end > rev.revocation_date:
+            coverage["refiled_after_revocation"] += 1
+            continue
+        coverage["scored"] += 1
         predicted = due_date(period_ends_after(pc.period_end, 3)[2])
         n += 1
         is_exact = predicted == rev.revocation_date
@@ -78,7 +86,15 @@ def run_backtest(
         misses_path = misses_out
 
     window = f"revocations dated {start.isoformat()} to {end.isoformat()}"
-    return BacktestResult(window=window, n=n, exact=exact, same_month=same_month, histogram_months=histogram, misses_path=misses_path)
+    return BacktestResult(
+        window=window,
+        n=n,
+        exact=exact,
+        same_month=same_month,
+        histogram_months=histogram,
+        coverage=coverage,
+        misses_path=misses_path,
+    )
 
 
 def backtest_to_dict(b: BacktestResult, source_dates: dict[str, str]) -> dict:
@@ -90,5 +106,6 @@ def backtest_to_dict(b: BacktestResult, source_dates: dict[str, str]) -> dict:
         "same_month": b.same_month,
         "same_month_rate": (b.same_month / b.n) if b.n else 0.0,
         "histogram_months": {str(k): v for k, v in sorted(b.histogram_months.items())},
+        "coverage": b.coverage,
         "source_dates": source_dates,
     }

@@ -146,3 +146,40 @@ def test_store_survives_a_reload(tmp_path):
     reloaded = AlertStore(tmp_path / "alerts.json")
     assert reloaded.has(SURFACE_EIN, SURFACE_DATE)
     assert not reloaded.has(SURFACE_EIN, "2028-05-15")
+
+
+def hold_event(ein: str, predicted: str, reason: str):
+    return SimpleNamespace(
+        tool_use={
+            "name": "hold_for_review",
+            "toolUseId": "t2",
+            "input": {"ein": ein, "predicted_revocation": predicted, "reason": reason},
+        },
+        cancel_tool=False,
+        selected_tool=None,
+        invocation_state={},
+    )
+
+
+def test_hold_is_recorded_as_a_third_decision_and_writes_no_history(tmp_path):
+    gate, store, events = make_gate(tmp_path)
+    event = hold_event(SURFACE_EIN, SURFACE_DATE, "name reads as a local of a national union")
+    gate.before(event)
+    assert event.cancel_tool is False
+    assert events[-1].decision == "held"
+    assert events[-1].tool == "hold_for_review"
+    assert "local of a national union" in events[-1].reason
+    assert SURFACE_EIN in gate.attempted
+    assert store.status(SURFACE_EIN, SURFACE_DATE) is None
+
+
+def test_after_keeps_the_delivery_id_from_the_tool_result(tmp_path):
+    gate, store, events = make_gate(tmp_path)
+    gate.before(before_event(SURFACE_EIN, SURFACE_DATE))
+    event = after_event(SURFACE_EIN, SURFACE_DATE)
+    event.result["content"] = [{"text": "sent via dry-run, delivery dry-run-abc123"}]
+    gate.after(event)
+    assert store.entries[store.key(SURFACE_EIN, SURFACE_DATE)]["delivery_id"] == "dry-run-abc123"
+    assert store.entries[store.key(SURFACE_EIN, SURFACE_DATE)]["channel"] == "dry-run"
+    assert events[-1].channel == "dry-run"
+    assert events[-1].delivery_id == "dry-run-abc123"

@@ -43,6 +43,18 @@ export function BacktestPanel({ backtest }: { backtest: Backtest | null }) {
           <Field label="Window">
             <span className="font-sans">{backtest.window}</span>
           </Field>
+          {backtest.coverage ? (
+            <>
+              <Field label="Revocations in the window">{formatCount(backtest.coverage.in_window)}</Field>
+              <Field label="Scored, postcard on record">{formatCount(backtest.coverage.scored)}</Field>
+              <Field label="Dropped, refiled after revocation">
+                {formatCount(backtest.coverage.refiled_after_revocation)}
+              </Field>
+              <Field label="Not scored, no 990-N postcard">
+                {formatCount(backtest.coverage.no_postcard)}
+              </Field>
+            </>
+          ) : null}
           {Object.entries(backtest.source_dates).map(([source, date]) => (
             <Field key={source} label={`${sourceLabel(source)}, dated`}>
               {date}

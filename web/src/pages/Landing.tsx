@@ -1,5 +1,6 @@
 import { BacktestPanel } from '../components/BacktestPanel'
 import { Section } from '../components/Section'
+import { SilencePanel } from '../components/SilencePanel'
 import { SiteFooter } from '../components/SiteFooter'
 import { TopBar } from '../components/TopBar'
 import { useReport } from '../lib/use-report'
@@ -27,6 +28,15 @@ export function Landing() {
             >
               <BacktestPanel backtest={state.report.backtest} />
             </Section>
+            {state.report.silence ? (
+              <Section
+                title="Scoring the silence"
+                align="center"
+                lead="The same classifier rerun as of a date two years back, with every later revocation hidden from it, against what the IRS has posted since."
+              >
+                <SilencePanel silence={state.report.silence} />
+              </Section>
+            ) : null}
           </>
         ) : null}
         {state.status === 'loading' ? (

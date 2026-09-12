@@ -8,8 +8,9 @@ from pathlib import Path
 from kizashi.backtest import backtest_to_dict, run_backtest
 from kizashi.classify import Cls, classify_portfolio
 from kizashi.ledger import Report, Surfaced, make_run_id, report_to_dict, write_report
-from kizashi.pipeline import run_pipeline
+from kizashi.pipeline import load_sources, run_pipeline
 from kizashi.portfolio import build_portfolio_from_bmf, load_portfolio_csv
+from kizashi.score import score_silence, score_to_dict
 from kizashi.sources import (
     BMF_URLS,
     POSTCARD_URL,
@@ -147,7 +148,29 @@ def cmd_backtest(args: argparse.Namespace) -> None:
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(d, indent=2))
     print(f"n={d['n']} exact={d['exact']} exact_rate={d['exact_rate']:.4f} same_month={d['same_month']} same_month_rate={d['same_month_rate']:.4f}")
+    print(f"coverage: {json.dumps(d['coverage'])}")
     print(f"source dates: revocation={source_dates['revocation']} 990n={source_dates['990n']}")
+
+
+def cmd_score(args: argparse.Namespace) -> None:
+    bmf, pcs, revs, metas = load_sources(DATA_RAW)
+    revocation_meta = next(m for m in metas if m.name.startswith("data-download-revocation"))
+    list_date = date.fromisoformat(revocation_meta.last_modified)
+    as_of = date.fromisoformat(args.as_of)
+    result = score_silence(bmf, pcs, revs, as_of, list_date, args.lag_months)
+    d = score_to_dict(result)
+    out = Path(args.out)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(d, indent=2))
+    print(
+        f"as_of={d['as_of']} list_date={d['list_date']} universe={d['universe']} truth={d['truth']} "
+        f"positives={d['positives']} tp={d['tp']} fp={d['fp']} fn={d['fn']} "
+        f"precision={d['precision']:.4f} recall={d['recall']:.4f} "
+        f"recall_excluding_refiled={d['recall_excluding_refiled']:.4f} "
+        f"refiled={d['refiled_after_revocation']} lag_excluded={d['lag_excluded']}"
+    )
+    for cls, bucket in sorted(d["by_class"].items()):
+        print(f"{cls}\ttotal={bucket['total']}\trevoked={bucket['revoked']}")
 
 
 def cmd_serve(args: argparse.Namespace) -> None:
@@ -178,6 +201,9 @@ def cmd_export(args: argparse.Namespace) -> None:
     backtest_path = runs_dir / "backtest.json"
     if backtest_path.exists():
         report["backtest"] = json.loads(backtest_path.read_text())
+    silence_path = runs_dir / "silence.json"
+    if silence_path.exists():
+        report["silence"] = json.loads(silence_path.read_text())
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(report, indent=2))
@@ -244,6 +270,12 @@ def build_parser() -> argparse.ArgumentParser:
     backtest_p.add_argument("--out", default="data/runs/backtest.json")
     backtest_p.add_argument("--misses", default="data/runs/backtest-misses.csv")
     backtest_p.set_defaults(func=cmd_backtest)
+
+    score_p = sub.add_parser("score")
+    score_p.add_argument("--as-of", required=True)
+    score_p.add_argument("--lag-months", type=int, default=6)
+    score_p.add_argument("--out", default="data/runs/silence.json")
+    score_p.set_defaults(func=cmd_score)
 
     serve_p = sub.add_parser("serve")
     serve_p.add_argument("--host", default="127.0.0.1")

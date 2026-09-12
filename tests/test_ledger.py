@@ -59,8 +59,10 @@ def test_report_to_dict_shape_and_summary():
         "ledger",
         "gate_events",
         "backtest",
+        "silence",
     }
     assert d["summary"]["surface"] == 1
+    assert d["summary"]["alerts_held"] == 0
     assert d["summary"]["reinstated"] == 1
     assert d["ledger"][0]["predicted_revocation"] == "2027-05-15"
     json.dumps(d)

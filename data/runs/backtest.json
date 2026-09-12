@@ -47,6 +47,12 @@
     "23": 5,
     "24": 8631
   },
+  "coverage": {
+    "in_window": 328308,
+    "scored": 152249,
+    "refiled_after_revocation": 20113,
+    "no_postcard": 155946
+  },
   "source_dates": {
     "revocation": "2026-09-11",
     "990n": "2026-09-07"

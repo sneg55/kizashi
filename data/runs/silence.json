@@ -1,0 +1,46 @@
+{
+  "as_of": "2024-09-12",
+  "list_date": "2026-09-11",
+  "cutoff": "2026-03-11",
+  "universe": 130601,
+  "truth": 529,
+  "positives": 135,
+  "tp": 105,
+  "fp": 30,
+  "fn": 424,
+  "precision": 0.7777777777777778,
+  "recall": 0.19848771266540643,
+  "recall_excluding_refiled": 0.31343283582089554,
+  "refiled_after_revocation": 194,
+  "lag_excluded": 0,
+  "by_class": {
+    "CURRENT": {
+      "total": 106202,
+      "revoked": 384
+    },
+    "EXCLUDED": {
+      "total": 23385,
+      "revoked": 2
+    },
+    "DEAD": {
+      "total": 415,
+      "revoked": 0
+    },
+    "WATCH": {
+      "total": 276,
+      "revoked": 33
+    },
+    "SURFACE": {
+      "total": 135,
+      "revoked": 105
+    },
+    "PAST_DUE": {
+      "total": 177,
+      "revoked": 3
+    },
+    "NEVER_FILED": {
+      "total": 11,
+      "revoked": 2
+    }
+  }
+}

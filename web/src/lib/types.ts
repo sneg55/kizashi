@@ -38,6 +38,7 @@ export interface Summary {
   past_due: number
   alerts_sent: number
   alerts_suppressed: number
+  alerts_held?: number
 }
 
 export interface Brief {
@@ -49,6 +50,8 @@ export interface Brief {
 export interface AlertOutcome {
   status: string
   reason: string
+  channel?: string | null
+  delivery_id?: string | null
 }
 
 export interface SurfacedOrg {
@@ -65,6 +68,7 @@ export interface SurfacedOrg {
   brief: Brief | null
   brief_source: 'model' | 'fallback' | null
   outreach: string | null
+  review_note?: string | null
   alert: AlertOutcome | null
   dismissed?: boolean
 }
@@ -86,6 +90,8 @@ export interface GateEvent {
   tool: string
   decision: string
   reason: string
+  channel?: string | null
+  delivery_id?: string | null
 }
 
 export interface Backtest {
@@ -96,7 +102,33 @@ export interface Backtest {
   same_month: number
   same_month_rate: number
   histogram_months: Record<string, number>
+  coverage?: BacktestCoverage
   source_dates: Record<string, string>
+}
+
+export interface BacktestCoverage {
+  in_window: number
+  scored: number
+  refiled_after_revocation: number
+  no_postcard: number
+}
+
+export interface SilenceScore {
+  as_of: string
+  list_date: string
+  cutoff: string
+  universe: number
+  truth: number
+  positives: number
+  tp: number
+  fp: number
+  fn: number
+  precision: number
+  recall: number
+  recall_excluding_refiled: number
+  refiled_after_revocation: number
+  lag_excluded: number
+  by_class: Record<string, { total: number; revoked: number }>
 }
 
 export interface Report {
@@ -110,4 +142,5 @@ export interface Report {
   ledger: LedgerRow[]
   gate_events: GateEvent[]
   backtest: Backtest | null
+  silence?: SilenceScore | null
 }
