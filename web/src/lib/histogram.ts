@@ -3,6 +3,8 @@ export interface Bucket {
   count: number
 }
 
+export const CLAMP_MONTHS = 24
+
 export function toBuckets(histogram: Record<string, number>): Bucket[] {
   const entries = Object.entries(histogram)
     .map(([month, count]) => ({ month: Number(month), count }))
@@ -22,5 +24,26 @@ export function toBuckets(histogram: Record<string, number>): Bucket[] {
 
 export function tickLabel(month: number): string {
   if (month === 0) return '0'
+  if (month >= CLAMP_MONTHS) return `+${CLAMP_MONTHS} or more`
+  if (month <= -CLAMP_MONTHS) return `-${CLAMP_MONTHS} or less`
   return month > 0 ? `+${month}` : String(month)
+}
+
+export function shortTickLabel(month: number): string {
+  if (month === 0) return '0'
+  return month > 0 ? `+${month}` : String(month)
+}
+
+export function residualPeak(buckets: Bucket[]): number {
+  return buckets.reduce(
+    (highest, bucket) => (bucket.month === 0 ? highest : Math.max(highest, bucket.count)),
+    0,
+  )
+}
+
+export function topResiduals(buckets: Bucket[], howMany: number): Bucket[] {
+  return buckets
+    .filter((bucket) => bucket.month !== 0 && bucket.count > 0)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, howMany)
 }
