@@ -11,7 +11,7 @@
     { "action": "wait", "ms": 400 },
     { "action": "scroll", "y": 5000 },
     { "action": "wait", "ms": 400 },
-    { "action": "scroll", "y": 2657 },
+    { "action": "scroll", "y": 2713 },
     { "action": "wait", "ms": 2200 },
     { "action": "hover", "selector": "text=Revocations scored" },
     { "action": "wait", "ms": 2500 },

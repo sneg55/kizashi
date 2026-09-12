@@ -21,7 +21,7 @@
     { "action": "wait", "ms": 2500 },
     { "action": "type", "selector": "input[placeholder=\"Search by name or EIN\"]", "text": "", "clear": true },
     { "action": "wait", "ms": 1200 },
-    { "action": "click", "selector": "button:has-text(\"surface\")" },
+    { "action": "click", "selector": "button:has-text(\"surfaced\")" },
     { "action": "wait", "ms": 3000 }
   ]
 }

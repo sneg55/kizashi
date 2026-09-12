@@ -9,7 +9,7 @@
     { "action": "wait", "ms": 2500 },
     { "action": "hover", "selector": "text=data/demo/portfolio-nj-086.csv" },
     { "action": "wait", "ms": 2500 },
-    { "action": "hover", "selector": "text=data-download-epostcard.txt" },
+    { "action": "hover", "selector": "text=Business Master File, dated" },
     { "action": "wait", "ms": 2500 },
     { "action": "hover", "selector": "text=google.gemma-4-31b" },
     { "action": "wait", "ms": 2500 },
