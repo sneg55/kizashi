@@ -1,4 +1,4 @@
-import { humanizeReason } from '../lib/format'
+import { classLabel, humanizeReason } from '../lib/format'
 import type { LedgerRow } from '../lib/types'
 
 export function LedgerExcerpt({ rows }: { rows: LedgerRow[] }) {
@@ -17,7 +17,7 @@ export function LedgerExcerpt({ rows }: { rows: LedgerRow[] }) {
           <span
             className={`data text-micro ${row.class === 'SURFACE' ? 'text-flag' : 'text-ink-soft'}`}
           >
-            {row.class.toLowerCase()}
+            {classLabel(row.class)}
           </span>
           <span className="data text-micro text-ink-soft">{humanizeReason(row.reason)}</span>
         </li>

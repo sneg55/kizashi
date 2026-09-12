@@ -29,3 +29,24 @@ export function displayUrl(url: string): string {
 export function normalizeSearch(value: string): string {
   return value.replace(/[-\s]/g, '').toLowerCase()
 }
+
+const CLASS_LABEL: Record<string, string> = {
+  SURFACE: 'surfaced',
+}
+
+export function classLabel(cls: string): string {
+  return CLASS_LABEL[cls] ?? humanizeReason(cls.toLowerCase())
+}
+
+const SOURCE_LABEL: Record<string, string> = {
+  'eo1.csv': 'Business Master File',
+  bmf: 'Business Master File',
+  'data-download-epostcard.txt': '990-N postcard file',
+  '990n': '990-N postcard file',
+  'data-download-revocation.txt': 'Auto-revocation list',
+  revocation: 'Auto-revocation list',
+}
+
+export function sourceLabel(name: string): string {
+  return SOURCE_LABEL[name] ?? name
+}

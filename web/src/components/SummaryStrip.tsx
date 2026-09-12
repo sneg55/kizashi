@@ -7,7 +7,6 @@ const CLASS_ORDER: { key: keyof Summary; label: string }[] = [
   { key: 'current', label: 'current' },
   { key: 'excluded', label: 'excluded' },
   { key: 'dead', label: 'dead' },
-  { key: 'reinstated', label: 'reinstated' },
   { key: 'past_due', label: 'past due' },
   { key: 'never_filed', label: 'never filed' },
 ]
@@ -40,6 +39,12 @@ export function SummaryStrip({ summary }: { summary: Summary }) {
           <span className="data text-ink">{formatCount(summary.alerts_suppressed)}</span> suppressed
           by the gate
         </span>
+        {summary.reinstated > 0 ? (
+          <span>
+            <span className="data text-ink">{formatCount(summary.reinstated)}</span> reinstated after
+            an earlier revocation, counted in the classes above
+          </span>
+        ) : null}
       </p>
     </div>
   )

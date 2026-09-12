@@ -24,7 +24,7 @@ const RULE_STATEMENTS = [
 const BUILT_ON = [
   { name: 'Strands Agents SDK', role: 'the graph, the two agents, and the hook that owns the outbound call' },
   { name: 'Amazon Bedrock via the Mantle endpoint', role: 'the model that writes each brief from the record' },
-  { name: 'Amazon Bedrock AgentCore Runtime', role: 'the monthly run, off a schedule, with nobody watching' },
+  { name: 'Amazon Bedrock AgentCore Runtime', role: 'the entrypoint the run is invoked through, exercised locally for this submission' },
 ]
 
 function Hero({ report }: { report: Report | null }) {
@@ -145,6 +145,11 @@ function LandingBody({ report }: { report: Report }) {
             <div className="mt-5 max-w-[46rem]">
               <LedgerExcerpt rows={excerpt} />
             </div>
+            <p className="m-0 mt-4 text-tiny">
+              <Link to="/app#ledger" className="text-ink-soft hover:text-ink">
+                Full ledger, {formatCount(report.portfolio.count)} rows
+              </Link>
+            </p>
           </div>
 
           <div>
@@ -158,6 +163,11 @@ function LandingBody({ report }: { report: Report }) {
             <div className="mt-5 max-w-[46rem]">
               <GateFeed events={gateEvents} limit={4} />
             </div>
+            <p className="m-0 mt-4 text-tiny">
+              <Link to="/app#gate" className="text-ink-soft hover:text-ink">
+                Every gate event, {formatCount(report.gate_events.length)} in this run
+              </Link>
+            </p>
           </div>
         </div>
       </Section>

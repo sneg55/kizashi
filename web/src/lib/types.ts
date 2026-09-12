@@ -66,6 +66,7 @@ export interface SurfacedOrg {
   brief_source: 'model' | 'fallback' | null
   outreach: string | null
   alert: AlertOutcome | null
+  dismissed?: boolean
 }
 
 export interface LedgerRow {

@@ -1,3 +1,4 @@
+import os
 import zipfile
 from dataclasses import dataclass
 from datetime import date, datetime, timezone
@@ -86,8 +87,9 @@ def fetch(url: str, dest: Path, force: bool = False) -> SourceMeta:
             for chunk in response.iter_bytes():
                 f.write(chunk)
     if header_last_modified:
-        parsed = datetime.strptime(header_last_modified, "%a, %d %b %Y %H:%M:%S %Z")
+        parsed = datetime.strptime(header_last_modified, "%a, %d %b %Y %H:%M:%S %Z").replace(tzinfo=timezone.utc)
         last_modified = parsed.date().isoformat()
+        os.utime(dest, (parsed.timestamp(), parsed.timestamp()))
     else:
         last_modified = datetime.fromtimestamp(dest.stat().st_mtime, tz=timezone.utc).date().isoformat()
     if url.endswith(".zip"):
@@ -95,6 +97,8 @@ def fetch(url: str, dest: Path, force: bool = False) -> SourceMeta:
             names = [n for n in zf.namelist() if n.endswith(".txt")]
             zf.extractall(dest.parent)
         extracted = dest.parent / names[0]
+        if header_last_modified:
+            os.utime(extracted, (parsed.timestamp(), parsed.timestamp()))
         rows = sum(1 for _ in open(extracted, "rb"))
         return SourceMeta(name=extracted.name, url=url, last_modified=last_modified, rows=rows, path=extracted)
     rows = sum(1 for _ in open(dest, "rb"))

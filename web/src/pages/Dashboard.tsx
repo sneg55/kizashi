@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useLocation } from 'react-router'
 import { BacktestPanel } from '../components/BacktestPanel'
 import { GateFeed } from '../components/GateFeed'
 import { LedgerTable } from '../components/LedgerTable'
@@ -9,7 +10,7 @@ import { SurfacedCard } from '../components/SurfacedCard'
 import { TopBar } from '../components/TopBar'
 import { runSweep } from '../lib/data'
 import { compareIso } from '../lib/dates'
-import { formatCount } from '../lib/format'
+import { formatCount, sourceLabel } from '../lib/format'
 import { IS_STATIC } from '../lib/site'
 import type { Report } from '../lib/types'
 import { useReport } from '../lib/use-report'
@@ -42,8 +43,8 @@ function RunHeader({
           <h1 className="m-0 font-display text-[clamp(1.75rem,3vw,2.25rem)] leading-tight font-normal tracking-[-0.015em] [overflow-wrap:anywhere] text-ink">
             {report.portfolio.name}
           </h1>
-          <p className="data m-0 mt-2 text-micro [overflow-wrap:anywhere] text-ink-soft">
-            {report.portfolio.source}
+          <p className="m-0 mt-2 text-micro [overflow-wrap:anywhere] text-ink-soft">
+            portfolio <span className="data">{report.portfolio.source}</span>
           </p>
         </div>
         {IS_STATIC ? null : (
@@ -56,6 +57,12 @@ function RunHeader({
             >
               {sweep === 'running' ? 'Running the sweep' : 'Run sweep'}
             </button>
+            {sweep === 'running' ? (
+              <p className="m-0 max-w-[30ch] text-micro text-ink-soft">
+                Classifying {formatCount(report.portfolio.count)} organizations, writing briefs with
+                the model and dispatching through the gate. The page updates when the run finishes.
+              </p>
+            ) : null}
             {sweep === 'failed' ? (
               <p className="m-0 max-w-[28ch] text-micro text-ink">
                 The sweep did not start. Check that the API is running on port 8000.
@@ -73,7 +80,7 @@ function RunHeader({
           {report.model ? `${report.model.model_id}, ${report.model.region}` : 'not used this run'}
         </Meta>
         {report.sources.map((source) => (
-          <Meta key={source.name} label={source.name}>
+          <Meta key={source.name} label={`${sourceLabel(source.name)}, dated`}>
             {source.last_modified}
           </Meta>
         ))}
@@ -124,6 +131,12 @@ function Surfaced({ report }: { report: Report }) {
 
 export function Dashboard() {
   const { state, replace } = useReport()
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (state.status !== 'ready' || !hash) return
+    document.getElementById(hash.slice(1))?.scrollIntoView()
+  }, [state.status, hash])
 
   return (
     <div className="mx-auto max-w-[72rem] px-4 sm:px-8">
@@ -155,13 +168,13 @@ export function Dashboard() {
           <Section title="Surfaced" count={state.report.surfaced.length}>
             <Surfaced report={state.report} />
           </Section>
-          <Section title="Ledger">
+          <Section title="Ledger" id="ledger">
             <p className="mt-0 mb-6 max-w-[62ch] text-ink-soft">
               Every organization in the portfolio, with the reason it produced nothing to send.
             </p>
             <LedgerTable rows={state.report.ledger} />
           </Section>
-          <Section title="Gate">
+          <Section title="Gate" id="gate">
             <p className="mt-0 mb-6 max-w-[62ch] text-ink-soft">
               Every attempt on the outbound tool, allowed or cancelled, with the reason the hook
               recorded.
@@ -170,7 +183,7 @@ export function Dashboard() {
               <GateFeed events={state.report.gate_events} />
             </div>
           </Section>
-          <Section title="Backtest">
+          <Section title="Backtest" id="backtest">
             <BacktestPanel backtest={state.report.backtest} />
           </Section>
         </main>

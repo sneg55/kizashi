@@ -1,5 +1,5 @@
 import { useId, useState } from 'react'
-import { dismissOrg } from '../lib/data'
+import { dismissOrg, restoreOrg } from '../lib/data'
 import { formatCount, formatEin } from '../lib/format'
 import { IS_STATIC } from '../lib/site'
 import type { SurfacedOrg } from '../lib/types'
@@ -13,9 +13,20 @@ const BRIEF_SOURCE_LABEL: Record<string, string> = {
 }
 
 function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
-  const [dismiss, setDismiss] = useState<DismissState>('idle')
+  const [dismiss, setDismiss] = useState<DismissState>(org.dismissed ? 'done' : 'idle')
   const canDismiss = !IS_STATIC && org.predicted_revocation !== null
   const briefSource = org.brief_source ? BRIEF_SOURCE_LABEL[org.brief_source] : null
+
+  async function onRestore() {
+    if (!org.predicted_revocation) return
+    setDismiss('pending')
+    try {
+      await restoreOrg(org.ein, org.predicted_revocation)
+      setDismiss('idle')
+    } catch {
+      setDismiss('failed')
+    }
+  }
 
   async function onDismiss() {
     if (!org.predicted_revocation) return
@@ -79,9 +90,18 @@ function Panel({ org, asOf }: { org: SurfacedOrg; asOf: string }) {
                 : 'Dismiss'}
           </button>
         ) : null}
+        {canDismiss && dismiss === 'done' ? (
+          <button
+            type="button"
+            onClick={onRestore}
+            className="cursor-pointer text-micro text-ink-soft underline-offset-2 hover:text-ink hover:underline"
+          >
+            Restore
+          </button>
+        ) : null}
         {dismiss === 'failed' ? (
           <p className="m-0 text-micro text-ink">
-            The dismiss did not reach the API. Check that the server is running and try again.
+            The change did not reach the API. Check that the server is running and try again.
           </p>
         ) : null}
       </div>

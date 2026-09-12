@@ -88,7 +88,17 @@ def test_dismissed_org_is_suppressed(tmp_path):
     store.dismiss(SURFACE_EIN, SURFACE_DATE)
     event = before_event(SURFACE_EIN, SURFACE_DATE)
     gate.before(event)
-    assert event.cancel_tool == f"already alerted for {SURFACE_DATE}"
+    assert event.cancel_tool == f"dismissed for {SURFACE_DATE}"
+
+
+def test_restore_lifts_a_dismissal_but_not_a_send(tmp_path):
+    gate, store, events = make_gate(tmp_path)
+    store.dismiss(SURFACE_EIN, SURFACE_DATE)
+    assert store.restore(SURFACE_EIN, SURFACE_DATE) is True
+    assert store.status(SURFACE_EIN, SURFACE_DATE) is None
+    store.record(SURFACE_EIN, SURFACE_DATE, "run-1")
+    assert store.restore(SURFACE_EIN, SURFACE_DATE) is False
+    assert store.status(SURFACE_EIN, SURFACE_DATE) == "sent"
 
 
 def test_unknown_ein_is_cancelled(tmp_path):

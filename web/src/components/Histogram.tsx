@@ -63,10 +63,10 @@ export function Histogram({ histogram }: { histogram: Record<string, number> }) 
   return (
     <figure className="m-0">
       <figcaption className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-1 text-micro text-ink-soft">
-        <span>Predicted date minus the date the IRS recorded, in months</span>
+        <span>Date the IRS recorded minus the predicted date, in months</span>
         {readout ? (
           <span className="data text-tiny text-ink">
-            {tickLabel(readout.month)}, {formatCount(readout.count)} organizations
+            {tickLabel(readout.month)} months: {formatCount(readout.count)} organizations
           </span>
         ) : null}
       </figcaption>

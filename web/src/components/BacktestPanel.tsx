@@ -1,4 +1,4 @@
-import { formatCount, formatRate } from '../lib/format'
+import { formatCount, formatRate, sourceLabel } from '../lib/format'
 import type { Backtest } from '../lib/types'
 import { Histogram } from './Histogram'
 import { Field } from './Section'
@@ -15,7 +15,6 @@ export function BacktestPanel({ backtest }: { backtest: Backtest | null }) {
   }
 
   const exactRate = formatRate(backtest.exact, backtest.n)
-  const sameMonthRate = formatRate(backtest.same_month, backtest.n)
 
   return (
     <div>
@@ -36,15 +35,11 @@ export function BacktestPanel({ backtest }: { backtest: Backtest | null }) {
           {formatCount(backtest.exact)}
           {exactRate ? ` (${exactRate})` : ''}
         </Field>
-        <Field label="Same month">
-          {formatCount(backtest.same_month)}
-          {sameMonthRate ? ` (${sameMonthRate})` : ''}
-        </Field>
         <Field label="Window">
           <span className="font-sans">{backtest.window}</span>
         </Field>
         {Object.entries(backtest.source_dates).map(([source, date]) => (
-          <Field key={source} label={`Source file, ${source}`}>
+          <Field key={source} label={`${sourceLabel(source)}, dated`}>
             {date}
           </Field>
         ))}

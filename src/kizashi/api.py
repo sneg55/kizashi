@@ -39,6 +39,13 @@ def _load(path: Path) -> dict:
     return json.loads(path.read_text())
 
 
+def with_dismissals(report: dict, store: AlertStore) -> dict:
+    for org in report.get("surfaced") or []:
+        predicted = org.get("predicted_revocation")
+        org["dismissed"] = bool(predicted) and store.status(org["ein"], predicted) == "dismissed"
+    return report
+
+
 def _index_entry(report: dict) -> dict:
     portfolio = report.get("portfolio") or {}
     return {
@@ -58,6 +65,12 @@ def create_app(
 ) -> FastAPI:
     app = FastAPI(title="kizashi")
 
+    def store() -> AlertStore:
+        return AlertStore(state_dir / "alerts.json")
+
+    def annotated(report: dict) -> dict:
+        return with_dismissals(report, store())
+
     @app.get("/api/runs")
     def list_runs() -> list[dict]:
         return [_index_entry(_load(p)) for p in run_files(runs_dir)]
@@ -66,20 +79,20 @@ def create_app(
     def latest_run() -> dict:
         latest = runs_dir / "latest.json"
         if latest.exists():
-            return _load(latest)
+            return annotated(_load(latest))
         files = run_files(runs_dir)
         if not files:
             raise HTTPException(status_code=404, detail="no runs")
-        return _load(files[0])
+        return annotated(_load(files[0]))
 
     @app.get("/api/runs/{run_id}")
     def run_by_id(run_id: str) -> dict:
         for path in run_files(runs_dir):
             if path.stem == run_id:
-                return _load(path)
+                return annotated(_load(path))
         for path in run_files(runs_dir):
             if _load(path).get("run_id") == run_id:
-                return _load(path)
+                return annotated(_load(path))
         raise HTTPException(status_code=404, detail="unknown run")
 
     @app.get("/api/backtest")
@@ -91,7 +104,13 @@ def create_app(
 
     @app.post("/api/orgs/{ein}/dismiss")
     def dismiss(ein: str, body: DismissBody) -> dict:
-        AlertStore(state_dir / "alerts.json").dismiss(ein, body.predicted_revocation)
+        store().dismiss(ein, body.predicted_revocation)
+        return {"ok": True}
+
+    @app.post("/api/orgs/{ein}/restore")
+    def restore(ein: str, body: DismissBody) -> dict:
+        if not store().restore(ein, body.predicted_revocation):
+            raise HTTPException(status_code=404, detail="no dismissal on record")
         return {"ok": True}
 
     @app.post("/api/runs")
@@ -112,7 +131,7 @@ def create_app(
             with_model=body.with_model,
             slug=portfolio_path.stem,
         )
-        return report_to_dict(report)
+        return annotated(report_to_dict(report))
 
     @app.get("/{asset_path:path}")
     def web(asset_path: str) -> FileResponse:

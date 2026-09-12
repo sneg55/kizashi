@@ -40,6 +40,17 @@ class AlertStore:
         self.entries[self.key(ein, predicted)] = {"status": "dismissed", "run_id": None}
         self._write()
 
+    def status(self, ein: str, predicted: str) -> str | None:
+        entry = self.entries.get(self.key(ein, predicted))
+        return None if entry is None else entry.get("status")
+
+    def restore(self, ein: str, predicted: str) -> bool:
+        if self.status(ein, predicted) != "dismissed":
+            return False
+        del self.entries[self.key(ein, predicted)]
+        self._write()
+        return True
+
 
 class AlertGate(HookProvider):
     def __init__(
@@ -75,7 +86,10 @@ class AlertGate(HookProvider):
             return f"class={c.cls.value}, not an alert condition"
         if c.predicted_revocation is None or c.predicted_revocation.isoformat() != predicted:
             return "predicted date mismatch"
-        if self.store.has(ein, predicted):
+        status = self.store.status(ein, predicted)
+        if status == "dismissed":
+            return f"dismissed for {predicted}"
+        if status is not None:
             return f"already alerted for {predicted}"
         return None
 

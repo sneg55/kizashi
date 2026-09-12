@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { compareIso } from '../lib/dates'
-import { formatCount, formatEin, humanizeReason, normalizeSearch } from '../lib/format'
+import { classLabel, formatCount, formatEin, humanizeReason, normalizeSearch } from '../lib/format'
+import { Chip, Toggle } from './LedgerControls'
 import type { LedgerClass, LedgerRow } from '../lib/types'
 
 const PAGE_SIZE = 100
@@ -14,63 +15,6 @@ function countBy<T extends string>(rows: LedgerRow[], key: (row: LedgerRow) => T
     counts.set(value, (counts.get(value) ?? 0) + 1)
   }
   return counts
-}
-
-function Chip({
-  active,
-  label,
-  count,
-  accent = false,
-  onClick,
-}: {
-  active: boolean
-  label: string
-  count: number
-  accent?: boolean
-  onClick: () => void
-}) {
-  const resting = accent
-    ? 'border-flag/40 text-flag hover:border-flag'
-    : 'border-rule text-ink-soft hover:border-rule-strong hover:text-ink'
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={`flex cursor-pointer items-baseline gap-1.5 border px-2.5 py-1 text-micro transition-colors ${
-        active ? 'border-ink bg-ink text-ground' : resting
-      }`}
-    >
-      <span>{label}</span>
-      <span className="data opacity-70">{formatCount(count)}</span>
-    </button>
-  )
-}
-
-function Toggle({
-  active,
-  label,
-  onClick,
-}: {
-  active: boolean
-  label: string
-  onClick: () => void
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-pressed={active}
-      className={`cursor-pointer border px-2.5 py-1 text-micro transition-colors ${
-        active
-          ? 'border-ink bg-ink text-ground'
-          : 'border-rule text-ink-soft hover:border-rule-strong hover:text-ink'
-      }`}
-    >
-      {label}
-    </button>
-  )
 }
 
 export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
@@ -158,7 +102,7 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
             <Chip
               key={value}
               active={selectedClass === value}
-              label={humanizeReason(value.toLowerCase())}
+              label={classLabel(value)}
               count={count}
               accent={value === 'SURFACE'}
               onClick={() => {
@@ -211,11 +155,11 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
                   Last filed
                 </th>
                 <th scope="col" className="hidden py-2 pr-4 text-right font-medium sm:table-cell">
-                  Past due
+                  Returns past due
                 </th>
                 <th
                   scope="col"
-                  className="py-2 font-medium"
+                  className="hidden py-2 font-medium sm:table-cell"
                   aria-sort={
                     sort === 'soonest' ? 'ascending' : sort === 'latest' ? 'descending' : 'none'
                   }
@@ -228,15 +172,26 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
               {visible.map((row) => (
                 <tr key={row.ein} className="border-b border-rule align-baseline">
                   <td className="py-2 pr-4">
-                    <span className="text-tiny text-ink">{row.name}</span>
-                    <span className="data ml-3 text-micro whitespace-nowrap text-ink-soft">
+                    <span className="text-tiny text-ink">{row.name}</span>{' '}
+                    <span className="data ml-2 text-micro whitespace-nowrap text-ink-soft">
                       {formatEin(row.ein)}
                     </span>
                     {row.reinstated ? (
-                      <span className="data ml-3 text-micro text-ink-soft">reinstated</span>
+                      <>
+                        {' '}
+                        <span className="data ml-2 text-micro text-ink-soft">reinstated</span>
+                      </>
                     ) : null}
                     <span className="data block text-micro text-ink-soft sm:hidden">
                       {humanizeReason(row.reason)}
+                      {row.predicted_revocation ? (
+                        <>
+                          {', '}
+                          <span className={row.class === 'SURFACE' ? 'text-flag' : 'text-ink'}>
+                            {row.predicted_revocation}
+                          </span>
+                        </>
+                      ) : null}
                     </span>
                   </td>
                   <td
@@ -244,23 +199,23 @@ export function LedgerTable({ rows }: { rows: LedgerRow[] }) {
                       row.class === 'SURFACE' ? 'text-flag' : 'text-ink-soft'
                     }`}
                   >
-                    {row.class.toLowerCase()}
+                    {classLabel(row.class)}
                   </td>
                   <td className="data hidden py-2 pr-4 text-micro text-ink-soft sm:table-cell">
                     {humanizeReason(row.reason)}
                   </td>
                   <td className="data hidden py-2 pr-4 text-micro text-ink-soft sm:table-cell">
-                    {row.last_filed_end ?? 'none'}
+                    {row.last_filed_end ?? (row.class === 'NEVER_FILED' ? 'none' : 'n/a')}
                   </td>
                   <td className="data hidden py-2 pr-4 text-right text-micro text-ink-soft sm:table-cell">
                     {row.unfiled_past_due ?? 'n/a'}
                   </td>
                   <td
-                    className={`data py-2 text-micro whitespace-nowrap ${
+                    className={`data hidden py-2 text-micro whitespace-nowrap sm:table-cell ${
                       row.class === 'SURFACE' ? 'text-flag' : 'text-ink'
                     }`}
                   >
-                    {row.predicted_revocation ?? 'none'}
+                    {row.predicted_revocation ?? 'n/a'}
                   </td>
                 </tr>
               ))}

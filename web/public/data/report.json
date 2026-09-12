@@ -10,13 +10,13 @@
     {
       "name": "eo1.csv",
       "url": "https://www.irs.gov/pub/irs-soi/eo1.csv",
-      "last_modified": "2026-09-11",
+      "last_modified": "2026-09-07",
       "rows": 279042
     },
     {
       "name": "data-download-epostcard.txt",
       "url": "https://apps.irs.gov/pub/epostcard/data-download-epostcard.zip",
-      "last_modified": "2026-09-11",
+      "last_modified": "2026-09-07",
       "rows": 1544233
     },
     {

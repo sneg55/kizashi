@@ -66,6 +66,18 @@ def test_dismiss_writes_to_the_alert_store(client):
     assert store.has("223456789", "2027-05-15")
 
 
+def test_dismissal_shows_on_the_served_report_until_restored(client):
+    c, _ = client
+    org = c.get("/api/runs/latest").json()["surfaced"][0]
+    assert org["dismissed"] is False
+    c.post(f"/api/orgs/{org['ein']}/dismiss", json={"predicted_revocation": org["predicted_revocation"]})
+    served = c.get("/api/runs/latest").json()["surfaced"][0]
+    assert served["dismissed"] is True
+    assert c.post(f"/api/orgs/{org['ein']}/restore", json={"predicted_revocation": org["predicted_revocation"]}).json() == {"ok": True}
+    assert c.get("/api/runs/latest").json()["surfaced"][0]["dismissed"] is False
+    assert c.post(f"/api/orgs/{org['ein']}/restore", json={"predicted_revocation": org["predicted_revocation"]}).status_code == 404
+
+
 def test_run_without_an_as_of_is_rejected(client):
     c, _ = client
     body = c.post("/api/runs", json={"portfolio_csv": "data/demo/portfolio-nj-086.csv", "with_model": False})

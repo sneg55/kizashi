@@ -39,3 +39,12 @@ export async function dismissOrg(ein: string, predictedRevocation: string): Prom
   })
   if (!response.ok) throw new Error(`Dismiss failed with status ${response.status}`)
 }
+
+export async function restoreOrg(ein: string, predictedRevocation: string): Promise<void> {
+  const response = await fetch(`/api/orgs/${ein}/restore`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ predicted_revocation: predictedRevocation }),
+  })
+  if (!response.ok) throw new Error(`Restore failed with status ${response.status}`)
+}
