@@ -11,15 +11,8 @@ from kizashi.ledger import Report, Surfaced, make_run_id, report_to_dict, write_
 from kizashi.pipeline import load_sources, run_pipeline
 from kizashi.portfolio import build_portfolio_from_bmf, load_portfolio_csv
 from kizashi.score import score_silence, score_to_dict
-from kizashi.sources import (
-    BMF_URLS,
-    POSTCARD_URL,
-    REVOCATION_URL,
-    fetch,
-    read_bmf,
-    read_postcards,
-    read_revocations,
-)
+from kizashi.publish import add_parsers as add_publish_parsers
+from kizashi.sources import BMF_URLS, POSTCARD_URL, REVOCATION_URL, fetch, read_bmf, read_postcards, read_revocations
 
 DATA_RAW = Path("data/raw")
 POSTCARD_DEST = DATA_RAW / "data-download-epostcard.zip"
@@ -290,6 +283,8 @@ def build_parser() -> argparse.ArgumentParser:
 
     reconcile_p = sub.add_parser("reconcile")
     reconcile_p.set_defaults(func=cmd_reconcile)
+
+    add_publish_parsers(sub)
 
     return parser
 
