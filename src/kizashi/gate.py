@@ -37,7 +37,8 @@ class AlertStore:
         self._write()
 
     def dismiss(self, ein: str, predicted: str) -> None:
-        self.entries[self.key(ein, predicted)] = {"status": "dismissed", "run_id": None}
+        prior = self.entries.get(self.key(ein, predicted))
+        self.entries[self.key(ein, predicted)] = {"status": "dismissed", "run_id": None, "prior": prior}
         self._write()
 
     def status(self, ein: str, predicted: str) -> str | None:
@@ -47,7 +48,11 @@ class AlertStore:
     def restore(self, ein: str, predicted: str) -> bool:
         if self.status(ein, predicted) != "dismissed":
             return False
-        del self.entries[self.key(ein, predicted)]
+        prior = self.entries[self.key(ein, predicted)].get("prior")
+        if prior is None:
+            del self.entries[self.key(ein, predicted)]
+        else:
+            self.entries[self.key(ein, predicted)] = prior
         self._write()
         return True
 
