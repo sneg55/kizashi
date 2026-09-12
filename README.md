@@ -80,6 +80,14 @@ The residual is not noise. The histogram of actual minus predicted, in months an
 
 `uv run kizashi portfolio --state NJ --zip3 086` then `uv run kizashi classify --portfolio data/demo/portfolio-nj-086.csv --as-of 2026-09-12`, 886 EINs: surface=38, watch=151, current=456, excluded=215, dead=11, reinstated=99, never_filed=14, past_due=1, alerts_sent=0, alerts_suppressed=0.
 
+## Live run with the model and the gate
+
+`KIZASHI_DEMO_FORCE_EIN=010579647 uv run kizashi run --portfolio data/demo/portfolio-nj-086.csv --name "Mercer County NJ small nonprofits"` on 2026-09-11 with a fresh alert history, model `google.gemma-4-31b` on Bedrock Mantle in us-east-1: briefs model=38 fallback=0; alerts_sent=38, alerts_suppressed=1. The suppressed one is the forced negative control, cancelled by the hook with `class=WATCH, not an alert condition`. A second run over the same portfolio without clearing the alert history yields alerts_sent=0 and alerts_suppressed=38, each cancelled with `already alerted for <date>`. This run is the report the web app ships with.
+
+## Runtime
+
+`uv run python src/kizashi/runtime_app.py` starts the AgentCore runtime contract locally on port 8080; `POST /invocations` with `{"portfolio_csv": "data/demo/portfolio-nj-086.csv", "with_model": false}` returns the run summary. Deploying it to a hosted AgentCore Runtime is blocked on this AWS account by a zero agents-per-account quota, so the hosted step is not part of this submission.
+
 ## Source agreement
 
 `uv run kizashi reconcile`, BMF `TAX_PERIOD` against the last 990-N `Tax Period End` for `eo1.csv` filing-requirement-02 organizations: agree=97114, bmf_later=6639, postcard_later=1107, one_missing=25741.

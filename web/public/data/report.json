@@ -1,8 +1,8 @@
 {
-  "run_id": "2026-09-11T23-44-12Z-portfolio-nj-086",
-  "as_of": "2026-09-12",
+  "run_id": "2026-09-11T23-59-07Z-portfolio-nj-086",
+  "as_of": "2026-09-11",
   "portfolio": {
-    "name": "portfolio-nj-086",
+    "name": "Mercer County NJ small nonprofits",
     "source": "data/demo/portfolio-nj-086.csv",
     "count": 886
   },
@@ -53,7 +53,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2026-11-15",
-      "days_left": 64,
+      "days_left": 65,
       "evidence": [
         "Last return on record covers the tax period ending 2023-06-30",
         "Return for the period ending 2024-06-30 was due 2024-11-15 and is not on record",
@@ -66,7 +66,7 @@
         "next_filing_needed": "Tax periods ending 2024-06-30 and 2025-06-30 must be filed before 2026-11-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact MASSACHUSETTS MEDICAL GROUP MANAGEMENT ASSOCIATION INC. The record shows two missing returns and a statutory revocation date of 2026-11-15.",
+      "outreach": "Grants Lead, the record for MASSACHUSETTS MEDICAL GROUP MANAGEMENT ASSOCIATION INC shows two missing returns. The statutory date for automatic revocation is 2026-11-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2026-11-15"
@@ -81,7 +81,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -94,7 +94,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact NEW JERSEY PROFESSIONAL FIREFIGHTERS EMERGENCY RELIEF FUND. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead, the record for NEW JERSEY PROFESSIONAL FIREFIGHTERS EMERGENCY RELIEF FUND shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -109,7 +109,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2026-11-15",
-      "days_left": 64,
+      "days_left": 65,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-06-30",
         "Return for the period ending 2024-06-30 was due 2024-11-15 and is not on record",
@@ -122,7 +122,7 @@
         "next_filing_needed": "Tax periods ending 2024-06-30 and 2025-06-30 must be filed before 2026-11-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact FRIENDS OF STEINERT HIGH SCHOOLJAZZ PROGRAM. The record shows two missing returns and a statutory revocation date of 2026-11-15.",
+      "outreach": "Grants Lead, the record for FRIENDS OF STEINERT HIGH SCHOOLJAZZ PROGRAM shows two missing returns. The statutory date for automatic revocation is 2026-11-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2026-11-15"
@@ -137,7 +137,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-03-15",
-      "days_left": 184,
+      "days_left": 185,
       "evidence": [
         "Last return on record covers the tax period ending 2023-10-31",
         "Return for the period ending 2024-10-31 was due 2025-03-15 and is not on record",
@@ -150,7 +150,7 @@
         "next_filing_needed": "Tax periods ending 2024-10-31 and 2025-10-31 must be filed before 2027-03-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact LAWRENCEVILLE SCHOOL CAMP INC. The record shows two missing returns and a statutory revocation date of 2027-03-15.",
+      "outreach": "Grants Lead, the record for LAWRENCEVILLE SCHOOL CAMP INC shows two missing returns. The statutory date for automatic revocation is 2027-03-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-03-15"
@@ -165,7 +165,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -178,7 +178,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact GREATER TRENTON CHORAL SOCIETY INC. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead, the record for GREATER TRENTON CHORAL SOCIETY INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -193,7 +193,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -206,7 +206,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact CIFA FOUNDATION INC. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead, the record for CIFA FOUNDATION INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -221,7 +221,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -234,7 +234,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact MERCEDES BENZ CLUB OF SOUTH JERSEY. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead, the record for MERCEDES BENZ CLUB OF SOUTH JERSEY shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -249,7 +249,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -262,7 +262,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact THE FRIENDLY SONS AND DAUGHTERS OF ST PATRICK OF MERCER COUNTY INC. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead, the record for THE FRIENDLY SONS AND DAUGHTERS OF ST PATRICK OF MERCER COUNTY INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -277,7 +277,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -305,7 +305,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -333,7 +333,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -361,7 +361,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -389,7 +389,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -417,7 +417,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -445,7 +445,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -473,7 +473,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -501,7 +501,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -529,7 +529,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -557,7 +557,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -585,7 +585,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-08-15",
-      "days_left": 337,
+      "days_left": 338,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2024-03-31",
         "Return for the period ending 2025-03-31 was due 2025-08-15 and is not on record",
@@ -613,7 +613,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -641,7 +641,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -669,7 +669,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -697,7 +697,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last return on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -725,7 +725,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -738,7 +738,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for ELBRAS DREAM INC shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for ELBRAS DREAM INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -753,7 +753,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -766,7 +766,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for CULTURE IS KEY shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for CULTURE IS KEY shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -781,7 +781,7 @@
       "last_filed_source": "bmf",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last return on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -794,7 +794,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for FAMILY ENRICHMENT ENPOWERMENT DEVELOPMENT shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for FAMILY ENRICHMENT ENPOWERMENT DEVELOPMENT shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -809,7 +809,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -822,7 +822,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for SGFS FOUNDATION shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for SGFS FOUNDATION shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -837,7 +837,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -850,7 +850,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for VONZELLAS CROWN shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for VONZELLAS CROWN shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -865,7 +865,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -878,7 +878,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for AGAPE HEALING INC shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for AGAPE HEALING INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -893,7 +893,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -906,7 +906,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for AMEMONOS AGENCIA MISIONERA INTERNACIONAL INC shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for AMEMONOS AGENCIA MISIONERA INTERNACIONAL INC shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -921,7 +921,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -934,7 +934,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Grants Lead, the record for FRIENDS OF HAMILTON HIGH WEST SPORTS shows two missing returns. The statutory date for revocation is 2027-05-15. Please contact the organization.",
+      "outreach": "Grants lead, the record for FRIENDS OF HAMILTON HIGH WEST SPORTS shows two missing returns. The statutory date for automatic revocation is 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -949,7 +949,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -962,7 +962,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact A SHANTE LOVE INC. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead: A SHANTE LOVE INC has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -977,7 +977,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -990,7 +990,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact JBMDL 5-6 COUNCIL. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead: JBMDL 5-6 COUNCIL has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -1005,7 +1005,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -1018,7 +1018,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact BROTHER OFFICER LAW ENFORCEMENT SOCIETY. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead: BROTHER OFFICER LAW ENFORCEMENT SOCIETY has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -1033,7 +1033,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -1046,7 +1046,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact SAINT SHENOUDA INC. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead: SAINT SHENOUDA INC has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -1061,7 +1061,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-05-15",
-      "days_left": 245,
+      "days_left": 246,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2023-12-31",
         "Return for the period ending 2024-12-31 was due 2025-05-15 and is not on record",
@@ -1074,7 +1074,7 @@
         "next_filing_needed": "Tax periods ending 2024-12-31 and 2025-12-31 must be filed before 2027-05-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact LET OUR VOICES ELEVATE INC. The record shows two missing returns and a statutory revocation date of 2027-05-15.",
+      "outreach": "Grants Lead: LET OUR VOICES ELEVATE INC has two missing returns. The record shows a statutory revocation date of 2027-05-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-05-15"
@@ -1089,7 +1089,7 @@
       "last_filed_source": "990n",
       "unfiled_past_due": 2,
       "predicted_revocation": "2027-08-15",
-      "days_left": 337,
+      "days_left": 338,
       "evidence": [
         "Last 990-N on record covers the tax period ending 2024-03-31",
         "Return for the period ending 2025-03-31 was due 2025-08-15 and is not on record",
@@ -1102,7 +1102,7 @@
         "next_filing_needed": "Tax periods ending 2025-03-31 and 2026-03-31 must be filed before 2027-08-15."
       },
       "brief_source": "model",
-      "outreach": "Please contact HORIZON FOR ALL. The record shows two missing returns and a statutory revocation date of 2027-08-15.",
+      "outreach": "Grants Lead: HORIZON FOR ALL has two missing returns. The record shows a statutory revocation date of 2027-08-15. Please contact the organization.",
       "alert": {
         "status": "sent",
         "reason": "class=SURFACE, no prior alert for 2027-08-15"
